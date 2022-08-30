@@ -1,0 +1,30 @@
+{
+  "name": "achirsh-react-app",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "source": "public/index.html",
+  "scripts": {
+    "start": "parcel --no-autoinstall",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achirsh/achirsh-react-app.git"
+  },
+  "author": "achirsh",
+  "engines": {
+    "node": ">=14 <=16",
+    "npm": ">=6 <=8"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6",
+    "parcel": "^2.7.0"
+  },
+  "browserslist": "> 0.5%, last 2 version, not dead",
+  "@parcel/bundler-default": {
+    "minBundles": 1,
+    "minBundleSize": 3000,
+    "maxParallelRequests": 20
+  }
+}
