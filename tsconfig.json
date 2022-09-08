@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+      "target": "esnext",  // 生成代码的语言版本
+      "module": "esnext",  // 生成代码的模块化标准
+      "allowJs": true,     // 允许ts编译器编译js文件
+      "lib": [             // 指定要包含在编译中的library
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "skipLibCheck": true,     // 跳过声明文件的类型检查
+      "esModuleInterop": true,  // es模块互操作，屏蔽ESModule和CommonJS之间的差异 
+      "allowSyntheticDefaultImports": true,     // 允许通过import x from 'y' 即使模块没有显式制定default导出
+      "strict": true,           // 开启严格模式
+      "forceConsistentCasingInFileNames": true, // 对文件名称强制区分大小写
+      "noFallthroughCasesInSwitch": true,       // 对switch语句启用错误报告
+      "moduleResolution": "node",               // 模块解析（查找）策略
+      "resolveJsonModule": true,                // 允许导入拓展名为.json的模块
+      "jsx": "react-jsx",                       // 指定将JSX编译成什么形式 
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "paths": {
+        "@src/*": [
+          "./src/*"
+        ]
+      }
+    },
+    "include": [
+      "global.d.ts",
+      "assets.d.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "build"
+    ]
+  }
