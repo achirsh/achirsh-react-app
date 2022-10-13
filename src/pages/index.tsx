@@ -1,4 +1,3 @@
-import React from "react"
 import * as config from "src/config"
 import loadable from "@loadable/component"
 import { useLocation, Routes, Route, useNavigationType } from "react-router-dom"

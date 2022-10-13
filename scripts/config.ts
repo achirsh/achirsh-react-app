@@ -7,17 +7,20 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 import { WebpackManifestPlugin } from "webpack-manifest-plugin"
 import TerserPlugin from "terser-webpack-plugin"
 
-const styleOptions = (config: Configuration, otherOptions?: any) => {
+const styleOptions = (config: Configuration, isModule: string, otherOptions?: any) => {
     const options = [
         {
             loader: config?.mode === "development" ? require.resolve("style-loader") : MiniCssExtractPlugin.loader,
         },
         {
             loader: require.resolve("css-loader"),
-            options: {
-                sourceMap: true,
-                modules: true,
-            },
+            options:
+                isModule === "module"
+                    ? {
+                          // sourceMap: true,
+                          modules: true,
+                      }
+                    : {},
         },
         {
             loader: require.resolve("postcss-loader"),
@@ -112,20 +115,20 @@ export default function confg(config: Configuration): Configuration {
                             {
                                 test: cssRegex,
                                 exclude: cssModuleRegex,
-                                use: styleOptions(config),
+                                use: styleOptions(config, "no-module"),
                             },
                             {
                                 test: cssModuleRegex,
-                                use: styleOptions(config),
+                                use: styleOptions(config, "module"),
                             },
                             {
                                 test: sassRegex,
                                 exclude: sassModuleRegex,
-                                use: styleOptions(config, "sass-loader"),
+                                use: styleOptions(config, "no-module", "sass-loader"),
                             },
                             {
                                 test: sassModuleRegex,
-                                use: styleOptions(config, "sass-loader"),
+                                use: styleOptions(config, "module", "sass-loader"),
                             },
                             {
                                 test: [/\.gif$/, /\.jpe?g$/, /\.png$/],

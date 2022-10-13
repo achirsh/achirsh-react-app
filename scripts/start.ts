@@ -6,11 +6,11 @@ import hotMiddleware from "webpack-hot-middleware"
 import fallback from "connect-history-api-fallback"
 import express from "express"
 import config from "./config"
+import { createProxyMiddleware } from "http-proxy-middleware"
 
+const argv = yargs(process.argv.slice(2))
 
-const argv = yargs(process.argv.slice(2));
-
-const publicPath = process.env.PUBLIC_PATH || "/";
+const publicPath = process.env.PUBLIC_PATH || "/"
 
 const compiler = webpack(
     config({
@@ -26,15 +26,15 @@ const compiler = webpack(
             },
         },
     })
-);
+)
 
 express()
     .use(fallback({ index: `${publicPath}index.html` }))
     .use(devMiddleware(compiler, { publicPath }))
     .use(hotMiddleware(compiler))
-    .listen(3002, () => {
-        console.info("Listening on :3002");
-        open(`http://localhost:3002${publicPath}`, {
+    .listen(3003, () => {
+        console.info("Listening on :3003")
+        open(`http://localhost:3003${publicPath}`, {
             app: argv.open === true ? null : argv.open,
-        });
-    });
+        })
+    })
