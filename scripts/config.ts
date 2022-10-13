@@ -149,6 +149,7 @@ export default function confg(config: Configuration): Configuration {
             plugins: [
                 new DefinePlugin({
                     PROJECTMODE: JSON.stringify(config?.mode),
+                    PUBLIC_PATH: process.env.PUBLIC_PATH,
                 }),
                 new MiniCssExtractPlugin({
                     filename: "css/[name].[contenthash:8].css",

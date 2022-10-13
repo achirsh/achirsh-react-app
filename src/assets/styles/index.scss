@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+textarea {
+    resize: none !important
+}
+
+img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 滚动槽（轨道）宽高 */
+::-webkit-scrollbar {
+    width: 0px !important;
+    /*对垂直流动条有效*/
+    height: 0px;
+    /*对水平流动条有效*/
+}
+  
+/*定义两端按钮的样式*/
+::-webkit-scrollbar-button {
+    height: 0px;
+    width: 0px;
+    background-color: #fff;
+}
