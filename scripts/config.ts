@@ -52,6 +52,8 @@ const styleOptions = (config: Configuration, isModule: string, otherOptions?: an
     return options
 }
 
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
+
 const cssRegex = /\.css$/
 const cssModuleRegex = /\.module\.css$/
 const sassRegex = /\.(scss|sass)$/
@@ -70,7 +72,7 @@ export default function confg(config: Configuration): Configuration {
                 chunkFilename:
                     config.mode === "production" ? "js/[name].[contenthash:8].chunk.js" : "js/[name].chunk.js",
                 assetModuleFilename: "images/[hash][ext][query]",
-                publicPath: process.env.PUBLIC_PATH || "/",
+                publicPath: PUBLIC_PATH,
             },
             resolve: {
                 alias: {
@@ -149,7 +151,7 @@ export default function confg(config: Configuration): Configuration {
             plugins: [
                 new DefinePlugin({
                     PROJECTMODE: JSON.stringify(config?.mode),
-                    PUBLIC_PATH: process.env.PUBLIC_PATH,
+                    PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
                 }),
                 new MiniCssExtractPlugin({
                     filename: "css/[name].[contenthash:8].css",

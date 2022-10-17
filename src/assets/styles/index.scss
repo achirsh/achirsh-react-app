@@ -10,6 +10,11 @@ body,
   height: 100%;
 }
 
+body, html {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 textarea {
     resize: none !important
 }
