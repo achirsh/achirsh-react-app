@@ -1,128 +1,190 @@
 import "./index.css"
-import { useEffect } from "react"
+import { useEffect, Component } from "react"
 import * as config from "src/config"
 import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
 import * as api from "src/api"
 
-import json from "./spinebody.json"
-import json1 from "./gebulin.json"
-import json2 from "./pixie.json"
+// 1680 1976 2120 1606
+export default class Home extends Component {
+    private dragging = false
+    private data: any
+    private diff = { x: 0, y: 0 }
+    private x = 500
+    private y = 500
 
-import iP4_BGtile from "./iP4_BGtile.jpeg"
-import iP4_ground from "./iP4_ground.png"
+    private oldBgContainerX: any
+    private oldBgContainerY: any
 
-const images = [
-    {
-        img: require("src/assets/images/bili/bg/left-top.jpg"),
-        width: 1680,
-        height: 1976,
-    },
-    {
-        img: require("src/assets/images/bili/bg/left-bottom.jpg"),
-        width: 1680,
-        height: 1606,
-    },
-    {
-        img: require("src/assets/images/bili/bg/right-top.jpg"),
-        width: 2120,
-        height: 1976,
-    },
-    {
-        img: require("src/assets/images/bili/bg/right-bottom.jpg"),
-        width: 2120,
-        height: 1606,
-    },
-]
-
-export default function Home(): JSX.Element {
-    useEffect(() => {
-        // init()
-        init1()
-    }, [])
-
-    const init = () => {
-        const c: any = document.getElementById("myCanvas")
-        const ctx = c.getContext("2d")
-        const dpr = window.devicePixelRatio
-
-        c.width = (1680 + 2120) * dpr
-        c.height = (1976 + 1606) * dpr
-        c.style.width = (1680 + 2120) / 3 + "px"
-        c.style.height = (1976 + 1606) / 3 + "px"
-
-        drawingBg(0, ctx, dpr)
+    private bgType: any = {
+        top: false,
+        bottom: false,
+        left: false,
+        right: false,
     }
 
-    const init1 = () => {
-        const app = new PIXI.Application()
-        document.body.appendChild(app.view)
+    private spineBoy: any
 
-        // load spine data
-        app.loader.add("goblins", "goblins.json").load(onAssetsLoaded)
+    componentDidMount() {
+        this.init1()
+    }
+
+    init1() {
+        const app = new PIXI.Application({
+            width: 1801, //window.screen.availWidth * 2,    // 渲染视图宽度
+            height: 1110, // window.screen.availHeight * 2,  // 渲染视图高度
+            antialias: true, // 抗锯齿
+            resolution: 1, // 分辨率
+            transparent: false, // 背景透明
+        })
+
+        document.getElementById("main")?.appendChild(app.view)
+
+        const bgContainer = new PIXI.Container()
+
+        // const bgContaineScale = 0.5
+        // bgContainer.scale.set(bgContaineScale)
+
+        app.stage.addChild(bgContainer)
+
+        bgContainer.interactive = true
+
+        // const bgTexture1 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/left-top.jpg'))
+        // const bgTexture2 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/left-bottom.jpg'))
+        // const bgTexture3 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/right-top.jpg'))
+        // const bgTexture4 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/right-bottom.jpg'))
+
+        const bgTexture5 = new PIXI.Sprite(PIXI.Texture.from("assets/bg/bg.png"))
+
+        // bgTexture1.position.set(0, 0)
+
+        // bgTexture1.width = 1680 / 2
+        // bgTexture1.height = 1976 / 2
+
+        // bgTexture2.position.set(0, 1976 / 2)
+
+        // bgTexture2.width = 1680 / 2
+        // bgTexture2.height = 1606 / 2
+
+        // bgTexture3.position.set(1680 / 2, 0)
+
+        // bgTexture3.width = 2120 / 2
+        // bgTexture3.height = 1976 / 2
+
+        // bgTexture4.position.set(1680 / 2, 1976 /2)
+
+        // bgTexture4.width = 2120 / 2
+        // bgTexture4.height = 1606 / 2
+
+        bgTexture5.position.set(0, 0)
+
+        bgTexture5.width = 1801
+        bgTexture5.height = 1110
+
+        // bgContainer.addChild(bgTexture1)
+        // bgContainer.addChild(bgTexture2)
+        // bgContainer.addChild(bgTexture3)
+        // bgContainer.addChild(bgTexture4)
+
+        bgContainer.addChild(bgTexture5)
+
+        // 设置bgContainer容器原点
+        // bgContainer.pivot.x = app.screen.width / 2
+        // bgContainer.pivot.y = app.screen.width / 2
+
+        // app.stage.pivot.x = 1801 / 2
+        // app.stage.pivot.y = 1110 / 2
+
+        app.loader.add("spineboy", "assets/spineboy.json").load((loader: any, res: any) => {
+            this.spineBoy = new Spine(res.spineboy.spineData)
+            this.spineBoy.x = this.x
+            this.spineBoy.y = this.y
+            this.spineBoy.scale.set(0.3)
+
+            this.spineBoy.state.setAnimation(0, "walk", true)
+            app.stage.addChild(this.spineBoy)
+
+            bgContainer
+                .on("pointertap", event => {
+                    this.diff = { x: event.data.global.x - this.x, y: event.data.global.y - this.y }
+
+                    // bg的偏移量
+                    this.oldBgContainerX = bgContainer.x
+                    this.oldBgContainerY = bgContainer.y
+
+                    if (event.data.global.x - this.x > 0) {
+                        // 向左平移
+                        this.bgType.right = true
+                        this.bgType.left = false
+
+                        this.spineBoy.skew.set(0, 0)
+                    }
+
+                    if (event.data.global.x - this.x < 0) {
+                        // 向右平移
+                        this.bgType.right = false
+                        this.bgType.left = true
+
+                        this.spineBoy.skew.set(0, 3.2)
+                    }
+
+                    if (event.data.global.y - this.y > 0) {
+                        // 向左平移
+                        this.bgType.top = true
+                        this.bgType.bottom = false
+                    }
+
+                    if (event.data.global.y - this.y < 0) {
+                        // 向右平移
+                        this.bgType.top = false
+                        this.bgType.bottom = true
+                    }
+
+                    this.dragging = true
+                    this.data = event.data
+                })
+                .on("pointerup", () => {
+                    this.dragging = false
+                    this.data = null
+                })
+                .on("pointerupoutside", () => {
+                    this.dragging = false
+                    this.data = null
+                })
+                .on("pointermove", event => {
+                    if (this.dragging) {
+                        // console.log(11)
+                    }
+                })
+        })
 
         app.stage.interactive = true
         app.stage.buttonMode = true
 
-        function onAssetsLoaded(loader: any, res: any) {
-            const goblin = new Spine(res.goblins.spineData)
-
-            // set current skin
-            goblin.skeleton.setSkinByName("goblin")
-            goblin.skeleton.setSlotsToSetupPose()
-
-            // set the position
-            goblin.x = 400
-            goblin.y = 600
-
-            goblin.scale.set(1.5)
-
-            // play animation
-            goblin.state.setAnimation(0, "walk", true)
-
-            app.stage.addChild(goblin)
-
-            app.stage.on("pointertap", () => {
-                // change current skin
-                const currentSkinName = goblin.skeleton.skin.name
-                const newSkinName = currentSkinName === "goblin" ? "goblingirl" : "goblin"
-                goblin.skeleton.setSkinByName(newSkinName)
-                goblin.skeleton.setSlotsToSetupPose()
-            })
-        }
-    }
-
-    // 绘制背景
-    const drawingBg = (n: number, ctx: any, dpr: number) => {
-        const len = images.length
-
-        if (n < len) {
-            const img = new Image()
-            img.src = images[n].img
-            img.onload = () => {
-                const imgWidth = images[n].width * dpr
-                const imgHeight = images[n].height * dpr
-
-                if (n === 0) {
-                    ctx.drawImage(img, 0, 0, imgWidth, imgHeight)
-                } else if (n === 1) {
-                    ctx.drawImage(img, 0, 1976 * dpr, imgWidth, imgHeight)
-                } else if (n === 2) {
-                    ctx.drawImage(img, 1680 * dpr, 0, imgWidth, imgHeight)
-                } else if (n === 3) {
-                    ctx.drawImage(img, 1680 * dpr, 1976 * dpr, imgWidth, imgHeight)
+        app.ticker.add(delta => {
+            if (this.diff.x && this.bgType !== "") {
+                // 横向走
+                if (this.bgType.right && Math.abs(bgContainer.x - this.oldBgContainerX) < this.diff.x) {
+                    bgContainer.x -= 0.5
                 }
 
-                drawingBg(n + 1, ctx, dpr)
+                if (this.bgType.left && Math.abs(this.oldBgContainerX - bgContainer.x) < Math.abs(this.diff.x)) {
+                    bgContainer.x += 0.5
+                }
+
+                // 垂直走
+                if (this.bgType.top && Math.abs(bgContainer.y - this.oldBgContainerY) < this.diff.y) {
+                    bgContainer.y -= 0.5
+                }
+
+                if (this.bgType.bottom && Math.abs(this.oldBgContainerY - bgContainer.y) < Math.abs(this.diff.y)) {
+                    bgContainer.y += 0.5
+                }
             }
-        }
+        })
     }
 
-    return (
-        <div className="main" id="main">
-            {/* <canvas id="myCanvas"  className='myCanvas'>
-            您的浏览器不支持 HTML5 canvas 标签。
-        </canvas> */}
-        </div>
-    )
+    render() {
+        return <div className="main" id="main"></div>
+    }
 }
