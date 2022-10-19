@@ -117,7 +117,7 @@ export default class Home extends Component {
     }
 
     bgTexture5Fn() {
-        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "pixi/bg/bg.jpg"))
+        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg.jpg"))
 
         this.bgTexture5.position.set(0, 0)
 
@@ -129,21 +129,23 @@ export default class Home extends Component {
 
     // 加载人物
     loadPeople() {
-        this.app.loader.add("spineboy", String(PUBLIC_PATH) + "pixi/spineboy.json").load((loader: any, res: any) => {
-            this.spineBoy = new Spine(res.spineboy.spineData)
+        this.app.loader
+            .add("spineboy", String(PUBLIC_PATH) + "assets/pixi/spineboy.json")
+            .load((loader: any, res: any) => {
+                this.spineBoy = new Spine(res.spineboy.spineData)
 
-            const spineBodyCoordinates = {
-                x: this.bgTexture5.width / 2,
-                y: this.bgTexture5.height / 2,
-            }
+                const spineBodyCoordinates = {
+                    x: this.bgTexture5.width / 2,
+                    y: this.bgTexture5.height / 2,
+                }
 
-            this.spineBoy.x = spineBodyCoordinates.x
-            this.spineBoy.y = spineBodyCoordinates.y
-            this.spineBoy.scale.set(0.2)
+                this.spineBoy.x = spineBodyCoordinates.x
+                this.spineBoy.y = spineBodyCoordinates.y
+                this.spineBoy.scale.set(0.2)
 
-            this.spineBoy.state.setAnimation(0, "walk", true)
-            this.app.stage.addChild(this.spineBoy)
-        })
+                this.spineBoy.state.setAnimation(0, "walk", true)
+                this.app.stage.addChild(this.spineBoy)
+            })
     }
 
     // 舞台ticker事件

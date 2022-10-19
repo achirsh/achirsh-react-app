@@ -189,7 +189,7 @@ export default function confg(config: Configuration): Configuration {
                 new CopyWebpackPlugin({
                     patterns: [
                         {
-                            from: resolvePath(__dirname, "../public/pixi"),
+                            from: resolvePath(__dirname, "../public/assets/pixi"),
                             to: resolvePath(__dirname, "../build/assets/pixi"),
                         },
                     ],
