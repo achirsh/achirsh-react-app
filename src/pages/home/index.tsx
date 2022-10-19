@@ -10,8 +10,6 @@ export default class Home extends Component {
     private dragging = false
     private data: any
     private diff = { x: 0, y: 0 }
-    private x = 500
-    private y = 500
 
     private oldBgContainerX: any
     private oldBgContainerY: any
@@ -31,14 +29,17 @@ export default class Home extends Component {
 
     init1() {
         const app = new PIXI.Application({
-            width: 1801, //window.screen.availWidth * 2,    // 渲染视图宽度
+            width: 1768, //window.screen.availWidth * 2,    // 渲染视图宽度
             height: 1110, // window.screen.availHeight * 2,  // 渲染视图高度
             antialias: true, // 抗锯齿
             resolution: 1, // 分辨率
             transparent: false, // 背景透明
+            backgroundColor: 0xd7dd7d,
         })
 
         document.getElementById("main")?.appendChild(app.view)
+
+        app.stop()
 
         const bgContainer = new PIXI.Container()
 
@@ -54,7 +55,7 @@ export default class Home extends Component {
         // const bgTexture3 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/right-top.jpg'))
         // const bgTexture4 = new PIXI.Sprite(PIXI.Texture.from('assets/bg/right-bottom.jpg'))
 
-        const bgTexture5 = new PIXI.Sprite(PIXI.Texture.from("assets/bg/bg.png"))
+        const bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "pixi/bg/bg.png"))
 
         // bgTexture1.position.set(0, 0)
 
@@ -78,8 +79,8 @@ export default class Home extends Component {
 
         bgTexture5.position.set(0, 0)
 
-        bgTexture5.width = 1801
-        bgTexture5.height = 1110
+        bgTexture5.width = app.screen.width
+        bgTexture5.height = app.screen.height
 
         // bgContainer.addChild(bgTexture1)
         // bgContainer.addChild(bgTexture2)
@@ -88,17 +89,19 @@ export default class Home extends Component {
 
         bgContainer.addChild(bgTexture5)
 
-        // 设置bgContainer容器原点
-        // bgContainer.pivot.x = app.screen.width / 2
-        // bgContainer.pivot.y = app.screen.width / 2
+        app.stage.pivot.x = (app.screen.width - window.screen.availWidth) / 2
+        app.stage.pivot.y = (app.screen.height - window.screen.availHeight) / 2
 
-        // app.stage.pivot.x = 1801 / 2
-        // app.stage.pivot.y = 1110 / 2
-
-        app.loader.add("spineboy", "assets/spineboy.json").load((loader: any, res: any) => {
+        app.loader.add("spineboy", String(PUBLIC_PATH) + "pixi/spineboy.json").load((loader: any, res: any) => {
             this.spineBoy = new Spine(res.spineboy.spineData)
-            this.spineBoy.x = this.x
-            this.spineBoy.y = this.y
+
+            const spineBodyCoordinates = {
+                x: app.screen.width / 2,
+                y: app.screen.height / 2,
+            }
+
+            this.spineBoy.x = spineBodyCoordinates.x
+            this.spineBoy.y = spineBodyCoordinates.y
             this.spineBoy.scale.set(0.3)
 
             this.spineBoy.state.setAnimation(0, "walk", true)
@@ -106,36 +109,33 @@ export default class Home extends Component {
 
             bgContainer
                 .on("pointertap", event => {
-                    this.diff = { x: event.data.global.x - this.x, y: event.data.global.y - this.y }
+                    this.diff = {
+                        x: event.data.global.x - window.screen.availWidth / 2,
+                        y: event.data.global.y - window.screen.availHeight / 2,
+                    }
 
                     // bg的偏移量
                     this.oldBgContainerX = bgContainer.x
                     this.oldBgContainerY = bgContainer.y
 
-                    if (event.data.global.x - this.x > 0) {
-                        // 向左平移
+                    if (event.data.global.x - window.screen.availWidth / 2 > 0) {
                         this.bgType.right = true
                         this.bgType.left = false
-
                         this.spineBoy.skew.set(0, 0)
                     }
 
-                    if (event.data.global.x - this.x < 0) {
-                        // 向右平移
+                    if (event.data.global.x - window.screen.availWidth / 2 < 0) {
                         this.bgType.right = false
                         this.bgType.left = true
-
                         this.spineBoy.skew.set(0, 3.2)
                     }
 
-                    if (event.data.global.y - this.y > 0) {
-                        // 向左平移
+                    if (event.data.global.y - window.screen.availHeight / 2 > 0) {
                         this.bgType.top = true
                         this.bgType.bottom = false
                     }
 
-                    if (event.data.global.y - this.y < 0) {
-                        // 向右平移
+                    if (event.data.global.y - window.screen.availHeight / 2 < 0) {
                         this.bgType.top = false
                         this.bgType.bottom = true
                     }
@@ -182,6 +182,8 @@ export default class Home extends Component {
                 }
             }
         })
+
+        app.start()
     }
 
     render() {

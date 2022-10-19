@@ -4,8 +4,8 @@
   "private": true,
   "license": "ISC",
   "scripts": {
-    "start": "ts-node ./scripts/start.ts",
-    "build": "ts-node ./scripts/build.ts",
+    "start": "cross-env PUBLIC_PATH=/static/ ts-node ./scripts/start.ts",
+    "build": "cross-env PUBLIC_PATH=/static/ ts-node ./scripts/build.ts",
     "prepare": "husky install"
   },
   "repository": {
@@ -47,6 +47,8 @@
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "connect-history-api-fallback": "2.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
     "eslint": "8.23.1",

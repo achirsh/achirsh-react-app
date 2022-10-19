@@ -11,10 +11,14 @@ export default function PageIndex(): JSX.Element {
 
     return (
         <Routes location={location}>
-            <Route path={PUBLIC_PATH}>
+            <Route path={String(PUBLIC_PATH)}>
                 {config.routes.map(item => {
                     return (
-                        <Route path={item.page} key={`route-${item.page}`} element={<CommonPage page={item.page} />} />
+                        <Route
+                            path={item.url || item.page}
+                            key={`route-${item.page}`}
+                            element={<CommonPage page={item.page} />}
+                        />
                     )
                 })}
                 <Route path="*" element={<div>404</div>} />

@@ -26,7 +26,7 @@ const compiler = webpack(
         mode: "development",
         devtool: "eval-source-map",
         output: { publicPath },
-        entry: ["webpack-hot-middleware/client?reload=true"],
+        // entry: ["webpack-hot-middleware/client?reload=true"],
         plugins: [new webpack.HotModuleReplacementPlugin()],
         cache: {
             type: "filesystem",
@@ -48,13 +48,13 @@ const serverConfig: any = {
     compress: true,
     static: {
         directory: resolveApp("public"),
-        publicPath: ["/"],
+        publicPath: [publicPath],
         watch: false,
     },
     devMiddleware: { publicPath: "" },
     https: false,
     host: "0.0.0.0",
-    historyApiFallback: { disableDotRule: true, index: "/" },
+    historyApiFallback: { disableDotRule: true, index: publicPath },
     port: 3003,
 }
 
