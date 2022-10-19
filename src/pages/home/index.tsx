@@ -3,7 +3,6 @@ import { useEffect, Component } from "react"
 import * as config from "src/config"
 import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
-import * as api from "src/api"
 
 // 1680 1976 2120 1606
 export default class Home extends Component {
@@ -29,8 +28,8 @@ export default class Home extends Component {
 
     init1() {
         const app = new PIXI.Application({
-            width: 1768, //window.screen.availWidth * 2,    // 渲染视图宽度
-            height: 1110, // window.screen.availHeight * 2,  // 渲染视图高度
+            width: 1768,
+            height: 1110,
             antialias: true, // 抗锯齿
             resolution: 1, // 分辨率
             transparent: false, // 背景透明
@@ -165,20 +164,20 @@ export default class Home extends Component {
             if (this.diff.x && this.bgType !== "") {
                 // 横向走
                 if (this.bgType.right && Math.abs(bgContainer.x - this.oldBgContainerX) < this.diff.x) {
-                    bgContainer.x -= 0.5
+                    bgContainer.x -= 0.8
                 }
 
                 if (this.bgType.left && Math.abs(this.oldBgContainerX - bgContainer.x) < Math.abs(this.diff.x)) {
-                    bgContainer.x += 0.5
+                    bgContainer.x += 0.8
                 }
 
                 // 垂直走
                 if (this.bgType.top && Math.abs(bgContainer.y - this.oldBgContainerY) < this.diff.y) {
-                    bgContainer.y -= 0.5
+                    bgContainer.y -= 0.8
                 }
 
                 if (this.bgType.bottom && Math.abs(this.oldBgContainerY - bgContainer.y) < Math.abs(this.diff.y)) {
-                    bgContainer.y += 0.5
+                    bgContainer.y += 0.8
                 }
             }
         })
