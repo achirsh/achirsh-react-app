@@ -88,13 +88,13 @@ export default class Home extends Component {
 
                 this.newBodyY = event.data.global.y
 
-                // 地图动
+                // 地图动-向右
                 if (event.data.global.x - config.clientWidth() / 2 > 0) {
                     this.bgDirection.right = true
                     this.bgDirection.left = false
                     this.spineBoy.skew.set(0, 0)
                 }
-                // 地图动
+                // 地图动-向左
                 if (event.data.global.x - config.clientWidth() / 2 < 0) {
                     this.bgDirection.right = false
                     this.bgDirection.left = true
@@ -118,9 +118,12 @@ export default class Home extends Component {
                     this.peopleDirection.bottom = false
                 }
                 // 人动-垂直-点击了人物当前位置下边的点
-                if (event.data.global.y - this.spineBoy.y > 0) {
+                else if (event.data.global.y - this.spineBoy.y > 0) {
                     this.peopleDirection.top = false
                     this.peopleDirection.bottom = true
+                } else {
+                    this.peopleDirection.top = false
+                    this.peopleDirection.bottom = false
                 }
 
                 this.dragging = true
@@ -142,7 +145,7 @@ export default class Home extends Component {
     }
 
     bgTexture5Fn() {
-        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg.jpeg"))
+        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg.jpg"))
 
         this.bgTexture5.position.set(0, 0)
 
@@ -183,18 +186,16 @@ export default class Home extends Component {
                 // 地图动-横向->向右
                 if (
                     this.bgDirection.right &&
-                    Math.abs(this.bgContainer.x - this.oldBgContainerX) < this.diff.x
-                    // && ((this.bgContainer.width / 2) - Math.abs(this.bgContainer.x) >= 249)
+                    this.oldBgContainerX - this.bgContainer.x <= this.diff.x &&
+                    this.bgContainer.width / 2 + this.bgContainer.x >= config.clientWidth() / 2
                 ) {
                     this.bgContainer.x -= 1
-
-                    console.log(this.bgContainer.x, this.bgContainer.x - this.oldBgContainerX, this.diff.x)
                 }
                 // 地图动-横向->向左
                 if (
                     this.bgDirection.left &&
-                    Math.abs(this.oldBgContainerX - this.bgContainer.x) < Math.abs(this.diff.x)
-                    // && ((this.bgContainer.width / 2) - Math.abs(this.bgContainer.x) >= 249)
+                    this.oldBgContainerX - this.bgContainer.x >= this.diff.x &&
+                    this.bgContainer.width / 2 - this.bgContainer.x >= config.clientWidth() / 2
                 ) {
                     this.bgContainer.x += 1
                 }
