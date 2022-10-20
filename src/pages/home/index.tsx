@@ -13,17 +13,26 @@ export default class Home extends Component {
     private oldBgContainerX: any
     private oldBgContainerY: any
 
-    private bgType: any = {
+    private newBodyY: any
+
+    private bgDirection: any = {
         top: false,
         bottom: false,
         left: false,
         right: false,
     }
 
+    private peopleDirection = {
+        top: false,
+        bottom: false,
+    }
+
     private app: any
     private spineBoy: any
     private bgContainer: any
     private bgTexture5: any
+
+    private resolution = 2
 
     componentDidMount() {
         this.initApp()
@@ -34,9 +43,9 @@ export default class Home extends Component {
             width: config.clientWidth(),
             height: config.clientHeight(),
             antialias: true, // 抗锯齿
-            resolution: 2, // 分辨率
+            resolution: this.resolution, // 分辨率
             transparent: false, // 背景透明
-            backgroundColor: 0xd7dd7d,
+            backgroundColor: 0x000000,
         })
 
         document.getElementById("main")?.appendChild(this.app.view)
@@ -69,33 +78,49 @@ export default class Home extends Component {
             .on("pointertap", (event: any) => {
                 this.diff = {
                     x: event.data.global.x - config.clientWidth() / 2,
-                    y: event.data.global.y - config.clientHeight() / 2,
+                    // y: event.data.global.y - config.clientHeight() / 2,
+                    y: event.data.global.y - this.spineBoy.y,
                 }
 
                 // bg的偏移量
                 this.oldBgContainerX = this.bgContainer.x
                 this.oldBgContainerY = this.bgContainer.y
 
+                this.newBodyY = event.data.global.y
+
+                // 地图动
                 if (event.data.global.x - config.clientWidth() / 2 > 0) {
-                    this.bgType.right = true
-                    this.bgType.left = false
+                    this.bgDirection.right = true
+                    this.bgDirection.left = false
                     this.spineBoy.skew.set(0, 0)
                 }
-
+                // 地图动
                 if (event.data.global.x - config.clientWidth() / 2 < 0) {
-                    this.bgType.right = false
-                    this.bgType.left = true
+                    this.bgDirection.right = false
+                    this.bgDirection.left = true
                     this.spineBoy.skew.set(0, 3.2)
                 }
 
-                if (event.data.global.y - config.clientHeight() / 2 > 0) {
-                    this.bgType.top = true
-                    this.bgType.bottom = false
-                }
+                // 地图动
+                // if (event.data.global.y - config.clientHeight() / 2 > 0) {
+                //     this.bgType.top = true
+                //     this.bgType.bottom = false
+                // }
+                // 地图动
+                // if (event.data.global.y - config.clientHeight() / 2 < 0) {
+                //     this.bgType.top = false
+                //     this.bgType.bottom = true
+                // }
 
-                if (event.data.global.y - config.clientHeight() / 2 < 0) {
-                    this.bgType.top = false
-                    this.bgType.bottom = true
+                // 人动-垂直-点击了人物当前位置上边的点
+                if (event.data.global.y - this.spineBoy.y < 0) {
+                    this.peopleDirection.top = true
+                    this.peopleDirection.bottom = false
+                }
+                // 人动-垂直-点击了人物当前位置下边的点
+                if (event.data.global.y - this.spineBoy.y > 0) {
+                    this.peopleDirection.top = false
+                    this.peopleDirection.bottom = true
                 }
 
                 this.dragging = true
@@ -117,12 +142,15 @@ export default class Home extends Component {
     }
 
     bgTexture5Fn() {
-        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg.jpg"))
+        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg.jpeg"))
 
         this.bgTexture5.position.set(0, 0)
 
-        this.bgTexture5.width = 5304 / 4
-        this.bgTexture5.height = 3330 / 4
+        const bgWidth = 5304
+        const bgHeight = 3330
+
+        this.bgTexture5.width = (bgWidth * config.clientHeight()) / bgHeight
+        this.bgTexture5.height = config.clientHeight()
 
         this.bgContainer.addChild(this.bgTexture5)
     }
@@ -151,23 +179,47 @@ export default class Home extends Component {
     // 舞台ticker事件
     appTicker() {
         this.app.ticker.add((delta: any) => {
-            if (this.diff.x && this.bgType !== "") {
-                // 横向走
-                if (this.bgType.right && Math.abs(this.bgContainer.x - this.oldBgContainerX) < this.diff.x) {
+            if (this.diff.x) {
+                // 地图动-横向->向右
+                if (
+                    this.bgDirection.right &&
+                    Math.abs(this.bgContainer.x - this.oldBgContainerX) < this.diff.x
+                    // && ((this.bgContainer.width / 2) - Math.abs(this.bgContainer.x) >= 249)
+                ) {
                     this.bgContainer.x -= 1
-                }
 
-                if (this.bgType.left && Math.abs(this.oldBgContainerX - this.bgContainer.x) < Math.abs(this.diff.x)) {
+                    console.log(this.bgContainer.x, this.bgContainer.x - this.oldBgContainerX, this.diff.x)
+                }
+                // 地图动-横向->向左
+                if (
+                    this.bgDirection.left &&
+                    Math.abs(this.oldBgContainerX - this.bgContainer.x) < Math.abs(this.diff.x)
+                    // && ((this.bgContainer.width / 2) - Math.abs(this.bgContainer.x) >= 249)
+                ) {
                     this.bgContainer.x += 1
                 }
+                // 地图动-垂直->向上
+                // if (this.bgType.top && Math.abs(this.bgContainer.y - this.oldBgContainerY) < this.diff.y) {
+                //     // this.bgContainer.y -= 1
+                //     // this.spineBoy.y += 1
+                // }
+                // 地图动-垂直->向下
+                // if (this.bgType.bottom && Math.abs(this.oldBgContainerY - this.bgContainer.y) < Math.abs(this.diff.y)) {
+                //     this.bgContainer.y += 1
+                // }
 
-                // 垂直走
-                if (this.bgType.top && Math.abs(this.bgContainer.y - this.oldBgContainerY) < this.diff.y) {
-                    this.bgContainer.y -= 1
+                // 人走-向上走
+                if (
+                    this.peopleDirection.top &&
+                    this.spineBoy.y >= this.spineBoy.height &&
+                    this.spineBoy.y > this.newBodyY
+                ) {
+                    this.spineBoy.y -= 1
                 }
 
-                if (this.bgType.bottom && Math.abs(this.oldBgContainerY - this.bgContainer.y) < Math.abs(this.diff.y)) {
-                    this.bgContainer.y += 1
+                // 人走-向下走
+                if (this.peopleDirection.bottom && this.spineBoy.y <= this.newBodyY) {
+                    this.spineBoy.y += 1
                 }
             }
         })
