@@ -3,7 +3,7 @@ export const routes = [
     {
         url: "home",
         page: "home",
-        keepAlive: true,
+        // keepAlive: true,
         sceneConfig: {
             enter: "fadeIn",
             exit: "back",
@@ -28,6 +28,14 @@ export const routes = [
     {
         url: "home/building",
         page: "building",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/building/setting",
+        page: "building/setting",
         sceneConfig: {
             enter: "forward",
             exit: "back",

@@ -5,8 +5,6 @@ import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
 import { useNavigate } from "react-router-dom"
 
-// 1680 1976 2120 1606
-
 const bgWidth = 5316
 const bgHeight = 3728
 const roomRatio = config.clientHeight() / bgHeight
@@ -16,7 +14,7 @@ export default function HomePage(): JSX.Element {
 
     return (
         <div className="home-page">
-            <Home />
+            <Home goBuild={() => navigate(String(PUBLIC_PATH) + "home/building")} />
 
             <div className="top-render">
                 <div className="user-info">
@@ -62,7 +60,7 @@ export default function HomePage(): JSX.Element {
         </div>
     )
 }
-class Home extends Component {
+class Home extends Component<any> {
     private dragging = false
     private data: any
     private diff = { x: 0, y: 0 }
@@ -300,6 +298,7 @@ class Home extends Component {
                 : Math.ceil(bgWidth * roomRatio) + 1
         this.buildContainer.height = config.clientHeight()
         this.buildContainer.zIndex = 3
+        this.buildContainer.sortableChildren = true
 
         this.app.stage.addChild(this.buildContainer)
 
@@ -310,6 +309,7 @@ class Home extends Component {
         shanhaige.height = 502 * roomRatio
         shanhaige.x = 2806 * roomRatio
         shanhaige.y = 2453 * roomRatio
+        shanhaige.zIndex = 10
 
         console.log("山海阁位置", shanhaige.x, shanhaige.y)
         console.log("山海阁宽高", shanhaige.width, shanhaige.height)
@@ -319,8 +319,23 @@ class Home extends Component {
 
         shanhaige.interactive = true
 
+        const shanhaigeModal = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/home/modal.png"))
+
+        shanhaigeModal.width = 510 * roomRatio
+        shanhaigeModal.height = 810 * roomRatio
+        shanhaigeModal.x = 3206 * roomRatio
+        shanhaigeModal.y = 2423 * roomRatio
+        shanhaigeModal.zIndex = 11
+        shanhaigeModal.visible = false
+        shanhaigeModal.interactive = true
+        this.buildContainer.addChild(shanhaigeModal)
+
         shanhaige.on("pointertap", () => {
-            // alert(111)
+            shanhaigeModal.visible = true
+        })
+
+        shanhaigeModal.on("pointertap", () => {
+            this.props.goBuild()
         })
 
         this.buildContainer.addChild(shanhaige)
