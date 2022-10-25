@@ -17,7 +17,7 @@ export default function ChinaMap(): JSX.Element {
 
     return (
         <div className="china-map">
-            <Home />
+            <Home back={() => navigate(-1)} />
 
             <div
                 className="back-button"
@@ -31,7 +31,7 @@ export default function ChinaMap(): JSX.Element {
     )
 }
 
-class Home extends Component {
+class Home extends Component<any> {
     private dragging = false
     private diff: any
 
@@ -49,9 +49,13 @@ class Home extends Component {
             backgroundColor: 0x000000,
         })
 
-        app.stage.sortableChildren = true
-
         document.getElementById("map-main")?.appendChild(app.view)
+
+        const container = new PIXI.Container()
+        container.interactive = true
+        container.sortableChildren = true
+
+        app.stage.addChild(container)
 
         const mapImg = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/map/map.png"))
 
@@ -61,19 +65,37 @@ class Home extends Component {
                 ? Math.ceil(bgWidth * roomRatio)
                 : Math.ceil(bgWidth * roomRatio) + 1
 
-        mapImg.position.x = -(mapImg.width - config.clientWidth()) + config.clientWidth() / 4
-        mapImg.position.y = -(config.clientHeight() / 3)
-
-        mapImg.interactive = true
         mapImg.zIndex = 1
 
-        mapImg
+        const diffX = mapImg.width - config.clientWidth()
+        const diffY = config.clientHeight() / 3
+
+        container.position.x = -diffX + config.clientWidth() / 4
+        container.position.y = -diffY
+
+        container.addChild(mapImg)
+
+        const graphics = new PIXI.Graphics()
+        graphics.beginFill(0x000000, 0.01)
+        graphics.drawRect(5792 * roomRatio, 2018 * roomRatio, 320 * roomRatio, 434 * roomRatio)
+        graphics.endFill()
+        graphics.zIndex = 2
+
+        graphics.interactive = true
+
+        graphics.on("touchstart", () => {
+            this.props.back()
+        })
+
+        container.addChild(graphics)
+
+        container
             .on("touchstart", (e: any) => {
                 this.dragging = true
 
                 this.diff = {
-                    x: e.data.global.x - mapImg.x,
-                    y: e.data.global.y - mapImg.y,
+                    x: e.data.global.x - container.x,
+                    y: e.data.global.y - container.y,
                 }
             })
             .on("touchendoutside", () => {
@@ -84,29 +106,27 @@ class Home extends Component {
             })
             .on("touchmove", (e: any) => {
                 if (this.dragging) {
-                    const newPosition = e.data.getLocalPosition(mapImg.parent)
-                    mapImg.x = newPosition.x - this.diff.x
-                    mapImg.y = newPosition.y - this.diff.y
+                    const newPosition = e.data.getLocalPosition(container.parent)
+                    container.x = newPosition.x - this.diff.x
+                    container.y = newPosition.y - this.diff.y
 
-                    if (mapImg.x >= 0) {
-                        mapImg.x = 0
+                    if (container.x >= 0) {
+                        container.x = 0
                     }
 
-                    if (mapImg.y >= 0) {
-                        mapImg.y = 0
+                    if (container.y >= 0) {
+                        container.y = 0
                     }
 
-                    if (mapImg.x <= config.clientWidth() - mapImg.width) {
-                        mapImg.x = config.clientWidth() - mapImg.width
+                    if (container.x <= config.clientWidth() - container.width) {
+                        container.x = config.clientWidth() - container.width
                     }
 
-                    if (mapImg.y <= config.clientHeight() - mapImg.height) {
-                        mapImg.y = config.clientHeight() - mapImg.height
+                    if (container.y <= config.clientHeight() - container.height) {
+                        container.y = config.clientHeight() - container.height
                     }
                 }
             })
-
-        app.stage.addChild(mapImg)
     }
 
     render() {

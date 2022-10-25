@@ -8,6 +8,106 @@
   width: 100%;
   height: 100%;
 
+  .top-render {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 29px;
+
+    .user-info {
+      margin-left: 15px;
+      width: 65%;
+      background-color: rgba(0, 0, 0, .42);
+      border-radius: 10px;
+      padding: 5px 6px;
+
+      div:nth-child(1) {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+
+        .avatar {
+          width: 28px;
+          height: 28px;
+        }
+  
+        .name {
+          margin-left: 6px;
+          font-size: 16px;
+          color: #fff;
+          margin-right: 7px;
+        }
+
+        .level {
+          font-size: 14px;
+          color: #2BF2FF;
+          font-weight: 600;
+          padding: 0 6px;
+          background: rgba(118,222,255,0.3);
+          border-radius: 10px;
+        }
+      }
+
+      .steps {
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+        margin-right: 11px;
+
+        i {
+          font-style: normal;
+          margin-left: 4px;
+          font-size: 16px;
+          text-shadow: 0px 2px 2px rgba(0, 0, 0, .2);
+          font-weight: 600;
+        }
+      }
+
+      .power {
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+
+        i {
+          font-style: normal;
+          margin-left: 3px;
+          font-size: 16px;
+          text-shadow: 0px 2px 2px rgba(0, 0, 0, .2);
+          font-weight: 600;
+          color: #FFE923;
+        }
+      }
+
+    }
+
+    .header-icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+
+      img:nth-child(1) {
+        width: 30px;
+        height: 30px;
+        margin-right: 7px;
+      }
+
+      img:nth-child(2) {
+        width: 24px;
+        height: 24px;
+        margin-right: 9px;
+      }
+
+      img:nth-child(3) {
+        width: 27px;
+        height: 23px;
+        margin-right: 10px;
+      }
+    }
+  }
+
   .bottom-render {
     position: fixed;
     width: 100%;
@@ -18,7 +118,7 @@
     z-index: 999;
 
     .button {
-      width: 28%;
+      width: 38%;
       height: 38px;
       border-radius: 19px;
       background-color: rgba(255, 255, 255, .9);

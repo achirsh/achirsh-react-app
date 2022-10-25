@@ -1,0 +1,93 @@
+.forward-enter,
+.forward-exit,
+.back-enter,
+.back-exit,
+.fadeIn-enter,
+.fadeIn-exit
+ {
+  position: absolute !important;
+  top: 0;
+  width: 100%;
+}
+
+.forward-enter-active,
+.forward-exit-active,
+.back-enter-active,
+.back-exit-active,
+.fadeIn-enter-active,
+.fadeIn-exit-active {
+  transition: all 400ms;
+  touch-action: none;
+}
+
+.forward-enter {
+  /* opacity: 0; */
+  transform: translateX(100%);
+}
+
+.forward-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.forward-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.forward-exit-active {
+  /* opacity: 0; */
+  transform: translateX(-100%);
+}
+
+.back-enter {
+  /* opacity: .3; */
+  transform: translateX(-100%);
+}
+
+.back-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.back-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.back-exit-active {
+  /* opacity: 0; */
+  transform: translateX(100%);
+}
+
+
+/* 淡入 */
+
+
+.fadeIn-enter {
+  opacity: 0;
+}
+
+.fadeIn-enter-active {
+  opacity: 1;
+}
+
+.fadeIn-exit {
+  opacity: 1;
+}
+
+.fadeIn-exit-active {
+  opacity: 0;
+}
+
+.router-wrapper {
+    height: 100%;
+}
+
+.ka-wrapper {
+    height: 100%;
+}
+
+.ka-content {
+    height: 100%;
+}

@@ -1,0 +1,117 @@
+.my-home {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    
+    .top-render {
+      width: 100%;
+      position: fixed;
+      top: 26px;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+
+      .avatar-render {
+        width: 235px;
+        height: 45px;
+        border-radius: 25px;
+        background-color: rgba(0, 0, 0, .4);
+        margin-left: 58px;
+        display: flex;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.8);
+
+        .avatar-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+
+          div:nth-child(2) {
+            span:nth-child(1) {
+              margin-right: 9px;
+            }
+          }
+        }
+
+        .name {
+          font-size: 14px;
+          line-height: 16px;
+          color: #fff;
+          margin-right: 5px;
+        }
+
+        .level {
+          font-size: 14px;
+          line-height: 16px;
+          color: #fff;
+          margin-right: 5px;
+          height: 20px;
+          padding: 0 5px;
+          border-radius: 10px;
+          background-color: rgba(104,242,255,0.24);          
+        }
+
+        .avatar {
+          width: 56px;
+          height: 56px;
+          margin-left: -19px;
+          margin-top: -5px;
+          margin-right: 5px;
+        }
+
+        .back {
+          // width: 19px;
+          // height: 19px;
+          position: absolute;
+          left: 10px;
+          top: 3px;
+          padding: 10px 5px;
+
+          img {
+            width: 19px;
+            height: 19px;
+          }
+        }
+      }
+
+      .icon-5 {
+        width: 50px;
+        height: 49px;
+        margin-right: 15px;
+      }
+    }
+
+    .bottom-render {
+      width: 100%;
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+
+      img {
+        width: 20%;
+        margin-right: 4%;
+      }
+
+      img:nth-child(1) {
+        margin-left: 4%
+      }
+    }
+
+    .my-home-main {
+        width: 100%;
+        height: 100%;
+        
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+}

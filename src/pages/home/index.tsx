@@ -18,6 +18,29 @@ export default function HomePage(): JSX.Element {
         <div className="home-page">
             <Home />
 
+            <div className="top-render">
+                <div className="user-info">
+                    <div>
+                        <img alt="" src={String(PUBLIC_PATH) + "assets/pixi/me/avatar.png"} className="avatar" />
+                        <span className="name">蓝天白云</span>
+                        <span className="level">LV.2</span>
+                    </div>
+                    <div>
+                        <span className="steps">
+                            今日步数 <i>2333</i>
+                        </span>
+                        <span className="power">
+                            今日体力值 <i>1899</i>
+                        </span>
+                    </div>
+                </div>
+                <div className="header-icon">
+                    <img alt="" src={String(PUBLIC_PATH) + "assets/pixi/home/icon-1.png"} />
+                    <img alt="" src={String(PUBLIC_PATH) + "assets/pixi/home/icon-2.png"} />
+                    <img alt="" src={String(PUBLIC_PATH) + "assets/pixi/home/icon-3.png"} />
+                </div>
+            </div>
+
             <div className="bottom-render">
                 <div
                     className="go-tourism button"
@@ -27,7 +50,12 @@ export default function HomePage(): JSX.Element {
                 >
                     <div>去旅行</div>
                 </div>
-                <div className="go-home button">
+                <div
+                    className="go-home button"
+                    onClick={() => {
+                        navigate(String(PUBLIC_PATH) + "home/me")
+                    }}
+                >
                     <div>回家</div>
                 </div>
             </div>
