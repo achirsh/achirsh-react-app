@@ -4,4 +4,8 @@ export const routes = [
         url: "home",
         page: "home",
     },
+    {
+        url: "home/map",
+        page: "map",
+    },
 ]

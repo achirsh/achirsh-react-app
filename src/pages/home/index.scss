@@ -1,10 +1,52 @@
-.main {
+.home-page {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  .bottom-render {
     position: fixed;
+    width: 100%;
+    bottom: 20px;
     left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    display: block;
+    display: flex;
+    justify-content: space-around;
+    z-index: 999;
+
+    .button {
+      width: 28%;
+      height: 38px;
+      border-radius: 19px;
+      background-color: rgba(255, 255, 255, .9);
+      color: #fff;
+      padding: 4px;
+    }
+
+    .go-tourism div{
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(270deg, #FFBA07 0%, #FFCD4B 100%);
+      border-radius: 14px;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    .go-home div{
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(270deg, #1ABBF0 0%, #3FD4FF 100%);
+      border-radius: 14px;
+      text-align: center;
+      line-height: 30px;
+    }
+  }
+}
+
+.main {
     width: 100%;
     height: 100%;
     
