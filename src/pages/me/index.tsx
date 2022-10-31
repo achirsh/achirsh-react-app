@@ -26,7 +26,7 @@ export default function MyHome(): JSX.Element {
                     <div className="avatar-info">
                         <div>
                             <span className="name">山海猫星人</span>
-                            <span className="level">LV:2</span>
+                            <span className="level">LV.2</span>
                             <span className="xunzhang">勋章：9枚</span>
                         </div>
                         <div>

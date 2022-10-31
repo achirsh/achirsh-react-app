@@ -12,7 +12,7 @@
     width: 100%;
     position: fixed;
     left: 0;
-    top: 29px;
+    top: 10px;
 
     .user-info {
       margin-left: 15px;
@@ -111,7 +111,7 @@
   .bottom-render {
     position: fixed;
     width: 100%;
-    bottom: 20px;
+    bottom: 10px;
     left: 0;
     display: flex;
     justify-content: space-around;
@@ -119,11 +119,8 @@
 
     .button {
       width: 38%;
-      height: 38px;
-      border-radius: 19px;
-      background-color: rgba(255, 255, 255, .9);
+      height: auto;
       color: #fff;
-      padding: 4px;
     }
 
     .go-tourism div{
@@ -144,6 +141,23 @@
       line-height: 30px;
     }
   }
+
+  .modal {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    img {
+      width: 200px;
+      height: 358px;
+      margin-top: -20px;
+    }
+  }
 }
 
 .main {
@@ -156,4 +170,16 @@
     height: 100%;
     object-fit: contain;
   }
+}
+
+.modal {
+  width: 100%;
+}
+
+.close-popup {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -20px;
+  right: 15px;
 }

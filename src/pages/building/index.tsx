@@ -29,8 +29,8 @@ export default function Building(): JSX.Element {
             <div
                 className="collar"
                 style={{
-                    top: `${1020 * roomRatio}px`,
-                    right: `${120 * roomRatio}px`,
+                    top: `${320 * roomRatio}px`,
+                    right: `${160 * roomRatio}px`,
                 }}
                 onClick={() => setVisible(true)}
             ></div>
@@ -38,11 +38,24 @@ export default function Building(): JSX.Element {
             <div
                 className="setting"
                 style={{
-                    top: `${200 * roomRatio}px`,
-                    right: `${70 * roomRatio}px`,
+                    top: `${40 * roomRatio}px`,
+                    right: `${180 * roomRatio}px`,
                 }}
                 onClick={() => {
                     navigate(String(PUBLIC_PATH) + "home/building/setting")
+                }}
+            ></div>
+
+            <div
+                className="go-three"
+                style={{
+                    top: `${2130 * roomRatio}px`,
+                    right: `${100 * roomRatio}px`,
+                    height: `${180 * roomRatio}px`,
+                }}
+                onClick={() => {
+                    navigate(String(PUBLIC_PATH) + "home/three")
+                    // window.open("https://threejs.org/examples/webgl_panorama_cube.html")
                 }}
             ></div>
 
@@ -53,6 +66,7 @@ export default function Building(): JSX.Element {
                 }}
             >
                 <img alt="" src={String(PUBLIC_PATH) + "assets/pixi/building/popup.png"} className="popup" />
+                <div className="close" onClick={() => setVisible(false)}></div>
             </Popup>
         </div>
     )

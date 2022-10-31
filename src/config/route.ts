@@ -41,4 +41,52 @@ export const routes = [
             exit: "back",
         },
     },
+    {
+        url: "home/square",
+        page: "square",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/square/release",
+        page: "square/release",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/wishing-well",
+        page: "wishing-well",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/tribal",
+        page: "tribal",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/tribal/chat",
+        page: "tribal/chat",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
+    {
+        url: "home/three",
+        page: "three",
+        sceneConfig: {
+            enter: "forward",
+            exit: "back",
+        },
+    },
 ]

@@ -1,20 +1,79 @@
 import "./index.scss"
-import { useEffect, Component } from "react"
+import { useEffect, Component, useState, useRef } from "react"
 import * as config from "src/config"
 import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
 import { useNavigate } from "react-router-dom"
+import { Popup } from "antd-mobile"
 
-const bgWidth = 5316
-const bgHeight = 3728
+const bgWidth = 2658
+const bgHeight = 1864
 const roomRatio = config.clientHeight() / bgHeight
+const speed = 1.5
+
+const builds = [
+    {
+        img: "shanhaige",
+        w: 286,
+        h: 251,
+        x: 1403,
+        y: 1226,
+    },
+    {
+        img: "xuyuanchi",
+        w: 211,
+        h: 240,
+        x: 440,
+        y: 205,
+    },
+    {
+        img: "tiananmen",
+        w: 302,
+        h: 113,
+        x: 1216,
+        y: 378,
+    },
+    {
+        img: "guangchang",
+        w: 471,
+        h: 159,
+        x: 1161,
+        y: 512,
+    },
+    {
+        img: "tribal",
+        w: 198,
+        h: 236,
+        x: 415,
+        y: 1247,
+    },
+]
 
 export default function HomePage(): JSX.Element {
+    const ref = useRef(null)
     const navigate = useNavigate()
+
+    const [modal, setModal] = useState<any>({
+        visible: false,
+        type: "",
+    })
 
     return (
         <div className="home-page">
-            <Home goBuild={() => navigate(String(PUBLIC_PATH) + "home/building")} />
+            <Home
+                showModal={(status: boolean, type: string) => {
+                    if (type === "guangchang") {
+                        navigate(String(PUBLIC_PATH) + "home/square")
+                    } else if (type === "xuyuanchi") {
+                        navigate(String(PUBLIC_PATH) + "home/wishing-well")
+                    } else if (type === "tribal") {
+                        navigate(String(PUBLIC_PATH) + "home/tribal")
+                    } else {
+                        setModal({ visible: status, type })
+                    }
+                }}
+                ref={ref}
+            />
 
             <div className="top-render">
                 <div className="user-info">
@@ -40,23 +99,60 @@ export default function HomePage(): JSX.Element {
             </div>
 
             <div className="bottom-render">
-                <div
+                <img
+                    alt=""
+                    src={String(PUBLIC_PATH) + `assets/pixi/home/icon-4.png`}
+                    onClick={() => {
+                        navigate(String(PUBLIC_PATH) + "home/map")
+                    }}
+                    className="go-tourism button"
+                />
+
+                <img
+                    alt=""
+                    src={String(PUBLIC_PATH) + `assets/pixi/home/icon-5.png`}
+                    onClick={() => {
+                        navigate(String(PUBLIC_PATH) + "home/me")
+                    }}
+                    className="go-tourism button"
+                />
+                {/* <div
                     className="go-tourism button"
                     onClick={() => {
                         navigate(String(PUBLIC_PATH) + "home/map")
                     }}
                 >
                     <div>去旅行</div>
-                </div>
-                <div
+                </div> */}
+                {/* <div
                     className="go-home button"
                     onClick={() => {
                         navigate(String(PUBLIC_PATH) + "home/me")
                     }}
                 >
                     <div>回家</div>
-                </div>
+                </div> */}
             </div>
+
+            <Popup visible={modal.visible} onMaskClick={() => setModal({ ...modal, visible: false })}>
+                <img
+                    alt=""
+                    src={String(PUBLIC_PATH) + `assets/pixi/home/${modal.type}-modal.png`}
+                    className="modal"
+                    onClick={() => {
+                        if (modal.type === "shanhaige") {
+                            setModal({ ...modal, visible: false })
+                            navigate(String(PUBLIC_PATH) + "home/building")
+                        }
+                    }}
+                />
+                <img
+                    className="close-popup"
+                    alt=""
+                    src={String(PUBLIC_PATH) + `assets/pixi/home/close.png`}
+                    onClick={() => setModal({ ...modal, visible: false })}
+                />
+            </Popup>
         </div>
     )
 }
@@ -93,9 +189,7 @@ class Home extends Component<any> {
         right: false,
     }
 
-    state = {
-        map: [],
-    }
+    private status = false
 
     componentDidMount() {
         this.initApp()
@@ -150,7 +244,7 @@ class Home extends Component<any> {
                 this.oldBgContainerX = this.bgContainer.x
                 this.oldBgContainerY = this.bgContainer.y
 
-                console.log(this.bgContainer.x, screenPoor)
+                // console.log(this.bgContainer.x, screenPoor)
 
                 if (event.data.global.x > config.clientWidth() / 2) {
                     // 地图动-向右
@@ -240,7 +334,7 @@ class Home extends Component<any> {
     }
 
     bgTexture5Fn() {
-        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/bg/bg2.jpg"))
+        this.bgTexture5 = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/home/bg.jpg"))
 
         this.bgTexture5.position.set(0, 0)
         this.bgTexture5.width =
@@ -267,18 +361,18 @@ class Home extends Component<any> {
                 }
 
                 this.spineBoy.x = spineBodyCoordinates.x
-                this.spineBoy.y = spineBodyCoordinates.y
+                this.spineBoy.y = spineBodyCoordinates.y + 90 * roomRatio
                 this.spineBoy.zIndex = 2
-                this.spineBoy.width = 29
-                this.spineBoy.height = 68
+                this.spineBoy.width = 27
+                this.spineBoy.height = 63
 
-                console.log("人物长宽", this.spineBoy.width, this.spineBoy.height)
-                console.log("地图宽度-高度", this.bgTexture5.width, this.bgTexture5.height)
+                // console.log("人物长宽", this.spineBoy.width, this.spineBoy.height)
+                // console.log("地图宽度-高度", this.bgTexture5.width, this.bgTexture5.height)
 
-                const col = this.bgTexture5.width / this.spineBoy.width
-                const row = this.bgTexture5.height / this.spineBoy.height
+                // const col = this.bgTexture5.width / this.spineBoy.width
+                // const row = this.bgTexture5.height / this.spineBoy.height
 
-                console.log("col-row", col, row)
+                // console.log("col-row", col, row)
 
                 this.spineBoy.state.setAnimation(0, "walk", true)
                 this.spineBoy.interactive = true
@@ -298,47 +392,30 @@ class Home extends Component<any> {
                 : Math.ceil(bgWidth * roomRatio) + 1
         this.buildContainer.height = config.clientHeight()
         this.buildContainer.zIndex = 3
-        this.buildContainer.sortableChildren = true
 
         this.app.stage.addChild(this.buildContainer)
 
-        const shanhaige = new PIXI.Sprite(
-            PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/building/beijing/shanhaige.png")
-        )
-        shanhaige.width = 572 * roomRatio
-        shanhaige.height = 502 * roomRatio
-        shanhaige.x = 2806 * roomRatio
-        shanhaige.y = 2453 * roomRatio
-        shanhaige.zIndex = 10
+        builds.forEach(item => {
+            const commonBuild = new PIXI.Sprite(
+                PIXI.Texture.from(String(PUBLIC_PATH) + `assets/pixi/building/beijing/${item.img}.png`)
+            )
+            commonBuild.width = item.w * roomRatio
+            commonBuild.height = item.h * roomRatio
+            commonBuild.x = item.x * roomRatio
+            commonBuild.y = item.y * roomRatio
 
-        console.log("山海阁位置", shanhaige.x, shanhaige.y)
-        console.log("山海阁宽高", shanhaige.width, shanhaige.height)
+            commonBuild.interactive = true
 
-        const mapArray = Array.from(new Array(Math.trunc(this.bgTexture5.width)).keys())
-        this.setState({ map: mapArray })
+            commonBuild.on("pointertap", () => {
+                if (item.img === "shanhaige" || item.img === "tiananmen") {
+                    this.props.showModal(true, item.img)
+                } else {
+                    this.props.showModal(false, item.img)
+                }
+            })
 
-        shanhaige.interactive = true
-
-        const shanhaigeModal = new PIXI.Sprite(PIXI.Texture.from(String(PUBLIC_PATH) + "assets/pixi/home/modal.png"))
-
-        shanhaigeModal.width = 510 * roomRatio
-        shanhaigeModal.height = 810 * roomRatio
-        shanhaigeModal.x = 3206 * roomRatio
-        shanhaigeModal.y = 2423 * roomRatio
-        shanhaigeModal.zIndex = 11
-        shanhaigeModal.visible = false
-        shanhaigeModal.interactive = true
-        this.buildContainer.addChild(shanhaigeModal)
-
-        shanhaige.on("pointertap", () => {
-            shanhaigeModal.visible = true
+            this.buildContainer.addChild(commonBuild)
         })
-
-        shanhaigeModal.on("pointertap", () => {
-            this.props.goBuild()
-        })
-
-        this.buildContainer.addChild(shanhaige)
     }
 
     // 舞台ticker事件
@@ -354,8 +431,8 @@ class Home extends Component<any> {
                     bgContainerXPoor <= this.diff.x
                     // && this.bgContainer.x > screenPoor
                 ) {
-                    this.bgContainer.x -= 1
-                    this.buildContainer.x -= 1
+                    this.bgContainer.x -= speed
+                    this.buildContainer.x -= speed
 
                     // console.log(this.bgContainer.x)
                 }
@@ -366,8 +443,8 @@ class Home extends Component<any> {
                     bgContainerXPoor >= this.diff.x
                     // && this.bgContainer.x < -screenPoor
                 ) {
-                    this.bgContainer.x += 1
-                    this.buildContainer.x += 1
+                    this.bgContainer.x += speed
+                    this.buildContainer.x += speed
                 }
 
                 // if (Math.abs(this.bgContainer.x) === Math.abs(screenPoor)) {
@@ -413,16 +490,42 @@ class Home extends Component<any> {
                     this.spineBoy.y >= this.spineBoy.height &&
                     this.spineBoy.y > this.newBodyY
                 ) {
-                    this.spineBoy.y -= 1
+                    this.spineBoy.y -= speed
                 }
 
                 // 人走-向下走
                 if (this.peopleDirection.bottom && this.spineBoy.y <= this.newBodyY) {
-                    this.spineBoy.y += 1
+                    this.spineBoy.y += speed
                 }
 
                 // 检测人物和山海阁是否碰撞
             }
+
+            // if (this.spineBoy) {
+            //     if (
+            //         this.bgContainer.x >= -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio
+            //         && this.bgContainer.x <= -Math.abs(bgWidth / 2 - 1703) * roomRatio
+            //         && this.spineBoy.y >= 1320 * roomRatio
+            //         && this.spineBoy.y <= 1480 * roomRatio + this.spineBoy.height
+            //         && !this.status
+            //     ) {
+            //         this.status = true
+            //         this.props.showModal(true)
+            //     } else {
+            //         // if (this.status) {
+            //         //     this.status = false
+            //         // }
+            //     }
+
+            //     // console.log( this.bgContainer.x, -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio)
+
+            //     // if (this.bgContainer.x < -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio
+            //     //     && this.bgContainer.x > -Math.abs(bgWidth / 2 - 1703) * roomRatio
+            //     //     && this.spineBoy.y < 1320 * roomRatio
+            //     //     && this.spineBoy.y > 1480 * roomRatio + this.spineBoy.height) {
+            //     //         console.log(11)
+            //     // }
+            // }
         })
     }
 

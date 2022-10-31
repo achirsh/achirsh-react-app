@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom"
 
 // 1680 1976 2120 1606
 
-const bgWidth = 8192
-const bgHeight = 6330
+const bgWidth = 4096
+const bgHeight = 3165
 const resolution = 2
 const roomRatio = (config.clientHeight() * 1.5) / bgHeight
 
@@ -77,7 +77,7 @@ class Home extends Component<any> {
 
         const graphics = new PIXI.Graphics()
         graphics.beginFill(0x000000, 0.01)
-        graphics.drawRect(5792 * roomRatio, 2018 * roomRatio, 320 * roomRatio, 434 * roomRatio)
+        graphics.drawRect(2896 * roomRatio, 1009 * roomRatio, 160 * roomRatio, 217 * roomRatio)
         graphics.endFill()
         graphics.zIndex = 2
 

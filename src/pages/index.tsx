@@ -56,7 +56,7 @@ export default function PageIndex(): JSX.Element {
                                     path={item.url || item.page}
                                     key={`route-${item.page}`}
                                     element={
-                                        <KeepAlive when={item.keepAlive || false}>
+                                        <KeepAlive when={false}>
                                             <CommonPage page={item.page} />
                                         </KeepAlive>
                                     }
