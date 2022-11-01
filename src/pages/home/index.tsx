@@ -1,5 +1,5 @@
 import "./index.scss"
-import { useEffect, Component, useState, useRef } from "react"
+import { Component, useState, useRef } from "react"
 import * as config from "src/config"
 import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
@@ -348,10 +348,9 @@ class Home extends Component<any> {
     }
 
     // 加载人物
-    loadPeople() {
+    async loadPeople() {
         this.app.loader
             .add("spineboy", String(PUBLIC_PATH) + "assets/pixi/spineboy.json")
-            .add("shanhaige", String(PUBLIC_PATH) + "assets/pixi/building/beijing/shanhaige.png")
             .load((loader: any, res: any) => {
                 this.spineBoy = new Spine(res.spineboy.spineData)
 
@@ -365,14 +364,6 @@ class Home extends Component<any> {
                 this.spineBoy.zIndex = 2
                 this.spineBoy.width = 27
                 this.spineBoy.height = 63
-
-                // console.log("人物长宽", this.spineBoy.width, this.spineBoy.height)
-                // console.log("地图宽度-高度", this.bgTexture5.width, this.bgTexture5.height)
-
-                // const col = this.bgTexture5.width / this.spineBoy.width
-                // const row = this.bgTexture5.height / this.spineBoy.height
-
-                // console.log("col-row", col, row)
 
                 this.spineBoy.state.setAnimation(0, "walk", true)
                 this.spineBoy.interactive = true
@@ -397,7 +388,7 @@ class Home extends Component<any> {
 
         builds.forEach(item => {
             const commonBuild = new PIXI.Sprite(
-                PIXI.Texture.from(String(PUBLIC_PATH) + `assets/pixi/building/beijing/${item.img}.png`)
+                PIXI.Texture.from(String(PUBLIC_PATH) + `assets/pixi/building/beijing/${item.img}.png?t=${Date.now()}`)
             )
             commonBuild.width = item.w * roomRatio
             commonBuild.height = item.h * roomRatio
@@ -433,8 +424,6 @@ class Home extends Component<any> {
                 ) {
                     this.bgContainer.x -= speed
                     this.buildContainer.x -= speed
-
-                    // console.log(this.bgContainer.x)
                 }
 
                 // 地图动-横向->向左
@@ -446,43 +435,6 @@ class Home extends Component<any> {
                     this.bgContainer.x += speed
                     this.buildContainer.x += speed
                 }
-
-                // if (Math.abs(this.bgContainer.x) === Math.abs(screenPoor)) {
-                //     if (this.peopleDirection.right && this.spineBoy.x <= this.newBodyX + (this.bgContainer.width - config.clientWidth()) / 2) {
-                //         this.spineBoy.x += 1
-                //     }
-                //     if (this.peopleDirection.left && this.spineBoy.x >= this.newBodyX + Math.abs((this.bgContainer.width - config.clientWidth()) / 2)) {
-                //         this.spineBoy.x -= 1
-                //     }
-                // }
-
-                // 人走-横向->向右
-                // if (
-                //     this.peopleDirection.right &&
-                //     this.bgContainer.x < (config.clientWidth() - this.bgContainer.width) / 2 &&
-                //     this.spineBoy.x < this.newBodyX + (this.bgContainer.width - config.clientWidth()) / 2
-                // ) {
-                //     this.spineBoy.x += 1
-                // }
-
-                // 人走-横向->向左
-                // if (
-                //     this.peopleDirection.left &&
-                //     this.bgContainer.x > Math.abs((config.clientWidth() - this.bgContainer.width) / 2) &&
-                //     this.spineBoy.x > this.newBodyX + Math.abs((this.bgContainer.width - config.clientWidth()) / 2)
-                // ) {
-                //     this.spineBoy.x -= 1
-                // }
-
-                // 地图动-垂直->向上
-                // if (this.bgType.top && Math.abs(this.bgContainer.y - this.oldBgContainerY) < this.diff.y) {
-                //     // this.bgContainer.y -= 1
-                //     // this.spineBoy.y += 1
-                // }
-                // 地图动-垂直->向下
-                // if (this.bgType.bottom && Math.abs(this.oldBgContainerY - this.bgContainer.y) < Math.abs(this.diff.y)) {
-                //     this.bgContainer.y += 1
-                // }
 
                 // 人走-向上走
                 if (
@@ -497,35 +449,7 @@ class Home extends Component<any> {
                 if (this.peopleDirection.bottom && this.spineBoy.y <= this.newBodyY) {
                     this.spineBoy.y += speed
                 }
-
-                // 检测人物和山海阁是否碰撞
             }
-
-            // if (this.spineBoy) {
-            //     if (
-            //         this.bgContainer.x >= -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio
-            //         && this.bgContainer.x <= -Math.abs(bgWidth / 2 - 1703) * roomRatio
-            //         && this.spineBoy.y >= 1320 * roomRatio
-            //         && this.spineBoy.y <= 1480 * roomRatio + this.spineBoy.height
-            //         && !this.status
-            //     ) {
-            //         this.status = true
-            //         this.props.showModal(true)
-            //     } else {
-            //         // if (this.status) {
-            //         //     this.status = false
-            //         // }
-            //     }
-
-            //     // console.log( this.bgContainer.x, -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio)
-
-            //     // if (this.bgContainer.x < -Math.abs(bgWidth / 2 - 1703 - 70) * roomRatio
-            //     //     && this.bgContainer.x > -Math.abs(bgWidth / 2 - 1703) * roomRatio
-            //     //     && this.spineBoy.y < 1320 * roomRatio
-            //     //     && this.spineBoy.y > 1480 * roomRatio + this.spineBoy.height) {
-            //     //         console.log(11)
-            //     // }
-            // }
         })
     }
 

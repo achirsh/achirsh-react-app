@@ -4,7 +4,6 @@ import loadable from "@loadable/component"
 import { useLocation, Routes, Route, useNavigationType } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { cloneElement, useMemo, useState, useEffect } from "react"
-import KeepAlive from "react-activation"
 
 const CommonPage = loadable((props: any) => import(`../pages/${props.page}`), {
     cacheKey: (props: any) => props.page,
@@ -55,11 +54,7 @@ export default function PageIndex(): JSX.Element {
                                 <Route
                                     path={item.url || item.page}
                                     key={`route-${item.page}`}
-                                    element={
-                                        <KeepAlive when={false}>
-                                            <CommonPage page={item.page} />
-                                        </KeepAlive>
-                                    }
+                                    element={<CommonPage page={item.page} />}
                                 />
                             )
                         })}

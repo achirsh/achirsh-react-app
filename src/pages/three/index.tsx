@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 // const url = "https://threejs.org/examples/webgl_panorama_cube.html"
-const url = "https://ljnmeow.github.io/360-house-viewing/dist/#/"
+const url = "https://manors.sit.shanhai.team/static/three/#/"
 
 export default function ComplaintsPage(): JSX.Element {
     return (
