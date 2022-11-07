@@ -4,7 +4,7 @@ import * as config from "src/config"
 import * as PIXI from "pixi.js"
 import { Spine } from "pixi-spine"
 import { useNavigate } from "react-router-dom"
-import { Popup } from "antd-mobile"
+import Popup from "antd-mobile/es/components/popup"
 
 const bgWidth = 2658
 const bgHeight = 1864
@@ -50,13 +50,9 @@ const builds = [
 ]
 
 export default function HomePage(): JSX.Element {
-    const ref = useRef(null)
     const navigate = useNavigate()
 
-    const [modal, setModal] = useState<any>({
-        visible: false,
-        type: "",
-    })
+    const [modal, setModal] = useState<{ visible: boolean; type: string }>({ visible: false, type: "" })
 
     return (
         <div className="home-page">
@@ -72,7 +68,6 @@ export default function HomePage(): JSX.Element {
                         setModal({ visible: status, type })
                     }
                 }}
-                ref={ref}
             />
 
             <div className="top-render">
@@ -417,21 +412,13 @@ class Home extends Component<any> {
                 const bgContainerXPoor = this.oldBgContainerX - this.bgContainer.x
 
                 // 地图动-横向->向右
-                if (
-                    this.bgDirection.right &&
-                    bgContainerXPoor <= this.diff.x
-                    // && this.bgContainer.x > screenPoor
-                ) {
+                if (this.bgDirection.right && bgContainerXPoor <= this.diff.x && this.bgContainer.x > screenPoor) {
                     this.bgContainer.x -= speed
                     this.buildContainer.x -= speed
                 }
 
                 // 地图动-横向->向左
-                if (
-                    this.bgDirection.left &&
-                    bgContainerXPoor >= this.diff.x
-                    // && this.bgContainer.x < -screenPoor
-                ) {
+                if (this.bgDirection.left && bgContainerXPoor >= this.diff.x && this.bgContainer.x < -screenPoor) {
                     this.bgContainer.x += speed
                     this.buildContainer.x += speed
                 }
