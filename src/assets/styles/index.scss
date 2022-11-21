@@ -4,12 +4,6 @@
     margin: 0;
 }
 
-html,
-body,
-#root {
-  height: 100%;
-}
-
 :root {
     -webkit-tap-highlight-color: transparent;
 }
@@ -17,6 +11,10 @@ body,
 html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
+}
+
+li {
+    list-style: none;
 }
 
 body, html {
@@ -33,6 +31,11 @@ body, html {
 body *, html * {
     appearance: none;
     -webkit-touch-callout: none;
+}
+
+body {
+    color: #333333;
+    font-size: 13px;
 }
 
 textarea {

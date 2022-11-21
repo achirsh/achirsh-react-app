@@ -48,4 +48,8 @@ export const routes = [
         url: "home/bili",
         page: "bili",
     },
+    {
+        url: "home/ceshi",
+        page: "ceshi",
+    },
 ]

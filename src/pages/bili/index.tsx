@@ -1,9 +1,9 @@
 import { Component } from "react"
-import "./index.scss"
 import * as PIXI from "pixi.js"
 import * as config from "src/config"
+import "./style.scss"
 
-const divisor = 1.8
+const divisor = 2
 const width = (1680 + 2120) / divisor
 const height = (1976 + 1606) / divisor
 
@@ -26,8 +26,7 @@ export default class Bili extends Component {
             height: config.clientHeight(),
             antialias: true, // 抗锯齿
             resolution: 2, // 分辨率
-            transparent: false, // 背景透明
-            backgroundColor: 0x000000,
+            backgroundAlpha: 1, // 背景透明
         })
 
         document.getElementById("bili-main")?.appendChild(app.view)
@@ -38,39 +37,34 @@ export default class Bili extends Component {
 
         // 添加背景
         for (let i = 0; i < 4; i++) {
-            const bg = new PIXI.Sprite(
-                PIXI.Texture.from(String(PUBLIC_PATH) + `assets/bilibili/bg/${bgList[i].img}.jpg`)
-            )
+            const bg = PIXI.Sprite.from(String(PUBLIC_PATH) + `assets/bilibili/bg/${bgList[i].img}.jpg`)
             bg.width = bgList[i].w / divisor
             bg.height = bgList[i].h / divisor
             bg.position.set(bgList[i].x / divisor, bgList[i].y / divisor)
             this.container.addChild(bg)
         }
 
-        this.container.on("pointertap", (event: any) => {
-            this.diff = {
-                x: event.data.global.x - config.clientWidth() / 2,
-                y: event.data.global.y - config.clientHeight() / 2,
-            }
+        this.container.on("pointerdown", (event: any) => {
+            console.log("event.data.screen", event.data.screen)
 
-            this.oldContainer = {
-                x: this.container.x,
-                y: this.container.y,
-            }
+            // this.diff = {
+            //     x: event.data.global.x - config.clientWidth() / 2,
+            //     y: event.data.global.y - config.clientHeight() / 2,
+            // }
 
-            if (event.data.global.x > config.clientWidth() / 2) {
-                this.containerDirection = { right: true }
-            } else if (event.data.global.x < config.clientWidth() / 2) {
-                this.containerDirection = { left: true }
-            }
+            // this.oldContainer = {
+            //     x: this.container.x,
+            //     y: this.container.y,
+            // }
+
+            // if (event.data.global.x > config.clientWidth() / 2) {
+            //     this.containerDirection = { right: true }
+            // } else if (event.data.global.x < config.clientWidth() / 2) {
+            //     this.containerDirection = { left: true }
+            // }
         })
 
-        app.stage.pivot.x = (width - config.clientWidth()) / 2
-        app.stage.pivot.y = (height - config.clientHeight()) / 2
-
-        app.loader.add("cat", String(PUBLIC_PATH) + "assets/bilibili/cat.json").load(onAssetsLoaded)
-
-        function onAssetsLoaded(loader: any, res: any) {
+        PIXI.Assets.load(String(PUBLIC_PATH) + "assets/bilibili/cat.json").then(spritesheet => {
             const cat_down = []
             const cat_left = []
             const cat_right = []
@@ -92,7 +86,7 @@ export default class Bili extends Component {
             dealAnim(cat_up, false)
 
             function dealAnim(element: any, show: boolean) {
-                const anim = new PIXI.AnimatedSprite(element)
+                const anim: any = new PIXI.AnimatedSprite(element)
 
                 anim.x = width / 2
                 anim.y = height / 2
@@ -102,7 +96,10 @@ export default class Bili extends Component {
                 anim.visible = show
                 app.stage.addChild(anim)
             }
-        }
+        })
+
+        app.stage.pivot.x = (width - config.clientWidth()) / 2
+        app.stage.pivot.y = (height - config.clientHeight()) / 2
 
         app.ticker.add(() => {
             if (this.diff.x) {

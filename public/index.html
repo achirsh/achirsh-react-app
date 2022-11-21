@@ -2,14 +2,38 @@
 <html lang="en-US" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#000000">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
     <title></title>
 </head>
 
 <body>
     <div id="root"></div>
 </body>
+<script>
+    function setFontSize() {
+        var e = null,
+            t = document.documentElement,
+            i = (navigator.userAgent, t.clientWidth || window.screen.width || window.innerWidth);
 
+        e = i > 750 ? 100 : i / 7.5
+        e = Math.ceil(100 * e) / 100,
+        t.style.fontSize = e + 'px'
+
+        var n = window.getComputedStyle(document.getElementsByTagName("html")[0]).fontSize.replace("px", "")
+
+        e !== n && (t.style.fontSize = e * (e / n) + 'px')
+    }
+
+    setFontSize()
+
+    window.addEventListener("resize", setFontSize, !1)
+</script>
+
+<script>
+    
+</script>
 </html>

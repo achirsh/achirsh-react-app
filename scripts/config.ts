@@ -15,20 +15,13 @@ const styleOptions = (config: Configuration, isModule: string, otherOptions?: an
         },
         {
             loader: require.resolve("css-loader"),
-            options:
-                isModule === "module"
-                    ? {
-                          // sourceMap: true,
-                          modules: true,
-                      }
-                    : {},
+            options: isModule === "module" ? { modules: true } : {},
         },
         {
             loader: require.resolve("postcss-loader"),
             options: {
                 postcssOptions: {
                     ident: "postcss",
-                    config: false,
                     plugins: [
                         [
                             "postcss-preset-env",
@@ -37,7 +30,6 @@ const styleOptions = (config: Configuration, isModule: string, otherOptions?: an
                                 stage: 3,
                             },
                         ],
-                        "postcss-normalize",
                     ],
                 },
             },
