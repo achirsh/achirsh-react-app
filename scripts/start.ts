@@ -1,6 +1,5 @@
 import webpack from "webpack"
 import config from "./config"
-import { getProxy } from "./proxy"
 import path from "path"
 import fs from "fs"
 

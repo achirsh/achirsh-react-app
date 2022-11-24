@@ -1,4 +1,3 @@
-import "./index.css"
 import * as config from "src/config"
 import loadable from "@loadable/component"
 import { useLocation, Routes, Route } from "react-router-dom"
