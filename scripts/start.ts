@@ -1,14 +1,13 @@
-import open from "open"
-import yargs from "yargs-parser"
 import webpack from "webpack"
-import devMiddleware from "webpack-dev-middleware"
-import hotMiddleware from "webpack-hot-middleware"
-import fallback from "connect-history-api-fallback"
-import express from "express"
 import config from "./config"
-import { createProxyMiddleware } from "http-proxy-middleware"
+import { getProxy } from "./proxy"
+import path from "path"
+import fs from "fs"
 
-const argv = yargs(process.argv.slice(2))
+import WebpackDevServer from "webpack-dev-server"
+
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = (relativePath: any) => path.resolve(appDirectory, relativePath)
 
 const publicPath = process.env.PUBLIC_PATH || "/"
 
@@ -17,7 +16,6 @@ const compiler = webpack(
         mode: "development",
         devtool: "eval-source-map",
         output: { publicPath },
-        entry: ["webpack-hot-middleware/client?reload=true"],
         plugins: [new webpack.HotModuleReplacementPlugin()],
         cache: {
             type: "filesystem",
@@ -28,13 +26,31 @@ const compiler = webpack(
     })
 )
 
-express()
-    .use(fallback({ index: `${publicPath}index.html` }))
-    .use(devMiddleware(compiler, { publicPath }))
-    .use(hotMiddleware(compiler))
-    .listen(3003, () => {
-        console.info("Listening on :3003")
-        open(`http://localhost:3003${publicPath}`, {
-            app: argv.open === true ? null : argv.open,
-        })
-    })
+const serverConfig: any = {
+    hot: true,
+    allowedHosts: "all",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Headers": "*",
+    },
+    compress: true,
+    static: {
+        directory: resolveApp("public"),
+        publicPath: [publicPath],
+        watch: false,
+    },
+    devMiddleware: { publicPath: "" },
+    https: false,
+    host: "0.0.0.0",
+    historyApiFallback: { disableDotRule: true, index: publicPath },
+    port: 3003,
+}
+
+const devServer = new WebpackDevServer(serverConfig, compiler)
+
+devServer.startCallback(() => {
+    console.info("Listening on :3003")
+})
+
+// const proxySetting: any = getProxy(REACT_APP_ENV)
