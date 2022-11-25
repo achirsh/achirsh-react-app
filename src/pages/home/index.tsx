@@ -63,7 +63,7 @@ export default function Home(): JSX.Element {
             position: [116.401165, 39.904462],
             content: markerContent1,
             offset: new mapLoader.Pixel(-10, -28),
-            zooms: [4, 5],
+            zooms: [4, 8.9],
         })
 
         marker1.on("click", () => {
@@ -83,7 +83,7 @@ export default function Home(): JSX.Element {
             content: markerContent2,
             position: [116.398419, 39.919209],
             offset: new mapLoader.Pixel(-8.5, -24),
-            zooms: [9, 9],
+            zooms: [9, 17.9],
         })
 
         marker2.on("click", () => {
