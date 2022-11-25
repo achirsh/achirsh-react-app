@@ -1,28 +1,25 @@
 import "./index.scss"
 import AMapLoader from "@amap/amap-jsapi-loader"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Component } from "react"
 
-export default function Home(): JSX.Element {
-    // 4 9 18
-    // 0 0 40
+export default class Home extends Component<any> {
+    private map: any
+    private zoom = 4
 
-    // 116.397083, 39.874531 116.398419,39.919209 116.47609,39.865086
-    const [MAP, SETMAP] = useState<any>(null)
+    componentDidMount() {
+        this.init()
+    }
 
-    useEffect(() => {
-        init()
-    }, [])
-
-    const init = async () => {
+    async init() {
         const mapLoader = await AMapLoader.load({
             key: "259b0027f2e11456d32a085761d3bf38",
             version: "2.0",
         })
 
-        const map = new mapLoader.Map("container", {
+        this.map = new mapLoader.Map("container", {
             viewMode: "3D", //是否为3D地图模式
             zoom: 4, //初始化地图级别
-            center: [116.397083, 39.874531],
+            center: [116.47609, 39.865086],
             zooms: [4, 18],
             terrain: true, // 开启地形图
 
@@ -36,8 +33,6 @@ export default function Home(): JSX.Element {
             // skyColor: [],   // 天空颜色
         })
 
-        SETMAP(map)
-
         const markerContent =
             "" +
             '<div class="custom-content-marker">' +
@@ -45,13 +40,13 @@ export default function Home(): JSX.Element {
             "</div>"
 
         const marker = new mapLoader.Marker({
-            position: [116.476046, 39.865105],
+            position: [116.47609, 39.865086],
             content: markerContent,
             offset: new mapLoader.Pixel(-50, -50),
             zooms: [18, 18],
         })
 
-        map.add(marker)
+        this.map.add(marker)
 
         const markerContent1 =
             "" +
@@ -60,18 +55,19 @@ export default function Home(): JSX.Element {
             "</div>"
 
         const marker1 = new mapLoader.Marker({
-            position: [116.401165, 39.904462],
+            position: [116.47609, 39.865086],
             content: markerContent1,
             offset: new mapLoader.Pixel(-10, -28),
             zooms: [4, 8.9],
         })
 
         marker1.on("click", () => {
-            map.setCenter([116.398419, 39.919209])
-            map.setZoom(9)
+            this.map.setCenter([116.47609, 39.865086])
+            this.map.setZoom(9)
+            this.zoom = 9
         })
 
-        map.add(marker1)
+        this.map.add(marker1)
 
         const markerContent2 =
             "" +
@@ -81,39 +77,49 @@ export default function Home(): JSX.Element {
 
         const marker2 = new mapLoader.Marker({
             content: markerContent2,
-            position: [116.398419, 39.919209],
+            position: [116.47609, 39.865086],
             offset: new mapLoader.Pixel(-8.5, -24),
             zooms: [9, 17.9],
         })
 
         marker2.on("click", () => {
-            map.setCenter([116.47609, 39.865086])
-            map.setZoom(18)
+            this.map.setCenter([116.47609, 39.865086])
+            this.map.setZoom(18)
+            this.zoom = 18
         })
 
-        map.add(marker2)
+        this.map.add(marker2)
 
-        map.on("zoomend", () => {
-            if (map.getZoom() >= 18) {
-                map.setPitch(40)
+        this.map.on("zoomend", () => {
+            if (this.map.getZoom() > 4 && this.map.getZoom() < 9 && this.zoom === 4) {
+                this.map.setCenter([116.47609, 39.865086])
+                this.map.setZoom(9)
+                this.zoom = 9
+            } else if (this.map.getZoom() > 9 && this.map.getZoom() < 18 && this.zoom === 9) {
+                this.map.setCenter([116.47609, 39.865086])
+                this.map.setZoom(18)
+                this.zoom = 18
+            } else if (this.zoom === 18 && this.map.getZoom() < 18 && this.map.getZoom() > 9) {
+                this.map.setCenter([116.47609, 39.865086])
+                this.map.setZoom(9)
+                this.zoom = 9
+            } else if (this.map.getZoom() > 4 && this.map.getZoom() < 9 && this.zoom === 9) {
+                this.map.setCenter([116.47609, 39.865086])
+                this.map.setZoom(4)
+                this.zoom = 4
             }
 
-            if (map.getPitch() !== 0 && map.getZoom() < 18) {
-                map.setPitch(0)
+            if (this.map.getZoom() >= 18) {
+                this.map.setPitch(40)
+            }
+
+            if (this.map.getPitch() !== 0 && this.map.getZoom() < 18) {
+                this.map.setPitch(0)
             }
         })
     }
 
-    const reset = () => {
-        MAP.setCenter([116.397083, 39.874531])
-        MAP.setZoom(4)
+    render() {
+        return <div className="container" id="container"></div>
     }
-
-    return (
-        <div className="container" id="container">
-            <div className="reset" onClick={reset}>
-                重置
-            </div>
-        </div>
-    )
 }
