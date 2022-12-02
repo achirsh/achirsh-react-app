@@ -11,7 +11,7 @@ export default function PageIndex(): JSX.Element {
 
     return (
         <Routes location={location}>
-            <Route path={"/"}>
+            <Route path={String(PUBLIC_PATH)}>
                 {config.routes.map(item => {
                     return (
                         <Route

@@ -47,6 +47,7 @@ const styleOptions = (config: Configuration, isModule: string, otherOptions?: an
 }
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
+const ASSET_PATH = process.env.ASSET_PATH
 
 const cssRegex = /\.css$/
 const cssModuleRegex = /\.module\.css$/
@@ -62,10 +63,13 @@ export default function confg(config: Configuration): Configuration {
             output: {
                 clean: true,
                 path: resolvePath(__dirname, "../build"),
-                filename: config.mode === "production" ? "assets/js/[name].[contenthash:8].js" : "js/bundle.js",
+                filename:
+                    config.mode === "production" ? `${ASSET_PATH}assets/js/[name].[contenthash:8].js` : "js/bundle.js",
                 chunkFilename:
-                    config.mode === "production" ? "assets/js/[name].[contenthash:8].chunk.js" : "js/[name].chunk.js",
-                assetModuleFilename: "assets/images/[hash][ext][query]",
+                    config.mode === "production"
+                        ? `${ASSET_PATH}assets/js/[name].[contenthash:8].chunk.js`
+                        : "js/[name].chunk.js",
+                assetModuleFilename: `${ASSET_PATH}assets/images/[hash][ext][query]`,
                 publicPath: PUBLIC_PATH,
             },
             resolve: {
@@ -148,7 +152,7 @@ export default function confg(config: Configuration): Configuration {
                     PUBLIC_PATH: process.env.PUBLIC_PATH || "/",
                 }),
                 new MiniCssExtractPlugin({
-                    filename: "assets/css/[name].[contenthash:8].css",
+                    filename: `${ASSET_PATH}assets/css/[name].[contenthash:8].css`,
                 }),
                 new HtmlWebpackPlugin(
                     Object.assign(

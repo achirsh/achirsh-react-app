@@ -1,6 +1,23 @@
 .container {
     width: 100%;
     height: 100%;
+
+    .button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 999;
+    }
+}
+
+.flag-marker {
+    width: 100px;
+    height: 100px;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .custom-content-marker {
@@ -50,3 +67,128 @@
     bottom: 20px;
     z-index: 999;
 }
+
+.flag-animation {
+    width: 80px;
+    height: 80px;
+    animation: myfirst .8s ease;
+    -webkit-animation: myfirst .8s ease;
+    background-image: url('src/assets/images/flag/1.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    // background-color: rgba($color: #000000, $alpha: 0.5);
+    position: relative;
+
+    .flag-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    &-text {
+        width: 100%;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.41px;
+        color: #fff;
+        text-align: right;
+        -webkit-text-stroke: 1px #000;
+        position: absolute;
+        top: 32px;
+        left: 0;
+        line-height: 22px;
+
+        animation: mysecond .4s ease;
+        -webkit-animation: mysecond .4s ease;
+        animation-delay: .8s;
+        -webkit-animation-delay: .8s;
+        opacity: 0;
+        transform: matrix(0.99, 0, -0.16, 1, 0, 0);
+        white-space: nowrap;
+        text-align: center;
+    }
+}
+
+@keyframes myfirst {
+    0% { background-image: url('src/assets/images/flag/1.png') }
+    12% { background-image: url('src/assets/images/flag/2.png') }
+    24% { background-image: url('src/assets/images/flag/3.png') }
+    36% { background-image: url('src/assets/images/flag/4.png') }
+    48% { background-image: url('src/assets/images/flag/5.png') }
+    60% { background-image: url('src/assets/images/flag/6.png') }
+    72% { background-image: url('src/assets/images/flag/7.png') }
+    84% { background-image: url('src/assets/images/flag/8.png') }
+    100% { background-image: url('src/assets/images/flag/9.png') }
+}
+
+@-webkit-keyframes myfirst {
+    0% { background-image: url('src/assets/images/flag/1.png') }
+    12% { background-image: url('src/assets/images/flag/2.png') }
+    24% { background-image: url('src/assets/images/flag/3.png') }
+    36% { background-image: url('src/assets/images/flag/4.png') }
+    48% { background-image: url('src/assets/images/flag/5.png') }
+    60% { background-image: url('src/assets/images/flag/6.png') }
+    72% { background-image: url('src/assets/images/flag/7.png') }
+    84% { background-image: url('src/assets/images/flag/8.png') }
+    100% { background-image: url('src/assets/images/flag/9.png') }
+}
+
+@-moz-keyframes myfirst {
+     0% { background-image: url('src/assets/images/flag/1.png') }
+    12% { background-image: url('src/assets/images/flag/2.png') }
+    24% { background-image: url('src/assets/images/flag/3.png') }
+    36% { background-image: url('src/assets/images/flag/4.png') }
+    48% { background-image: url('src/assets/images/flag/5.png') }
+    60% { background-image: url('src/assets/images/flag/6.png') }
+    72% { background-image: url('src/assets/images/flag/7.png') }
+    84% { background-image: url('src/assets/images/flag/8.png') }
+    100% { background-image: url('src/assets/images/flag/9.png') }
+}
+
+@keyframes mysecond {
+    0% { top: 32px; opacity: 0; letter-spacing: -0.41px; font-size: 17px; }
+    10% { top: 32px; opacity: .5; letter-spacing: -0.42px; font-size: 17px; }
+    20% { top: 30px; opacity: .6; letter-spacing: -0.44px; font-size: 18px; }
+    30% { top: 28px; opacity: .7; letter-spacing: -0.46px; font-size: 19px; }
+    40% { top: 26px; opacity: .8; letter-spacing: -0.48px; font-size: 20px; }
+    50% { top: 24px; opacity: .9; letter-spacing: -0.50px; font-size: 21px; }
+    60% { top: 22px; opacity: 1; letter-spacing: -0.54px; font-size: 22px; }
+    70% { top: 20px; opacity: .9; letter-spacing: -0.58px; font-size: 23px; }
+    80% { top: 18px; opacity: .8; letter-spacing: -0.60px; font-size: 24px; }
+    90% { top: 17px; opacity: .7; letter-spacing: -0.62px; font-size: 25px; }
+    100% { top: 17px; opacity: .5; letter-spacing: -0.64px; font-size: 27px; }
+}
+
+@-webkit-keyframes mysecond {
+    0% { top: 32px; opacity: 0; letter-spacing: -0.41px; font-size: 17px; }
+    10% { top: 32px; opacity: .5; letter-spacing: -0.42px; font-size: 17px; }
+    20% { top: 30px; opacity: .6; letter-spacing: -0.44px; font-size: 18px; }
+    30% { top: 28px; opacity: .7; letter-spacing: -0.46px; font-size: 19px; }
+    40% { top: 26px; opacity: .8; letter-spacing: -0.48px; font-size: 20px; }
+    50% { top: 24px; opacity: .9; letter-spacing: -0.50px; font-size: 21px; }
+    60% { top: 22px; opacity: 1; letter-spacing: -0.54px; font-size: 22px; }
+    70% { top: 20px; opacity: .9; letter-spacing: -0.58px; font-size: 23px; }
+    80% { top: 18px; opacity: .8; letter-spacing: -0.60px; font-size: 24px; }
+    90% { top: 17px; opacity: .7; letter-spacing: -0.62px; font-size: 25px; }
+    100% { top: 17px; opacity: .5; letter-spacing: -0.64px; font-size: 27px; }
+}
+
+@-moz-keyframes mysecond {
+    0% { top: 32px; opacity: 0; letter-spacing: -0.41px; font-size: 17px; }
+    10% { top: 32px; opacity: .5; letter-spacing: -0.42px; font-size: 17px; }
+    20% { top: 30px; opacity: .6; letter-spacing: -0.44px; font-size: 18px; }
+    30% { top: 28px; opacity: .7; letter-spacing: -0.46px; font-size: 19px; }
+    40% { top: 26px; opacity: .8; letter-spacing: -0.48px; font-size: 20px; }
+    50% { top: 24px; opacity: .9; letter-spacing: -0.50px; font-size: 21px; }
+    60% { top: 22px; opacity: 1; letter-spacing: -0.54px; font-size: 22px; }
+    70% { top: 20px; opacity: .9; letter-spacing: -0.58px; font-size: 23px; }
+    80% { top: 18px; opacity: .8; letter-spacing: -0.60px; font-size: 24px; }
+    90% { top: 17px; opacity: .7; letter-spacing: -0.62px; font-size: 25px; }
+    100% { top: 17px; opacity: .5; letter-spacing: -0.64px; font-size: 27px; }
+}
+
+// .amap-marker {
+//     pointer-events: none !important;
+// }

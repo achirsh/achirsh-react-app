@@ -4,8 +4,8 @@
   "private": true,
   "license": "ISC",
   "scripts": {
-    "start": "cross-env PUBLIC_PATH=/ ts-node ./scripts/start.ts",
-    "build": "cross-env PUBLIC_PATH=/ ts-node ./scripts/build.ts",
+    "start": "cross-env PUBLIC_PATH=/static/ ts-node ./scripts/start.ts",
+    "build": "cross-env PUBLIC_PATH=/static/ ASSET_PATH=shdl/ ts-node ./scripts/build.ts",
     "prepare": "husky install"
   },
   "repository": {
