@@ -1,6 +1,7 @@
 import "./index.scss"
 import AMap from "@amap/amap-jsapi-loader"
-import { Component } from "react"
+import { Component, CSSProperties } from "react"
+import Popup from "antd-mobile/es/components/popup"
 
 const zoomsData = [4, 8, 18]
 
@@ -8,47 +9,920 @@ const adcodes = [
     {
         name: "黑龙江",
         code: "230000",
-        center: [126.534142, 45.801889],
+        center: [127.701579, 46.013537],
+        centerQ: [127.701579, 46.013537],
         pixel: { x: -20, y: -80 },
         province: "#000",
         depth: 0,
         zooms: [zoomsData[0], zoomsData[0]],
+        city: {
+            zoom: 5.3,
+            shg: [
+                {
+                    name: "哈尔滨店",
+                    center: [126.622703, 45.761447],
+                    address: "哈尔滨市道里区抚顺街26号",
+                },
+            ],
+            lxs: [
+                {
+                    name: "福瑞国旅哈尔滨分公司会展营业部",
+                    center: [126.70863, 45.75739],
+                    address: "黑龙江省哈尔滨市南岗区泰海花园小区16栋门市 黄河路115-5号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司哈尔滨分公司",
+                    center: [126.582436, 45.733995],
+                    address: "黑龙江省哈尔滨市道里区工农大街1-9号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司哈尔滨分公司珠江路营业部",
+                    center: [126.687639, 45.737867],
+                    address: "黑龙江省哈尔滨市香坊区嵩山路珠江路交叉口嵩山路027号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司哈尔滨分公司抚顺街营业部",
+                    center: [126.621998, 45.761091],
+                    address: "黑龙江省哈尔滨市道里区抚顺街35号",
+                },
+                {
+                    name: "福瑞国旅哈尔滨分公司建国街营业部",
+                    center: [126.600217, 45.751468],
+                    address: "黑龙江省哈尔滨市道里区建国北四道街103号",
+                },
+                {
+                    name: "哈尔滨福瑞国际旅行社有限责任公司",
+                    center: [126.66707, 45.771135],
+                    address: "黑龙江省哈尔滨市南岗区花园街10号",
+                },
+            ],
+        },
     },
     {
         name: "吉林",
         code: "220000",
-        center: [125.324257, 43.811158],
+        center: [125.916489, 43.883454],
+        centerQ: [125.916489, 43.883454],
         pixel: { x: -20, y: -60 },
         province: "#000",
         depth: 0,
         zooms: [zoomsData[0], zoomsData[0]],
+        city: {
+            zoom: 5.7,
+            shg: [
+                {
+                    name: "长春店",
+                    center: [125.348023, 43.841022],
+                    address: "长春市南关区繁荣路与东岭南街交汇处",
+                },
+                {
+                    name: "吉林店",
+                    center: [126.540427, 43.837751],
+                    address: "吉林市船营区北京路永吉小区163号楼",
+                },
+            ],
+            lxs: [
+                {
+                    name: "福慧国旅吉林长春路营业部",
+                    center: [126.519296, 43.827121],
+                    address: "吉林省吉林市西城首府28号楼1层12号",
+                },
+                {
+                    name: "福慧国旅吉林泰山路营业部",
+                    center: [126.560487, 43.815481],
+                    address: "吉林省吉林市丰满区泰山路烽火C区H2号楼4号网点",
+                },
+                {
+                    name: "福慧国旅吉林宜山路营业部",
+                    center: [126.573615, 43.819207],
+                    address: "吉林省吉林市丰满区宜山路11号楼7号网点",
+                },
+                {
+                    name: "福慧国旅吉林嫩江街营业部",
+                    center: [126.586822, 43.848758],
+                    address: "吉林省吉林市昌邑区嫩江街胜昌小区3号楼1层1号",
+                },
+                {
+                    name: "福慧国旅吉林辽宁路营业部",
+                    center: [126.579365, 43.85437],
+                    address: "吉林省吉林市昌邑区格林印象b2号楼4号网点",
+                },
+                {
+                    name: "福慧国旅吉林农林街营业部",
+                    center: [126.526952, 43.81637],
+                    address: "吉林省吉林市船营区农林街鸿博锦绣花园51号楼1011号网点",
+                },
+                {
+                    name: "福慧国旅吉林通江街营业部",
+                    center: [126.575401, 43.876097],
+                    address: "吉林省吉林市通江街 家逸生活小区二号楼六号网点",
+                },
+                {
+                    name: "山海慧大药房",
+                    center: [125.217687, 43.884086],
+                    address: "长春市绿园区景阳大路1783号",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.371357, 43.884766],
+                    address: "二道区荣光路与和顺街交汇长江花园",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.219161, 43.859038],
+                    address: "绿园区支农大街与飞跃路交汇博众新城2期23栋105门市",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.37078, 43.923064],
+                    address: "太和东街与同康路交汇香水湾1期门市",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.283183, 43.893683],
+                    address: "长春市绿园区辽阳街526号",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [116.591468, 40.059081],
+                    address: "朝阳区长安路387号",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.339926, 43.841856],
+                    address: "亚太大街与净水路交汇，东南阳光小区1号楼北门",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.325465, 43.935468],
+                    address: "北人民大街与庆丰路交汇地铁名典B区",
+                },
+                {
+                    name: "大连山海居家养老服务有限公司长春分公司",
+                    center: [125.343326, 43.838561],
+                    address: "南关区繁锦路与荣锦街交汇，虹馆领尚居北门门市",
+                },
+                {
+                    name: "福慧国旅",
+                    center: [125.360358, 43.898873],
+                    address: "长春市二道区东莱南街601号",
+                },
+            ],
+            // ky: [
+            //     {
+            //         name: '长春洛城生活会馆',
+            //         center: [],
+            //         address: ''
+            //     },
+            // ]
+        },
     },
     {
         name: "辽宁",
         code: "210000",
-        center: [123.482987, 41.679366],
+        center: [122.39047, 41.76365],
+        centerQ: [122.39047, 41.76365],
         pixel: { x: -40, y: -70 },
         province: "#000",
         depth: 0,
         zooms: [zoomsData[0], zoomsData[0]],
+        city: {
+            zoom: 6.3,
+            shg: [
+                {
+                    name: "沈阳店",
+                    center: [123.389986, 41.7993],
+                    address: "沈阳市铁西区兴工北街41号",
+                },
+                {
+                    name: "奥林店",
+                    center: [121.60872, 38.909687],
+                    address: "辽宁省大连市西岗区奥林匹克广场负二层C区02-05号",
+                },
+                {
+                    name: "丹东店",
+                    center: [124.368277, 40.094657],
+                    address: "辽宁省丹东市振兴区月亮岛大街17号楼",
+                },
+                {
+                    name: "沈阳店",
+                    center: [123.384304, 41.790434],
+                    address: "沈阳市铁西区兴工北街121号",
+                },
+            ],
+            lxs: [
+                {
+                    name: "山海集团福慧国际旅行社盘锦分公司",
+                    center: [122.098817, 41.127703],
+                    address: "辽宁省盘锦市兴隆台区振兴街道蟠龙小区西门商网",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司庄河分公司",
+                    center: [122.968859, 39.690083],
+                    address: "辽宁省大连市庄河市城关街道财政委昌盛花园18#1层5号二层门市",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司青堆子分公司",
+                    center: [123.259071, 39.829124],
+                    address: "辽宁省大连市庄河市青堆镇双河大街4号楼-4-101",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司花园口分公司",
+                    center: [122.63938, 39.555893],
+                    address: "辽宁省大连市庄河市明阳街道锦苑学府5栋3公建",
+                },
+                {
+                    name: "山海集团福慧国际旅行社海城分公司",
+                    center: [119.662403, 29.12357],
+                    address: "辽宁省海城市北关老金华小吃部旁",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳分公司",
+                    center: [123.384635, 41.791681],
+                    address: "沈阳市铁西区兴工北街124号（7门）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳鸭绿江街营业部",
+                    center: [123.461259, 41.839485],
+                    address: "沈阳市皇姑区鸭绿江东街6-23号（12门、13门）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳滂江街营业部",
+                    center: [123.484164, 41.791191],
+                    address: "沈阳市大东区滂江街185甲1号（3-4轴）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳南顺城路营业部",
+                    center: [123.461347, 41.792693],
+                    address: "沈阳市沈河区南顺城路83号1-23轴",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳银卡路营业部",
+                    center: [123.462903, 41.731985],
+                    address: "沈阳市浑南区银卡路13号（9门）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司沈阳保工南街营业部",
+                    center: [123.343323, 41.781231],
+                    address: "沈阳市铁西区保工南街127号（2门）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司汪河路营业部",
+                    center: [123.361023, 41.756998],
+                    address: "沈阳市于洪区汪河路33号（7门）",
+                },
+                {
+                    name: "沈阳逸清国际旅行社有限公司",
+                    center: [123.296623, 41.79159],
+                    address: "沈阳市于洪区黄海路57-2号（5门）",
+                },
+                {
+                    name: "沈阳逸清国际旅行社有限公司北固山路营业部",
+                    center: [123.404612, 41.863567],
+                    address: "沈阳市于洪区北固山路16-13号（3门）",
+                },
+                {
+                    name: "沈阳逸清国际旅行社有限公司沈洲路营业部",
+                    center: [123.440088, 41.792514],
+                    address: "沈阳市沈河区沈洲路181号5-7轴",
+                },
+                {
+                    name: "沈阳逸清国际旅行社有限公司桦山路营业部",
+                    center: [123.395282, 41.821802],
+                    address: "沈阳市皇姑区华山路107号（3门）",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司抚顺分公司",
+                    center: [116.660974, 39.897995],
+                    address: "抚顺市顺城区新城东路15号楼3号门市",
+                },
+                {
+                    name: "辽宁逸清国际旅行社有限公司",
+                    center: [123.785786, 41.289787],
+                    address: "本溪市平山区前进街平东园公建1层5号、2层5号",
+                },
+                {
+                    name: "大连福慧国际旅行社",
+                    center: [121.614862, 38.919818],
+                    address: "辽宁省大连市西岗区久寿街36号",
+                },
+                {
+                    name: "大连鑫辉煌珠宝有限公司",
+                    center: [121.608551, 38.918266],
+                    address: "大连市西岗区信诚街3号长江路与长春路交叉路口东方国际大厦公建",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司黄河路分公司",
+                    center: [121.619592, 38.916478],
+                    address: "辽宁省大连西岗区黄河路131号公建",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司西岗区永丰街营业部",
+                    center: [121.608141, 38.917423],
+                    address: "辽宁省大连市西岗区永丰街57号",
+                },
+                {
+                    name: "大连福慧国旅",
+                    center: [121.584103, 38.983679],
+                    address: "大连市甘井子区山东路107-5 ",
+                },
+                {
+                    name: "大连福慧国际旅行社",
+                    center: [121.637925, 39.016056],
+                    address: "大连市甘井子区泉水B4区2-8号",
+                },
+                {
+                    name: "大连山海",
+                    center: [121.609824, 38.916066],
+                    address: "大连市西岗区长春路50号1层1号",
+                },
+                {
+                    name: "大连山海福慧国旅瓦房店分公司站前店",
+                    center: [122.010706, 39.624385],
+                    address: "瓦房店市铁东办事处水果街18-9号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司开发区高成山营业部",
+                    center: [121.819578, 39.065356],
+                    address: "辽宁省大连市经济技术开发区怡海街1栋-2-2-1号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司开发区黄海西路分公司",
+                    center: [121.880066, 39.058531],
+                    address: "辽宁省大连经济技术开发区黄海西路371号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司大连湾分公司",
+                    center: [121.712906, 39.025337],
+                    address: "辽宁省大连市甘井子区大连湾街391-12号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司前关分公司",
+                    center: [121.659766, 39.037682],
+                    address: "辽宁省大连市甘井子区博艺南园30-10号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司开发区湾里营业部",
+                    center: [121.857674, 39.065988],
+                    address: "辽宁省大连市经济技术开发区湾里南50栋-1号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司普兰店铁西分公司",
+                    center: [121.97262, 39.400801],
+                    address: "辽宁省大连市普兰店区孛兰路16-5号",
+                },
+                {
+                    name: "福慧旅行社金州站前营业部",
+                    center: [121.724142, 39.088035],
+                    address: "辽宁省大连市金州区盛滨花园41号楼D区",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司前关南园营业部",
+                    center: [121.53518, 38.887399],
+                    address: "辽宁省大连市甘井子区前关南园34号楼2号车库",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司开发区分公司",
+                    center: [121.801295, 39.026417],
+                    address: "辽宁省大连经济技术开发区鹏运家园38-10号",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司福佳分公司",
+                    center: [121.711273, 39.096728],
+                    address: "金州福佳新天地西门",
+                },
+                {
+                    name: "大连福慧国际旅行社有限公司开发区东城营业部",
+                    center: [121.843871, 39.063955],
+                    address: "辽宁省大连经济技术开发区东城园98-15号",
+                },
+                {
+                    name: "大连福慧国际旅行社连山街营业部",
+                    center: [121.566175, 38.88712],
+                    address: "大连市沙河口区连山街40号福慧国际旅行社",
+                },
+                {
+                    name: "大连福慧国际旅行社",
+                    center: [121.24833, 38.819718],
+                    address: "辽宁省大连市旅顺口区光荣街道 五一路37号大连福慧国际旅行社2楼",
+                },
+                {
+                    name: "山海集团福慧国际旅行社鞍山分公司",
+                    center: [123.003223, 41.118137],
+                    address: "鞍山市铁东区胜利宾馆东1-12-115-6",
+                },
+                {
+                    name: "福慧国际旅行社",
+                    center: [122.5138, 40.631168],
+                    address: "大石桥市新开路福慧国际旅行社",
+                },
+                {
+                    name: "山海福慧国际旅行社",
+                    center: [122.22367, 40.677844],
+                    address: "营口市西市区清华路10号福慧旅行社",
+                },
+                {
+                    name: "大连鹏驰国旅鲅鱼圈分公司",
+                    center: [122.137116, 40.253841],
+                    address: "辽宁省营口市鲅鱼圈绿色时代西区3#楼6#门市",
+                },
+                {
+                    name: "丹东宏昇国际旅行社有限公司",
+                    center: [124.383865, 40.116935],
+                    address: "辽宁省丹东市振兴区兴五路26-2-10号",
+                },
+            ],
+            ky: [
+                {
+                    name: "财神岛海岛酒店",
+                    center: [122.30536, 39.19997],
+                    address: "大连市长海县广鹿岛财神岛度假村",
+                },
+                {
+                    name: "山海康养休闲广场",
+                    center: [121.800747, 39.025179],
+                    address: "大连市开发区金马路411号山海康养休闲广场",
+                },
+                {
+                    name: "山海慧假日酒店",
+                    center: [121.800747, 39.025179],
+                    address: "大连市开发区金马路411号山海慧假日酒店",
+                },
+
+                {
+                    name: "开元曼居酒店",
+                    center: [121.638731, 38.917132],
+                    address: "大连市西岗区建设街12号开元曼居酒店",
+                },
+                {
+                    name: "山海福慧健康生活馆",
+                    center: [123.36006, 41.806319],
+                    address: "沈阳市铁西区保工北街52号3门山海福慧健康生活馆",
+                },
+                {
+                    name: "山海泓通温泉山庄",
+                    center: [122.298564, 39.827454],
+                    address: "辽宁省大连市普兰店区安波镇山海泓通温泉山庄",
+                },
+                {
+                    name: "山海慧乐椿轩",
+                    center: [121.210534, 38.819825],
+                    address: "辽宁省大连市旅顺口区革新街18号山海慧乐椿轩",
+                },
+                {
+                    name: "山海职业技术学校",
+                    center: [116.506725, 39.795253],
+                    address: "大连市经济技术开发区学府大街25号",
+                },
+
+                {
+                    name: "山海福慧健康生活馆",
+                    center: [116.48229, 39.88822],
+                    address: "大连市旅顺口区五一路43号山海福慧健康生活馆",
+                },
+
+                {
+                    name: "清泉山康养基地",
+                    center: [],
+                    address: "",
+                },
+                {
+                    name: "巴比伦养生会馆",
+                    center: [],
+                    address: "",
+                },
+            ],
+            sx: [
+                {
+                    name: "武昌店",
+                    center: [121.645178, 38.90687],
+                    address: "辽宁省大连市中山区武昌南巷6号",
+                },
+                {
+                    name: "侯二店",
+                    center: [121.582681, 38.929595],
+                    address: "辽宁省大连市沙河口区丝绸路18-20号",
+                },
+                {
+                    name: "五一广场店",
+                    center: [121.650452, 38.915592],
+                    address: "辽宁省大连市沙河口区长江路76号1-2层",
+                },
+                {
+                    name: "旅顺五一路",
+                    center: [121.24855, 38.82129],
+                    address: "辽宁省大连市旅顺口区五一路23—8.35号",
+                },
+                {
+                    name: "旅顺长江路",
+                    center: [121.26474, 38.808644],
+                    address: "辽宁省大连市旅顺口区长江路15号一层",
+                },
+                {
+                    name: "大连湾",
+                    center: [121.707482, 39.03443],
+                    address: "辽宁省大连市甘井子区大连湾街道大连湾G2-3;G2-4",
+                },
+                {
+                    name: "京渔鲜生",
+                    center: [124.356116, 40.105791],
+                    address: "辽宁省丹东市振兴区帽盔山街道春三路红房小学对面",
+                },
+                {
+                    name: "巨惠生鲜",
+                    center: [123.38202, 41.791248],
+                    address: "辽宁省沈阳市铁西区兴工北街124号",
+                },
+            ],
+            bld: [
+                {
+                    name: "普兰店",
+                    center: [121.97262, 39.400801],
+                    address: "辽宁省大连市普兰店区孛兰路16-5号",
+                },
+                {
+                    name: "东城园",
+                    center: [121.843442, 39.06342],
+                    address: "辽宁省大连市开发区东城园98-15号",
+                },
+                {
+                    name: "三八店",
+                    center: [121.654488, 38.919736],
+                    address: "辽宁省大连市中山区鲁迅路29-4号1层西侧（花样年华一期）",
+                },
+            ],
+            sc: [
+                {
+                    name: "开发区银帆",
+                    center: [121.800897, 39.025736],
+                    address: "辽宁省大连市开发区金马路409号地下一层",
+                },
+            ],
+            yd: [
+                {
+                    name: "大连山海慧药房金地艺境店",
+                    center: [121.661742, 39.037897],
+                    address: "大连市甘井子区大连湾街道博艺街30-10号",
+                },
+                {
+                    name: "大连山海慧药房天河路店",
+                    center: [121.584461, 38.983556],
+                    address: "大连市甘井子区山东路107-5号",
+                },
+                {
+                    name: "大连山海慧药房五一路店",
+                    center: [121.540802, 38.952988],
+                    address: "大连市沙河口区五一路203",
+                },
+                {
+                    name: "大连山海慧药房更新街店",
+                    center: [121.622956, 38.915698],
+                    address: "大连市西岗区更新街18号",
+                },
+                {
+                    name: "大连山海慧药房黄河路店",
+                    center: [121.619565, 38.916519],
+                    address: "大连市西岗区黄河路133号",
+                },
+                {
+                    name: "大连山海慧药房武昌街店",
+                    center: [121.643982, 38.906311],
+                    address: "大连市中山区武昌街南巷6号",
+                },
+                {
+                    name: "大连山海慧药房福佳店",
+                    center: [121.711273, 39.096728],
+                    address: "大连市金州区北山路1416号（福佳新天地西门）",
+                },
+                {
+                    name: "大连山海慧药房金源北里店",
+                    center: [121.821175, 39.059333],
+                    address: "大连市金州区金源北里63-23号",
+                },
+                {
+                    name: "大连山海慧药房东城天下店",
+                    center: [121.843321, 39.063336],
+                    address: "大连市金州区大连开发区东城天下3栋-14号",
+                },
+                {
+                    name: "大连山海慧药房大连湾店",
+                    center: [121.710604, 39.030197],
+                    address: "大连市甘井子区大连湾中学颐泊湾小区391-12",
+                },
+                {
+                    name: "大连山海慧药房忠诚街店",
+                    center: [121.26706, 38.810723],
+                    address: "大连市旅顺口区忠诚街81号",
+                },
+                {
+                    name: "大连山海慧药房水师营店",
+                    center: [121.246546, 38.85288],
+                    address: "大连市旅顺口区水师营街公交车终点站",
+                },
+            ],
+        },
     },
     {
         name: "北京",
         code: "110000",
         center: [116.41647, 39.90347],
+        centerQ: [116.41647, 39.90347],
+        centerS: [116.41647, 39.90347],
         pixel: { x: -35, y: -80 },
         province: "#000",
         depth: 0,
+        // municipality: true,
         zooms: [zoomsData[0], zoomsData[0]],
+        city: {
+            zoom: 8,
+            shg: [
+                {
+                    name: "山海阁",
+                    center: [116.476046, 39.865105],
+                    address: "北京市朝阳区十八里店乡周庄嘉园东里南侧底商甲3号一层-二层",
+                },
+            ],
+            lxs: [
+                {
+                    name: "鼎泰旅游",
+                    center: [115.988131, 39.695272],
+                    address: "北京市房山区西潞街道良乡中心小学北侧三层商业楼6号鼎泰旅游",
+                },
+                {
+                    name: "鹏驰旅游",
+                    center: [116.443407, 39.859879],
+                    address: "北京市丰台区紫芳园六区四号楼公建底商103室",
+                },
+                {
+                    name: "鹏驰鹏驰国旅",
+                    center: [116.438962, 40.068264],
+                    address: "北京市昌平区白坊路天通苑东二区1号楼底商 109室",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [116.477631, 39.881864],
+                    address: "北京市朝阳区西大望路鸿坤花语墅底42号9-1鹏驰国旅",
+                },
+                {
+                    name: "鼎泰旅游",
+                    center: [116.629917, 40.129302],
+                    address: "北京市顺义区石门街石门苑社区18号楼底商山海鼎泰旅游公司",
+                },
+                {
+                    name: "鹏驰鹏驰国旅",
+                    center: [116.351367, 40.079917],
+                    address: "北京市昌平区龙泽园街道北回归线336号院2号楼105",
+                },
+                {
+                    name: "北京丰台区马家堡海上海花园底商10-15",
+                    center: [116.334376, 39.820248],
+                    address: "北京市朝阳区西大望路鸿坤花语墅底42号9-1鹏驰国旅",
+                },
+                {
+                    name: "鹏驰国际旅行社",
+                    center: [116.395715, 39.954696],
+                    address: "北京市东城区鼓楼外大街52号楼首层北侧",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [116.682094, 39.901427],
+                    address: "北京通州二店通州区玉带河东街155号",
+                },
+                {
+                    name: "大连鹏驰旅游",
+                    center: [116.240361, 39.898742],
+                    address: "北京市石景山远洋山水南区34-10底商",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [116.498286, 39.791393],
+                    address: "亦庄店：北京市经济技术开发区天宝园五里二区1号楼1层鹏驰国旅",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [116.497963, 39.791073],
+                    address: "黄村店：北京市大兴区兴华北路78号131号1层彩虹新城底商鹏驰国旅",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [116.445412, 39.80351],
+                    address: "北京市大兴区旧宫镇清逸园32号楼底商 物美斜对面 鹏驰国旅",
+                },
+                {
+                    name: "大连鹏驰国旅",
+                    center: [116.143112, 39.809284],
+                    address: "北京市丰台区云岗西路28号院二区9号楼1层116",
+                },
+            ],
+            ky: [
+                {
+                    name: "山海福慧健康生活馆",
+                    center: [116.48229, 39.88822],
+                    address: "北京市朝阳区劲松街道珠江帝景D区302号楼山海福慧健康生活馆",
+                },
+            ],
+        },
     },
     {
         name: "河北省",
         code: "130000",
-        center: [114.625221, 37.953045],
+        center: [116.933895, 40.864895],
+        centerQ: [114.625221, 37.953045],
         pixel: { x: -30, y: -70 },
         province: "#000",
         depth: 0,
         zooms: [zoomsData[0], zoomsData[0]],
+        city: {
+            zoom: 6.3,
+            shg: [
+                {
+                    name: "沧州店",
+                    center: [116.857361, 38.309321],
+                    address: "河北省沧州市运河区水月寺大街东侧恒顺世纪中心2#B区104、105、106铺",
+                },
+                {
+                    name: "廊坊店",
+                    center: [116.679413, 39.545008],
+                    address: "廊坊市广阳区永兴路幸福城欣园底商S1-103",
+                },
+                {
+                    name: "唐山店",
+                    center: [118.201085, 39.625079],
+                    address: "河北省唐山市路北区龙泽北路绿景园西门131号",
+                },
+                {
+                    name: "保定店",
+                    center: [115.530672, 38.853539],
+                    address: "河北省保定市莲池区裕华东路655号",
+                },
+                {
+                    name: "石家庄店",
+                    center: [114.451449, 38.025567],
+                    address: "河北省石家庄市桥西区友谊南大街106号",
+                },
+            ],
+            lxs: [
+                {
+                    name: "大连鹏驰国际旅行社有限公司廊坊分公司",
+                    center: [116.707942, 39.527855],
+                    address: "河北省廊坊市广阳区尚都金茂A座底商42甲-4",
+                },
+                {
+                    name: "大连鹏驰国际旅行社有限公司固安营业部",
+                    center: [116.315013, 39.456999],
+                    address: "廊坊市固安县永定路西侧、英国宫二期S1#1-103号商铺",
+                },
+                {
+                    name: "大连鹏驰国际旅行社有限公司香河服务网点",
+                    center: [117.004824, 39.765264],
+                    address: "河北省廊坊市香河县新华大街路北新华嘉园底商80-8",
+                },
+                {
+                    name: "大连鹏驰国际旅行社有限公司霸州营业部",
+                    center: [116.382005, 39.124792],
+                    address: "河北省廊坊市霸州市迎宾西道底商114号",
+                },
+                {
+                    name: "大连鹏驰国际旅行社有限公司廊坊幸福城欣园分公司",
+                    center: [116.680799, 39.543622],
+                    address: "河北省廊坊市广阳区幸福城欣园底商1-11",
+                },
+                {
+                    name: "大连鹏驰国际旅行社廊坊市安次区第一分公司",
+                    center: [116.69606, 39.501546],
+                    address: "河北省廊坊市安次区南苑小区146-4",
+                },
+                {
+                    name: "大连鹏驰国际旅行社有限公司廊坊万庄服务网点",
+                    center: [116.627036, 39.576357],
+                    address: "廊坊市广阳区万庄华油华兴矿区爱卫路西街9号",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [115.480258, 38.873205],
+                    address: "河北省保定市竞秀区东风路仁和公寓底商1806号",
+                },
+                {
+                    name: "鹏驰国旅",
+                    center: [115.4734, 38.894818],
+                    address: "河北省保定市复兴中路3108号康泰国际3-701室",
+                },
+                {
+                    name: "览越旅游",
+                    center: [115.507936, 38.848773],
+                    address: "河北省保定市莲池区联盟街道办事处清河街62号府河美岸底商",
+                },
+                {
+                    name: "鹏驰旅行社",
+                    center: [115.99861, 39.486552],
+                    address: "河北省保定市涿州市金品时代底商范阳西路37号",
+                },
+                {
+                    name: "大连鹏驰国旅",
+                    center: [116.126125, 38.849715],
+                    address: "河北省沧州市运河区康宁路泰和星耀城底商铺102",
+                },
+                {
+                    name: "鹏驰国际旅行社有限公司唐山市丰润分公司",
+                    center: [118.154133, 39.823224],
+                    address: "河北省唐山市丰润区华龙嘉苑1号楼商业4号",
+                },
+                {
+                    name: "鹏驰国际旅行社有限公司唐山路南分公司",
+                    center: [118.154348, 39.624988],
+                    address: "河北省唐山市路南区南新西道已100-4号",
+                },
+                {
+                    name: "鹏驰国际旅行社有限公司唐山路北分公司",
+                    center: [118.154348, 39.624988],
+                    address: "河北省唐山市路北区部东里金色玺园1楼1单元长宁道12-8号",
+                },
+                {
+                    name: "鹏驰国际旅行社有限公司迁安分公司",
+                    center: [118.691386, 40.011283],
+                    address: "河北省唐山市迁安市永顺街道阜安大路东侧西关村24号",
+                },
+                {
+                    name: "石家庄乐溯国旅",
+                    center: [114.497558, 38.022242],
+                    address: "河北省石家庄市桥西区槐安东路89号1层109室",
+                },
+                {
+                    name: "乐溯国旅谈固店",
+                    center: [114.562783, 38.030687],
+                    address: "河北省石家庄市裕华区槐中路576号国际城底商59-5号",
+                },
+                {
+                    name: "乐溯国际旅行社",
+                    center: [114.451445, 38.025566],
+                    address: "河北省石家庄市桥西区友谊南大街106号顶峰汗蒸世界酒店一楼底商东南角1号",
+                },
+                {
+                    name: "乐溯国旅水上公园店",
+                    center: [114.461673, 38.079493],
+                    address: "河北省石家庄市新华区联盟西路641号水悦雅居底商01号",
+                },
+            ],
+            // ky: [
+            //     {
+            //         name: '廊坊生活馆',
+            //         center: [],
+            //         address: ''
+            //     },
+            // ],
+        },
+    },
+]
+
+const cityItems = [
+    {
+        title: "全国",
+        view: [{ title: "全国地图", key: "country" }],
+    },
+    {
+        title: "辽宁省",
+        view: [
+            { title: "大连市", key: "dalian" },
+            { title: "沈阳市", key: "dalian" },
+            { title: "本溪市", key: "dalian" },
+            { title: "旅顺口区", key: "dalian" },
+        ],
+    },
+    {
+        title: "黑龙江省",
+        view: [
+            { title: "大连市", key: "dalian" },
+            { title: "沈阳市", key: "dalian" },
+            { title: "本溪市", key: "dalian" },
+            { title: "旅顺口区", key: "dalian" },
+        ],
+    },
+    {
+        title: "北京市",
+        view: [
+            { title: "大连市", key: "dalian" },
+            { title: "沈阳市", key: "dalian" },
+            { title: "本溪市", key: "dalian" },
+            { title: "旅顺口区", key: "dalian" },
+        ],
+    },
+    {
+        title: "吉林省",
+        view: [
+            { title: "大连市", key: "dalian" },
+            { title: "沈阳市", key: "dalian" },
+            { title: "本溪市", key: "dalian" },
+            { title: "旅顺口区", key: "dalian" },
+        ],
+    },
+    {
+        title: "河北省",
+        view: [
+            { title: "大连市", key: "dalian" },
+            { title: "沈阳市", key: "dalian" },
+            { title: "本溪市", key: "dalian" },
+            { title: "旅顺口区", key: "dalian" },
+        ],
     },
 ]
 
@@ -68,6 +942,13 @@ export default class Home extends Component<any> {
     private zoom = 4
     private disProvinces: any = []
     private selectCity: any
+    private markerCity: any = []
+
+    state = {
+        visible: false,
+        visible1: false,
+        searchStatus: "show",
+    }
 
     componentDidMount() {
         this.init()
@@ -95,19 +976,30 @@ export default class Home extends Component<any> {
             viewMode: "3D",
             zoom: 4,
             center: [116.47609, 39.865086],
+            // zoom: 6.3,
+            // center: [116.933895,40.864895],
             zooms: [zoomsData[0], zoomsData[2]],
             terrain: true,
             zoomEnable: true,
             rotateEnable: false,
             pitchEnable: true,
             pitch: 0,
-            showLabel: false,
+            showLabel: true,
             doubleClickZoom: false,
             scrollWheel: false,
             touchZoom: false,
         })
 
-        this.dingwei()
+        // this.areaOfFill({
+        //     adcode: adcodes[4].code,
+        //     depth: 1,
+        //     style: {
+        //         fill: "rgba(110, 181, 226, 0.3)",
+        //         city: "#045f99",
+        //     },
+        // })
+
+        // this.dingwei()
         this.insertFlag()
         this.mapFn()
 
@@ -205,8 +1097,6 @@ export default class Home extends Component<any> {
                         strokeColor: "#000",
                     })
 
-                    console.log(polygon)
-
                     polygon.setMap(this.map)
                 }
             }
@@ -240,7 +1130,7 @@ export default class Home extends Component<any> {
                     "</div>"
 
                 const flagMarker = new this.mapLoader.Marker({
-                    position: item.center,
+                    position: item.centerQ,
                     content: flagMarkerContent,
                     offset: new this.mapLoader.Pixel(item.pixel?.x, item.pixel?.y),
                     zooms: item.zooms,
@@ -272,7 +1162,7 @@ export default class Home extends Component<any> {
         // geolocation.getCurrentPosition()
     }
 
-    // 地图缩放事件
+    // 地图事件
     mapFn() {
         const geocoder = new this.mapLoader.Geocoder({
             city: "010", //城市设为北京，默认：“全国”
@@ -280,35 +1170,67 @@ export default class Home extends Component<any> {
         })
 
         this.map.on("click", (e: any) => {
-            geocoder.getAddress([e.lnglat.lng, e.lnglat.lat], (status: any, result: any) => {
-                if (status === "complete" && result.regeocode) {
-                    const address = result.regeocode.formattedAddress
+            if (this.map.getZoom() === zoomsData[0]) {
+                geocoder.getAddress([e.lnglat.lng, e.lnglat.lat], (status: any, result: any) => {
+                    if (status === "complete" && result.regeocode) {
+                        const address = result.regeocode.formattedAddress
 
-                    const center = adcodes.filter(x => address.includes(x.name))
+                        const center = adcodes.filter(x => address.includes(x.name))
 
-                    if (center.length) {
-                        this.map.setZoomAndCenter(zoomsData[1], center[0].center)
-                        this.selectCity = center[0]
+                        if (center.length) {
+                            this.map.setZoomAndCenter(center[0].city.zoom, center[0].center)
+                            this.selectCity = center[0]
+                        }
                     }
-                }
-            })
+                })
+            }
         })
 
-        this.map.on("zoomstart", () => {
+        this.map.on("zoomend", () => {
+            const { selectCity } = this
+            // 在二级放大区域
             if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[2]) {
-                this.disProvinces.map((item: any) => {
-                    item.setMap(null)
-                })
+                // 在二级区域时清除一级区域的填充颜色
+                if (this.disProvinces && this.disProvinces.length) {
+                    this.disProvinces.map((item: any) => {
+                        item.setMap(null)
+                    })
+                    this.disProvinces = []
+                }
 
-                if (this.selectCity) {
+                if (selectCity) {
+                    // 给二级区域填充颜色
                     this.areaOfFill({
-                        adcode: this.selectCity.code,
+                        adcode: selectCity.code,
                         depth: 1,
                         style: {
                             fill: "rgba(110, 181, 226, 0.3)",
                             city: "#045f99",
                         },
                     })
+
+                    // 给二级区域打marker
+                    if (selectCity.city.shg) {
+                        this.addMarkerToSecond(selectCity.city.shg, "shg", "#de6430")
+                    }
+                    if (selectCity.city.lxs) {
+                        this.addMarkerToSecond(selectCity.city.lxs, "lxs", "#02cb5e")
+                    }
+                    if (selectCity.city.ky) {
+                        this.addMarkerToSecond(selectCity.city.ky, "ky", "#6a57de")
+                    }
+                    if (selectCity.city.sx) {
+                        this.addMarkerToSecond(selectCity.city.sx, "sx", "#078be3")
+                    }
+                    if (selectCity.city.bld) {
+                        this.addMarkerToSecond(selectCity.city.bld, "bld", "#f69d16")
+                    }
+                    if (selectCity.city.sc) {
+                        this.addMarkerToSecond(selectCity.city.sc, "sc", "#8f45c9")
+                    }
+                    if (selectCity.city.yd) {
+                        this.addMarkerToSecond(selectCity.city.yd, "yd", "#3b77ea")
+                    }
                 }
             }
         })
@@ -330,18 +1252,175 @@ export default class Home extends Component<any> {
             // if (this.map.getZoom() < zoomsData[2]) {
             //     this.map.setZoom(zoomsData[0])
             // }
-            // if (this.map.getZoom() >= zoomsData[2]) {
-            //     this.map.setPitch(40)
-            //     this.map.setRotation(45)
-            // }
-            // if (this.map.getPitch() !== 0 && this.map.getZoom() < zoomsData[2]) {
-            //     this.map.setPitch(0)
-            //     this.map.setRotation(0)
-            // }
+            if (this.map.getZoom() >= zoomsData[2]) {
+                this.map.setPitch(50)
+                this.map.setRotation(10)
+            }
+            if (this.map.getPitch() !== 0 && this.map.getZoom() < zoomsData[2]) {
+                this.map.setPitch(0)
+                this.map.setRotation(0)
+            }
         })
     }
 
+    // 给二级区域打marker
+    addMarkerToSecond(data: any, key: string, color: string) {
+        const { selectCity } = this
+
+        const markerContent =
+            "" +
+            '<div class="city-marker">' +
+            `   <img src=${require(`src/assets/images/city/${key}.png`)} alt="" />` +
+            `   <div class="city-formats-number" style="background: ${color}">${data.length}</div>` +
+            "</div>"
+
+        const marker = new this.mapLoader.Marker({
+            content: markerContent,
+            position: data[0].center,
+            offset: new this.mapLoader.Pixel(-20, -45),
+            zooms: [selectCity.city.zoom, 18],
+        })
+
+        this.markerCity.push(marker)
+
+        marker.on("click", () => {
+            // this.map.setZoomAndCenter(zoomsData[2], selectCity.centerS)
+            if (this.disProvinces && this.disProvinces.length) {
+                this.disProvinces[0].setMap(null)
+                this.disProvinces = []
+            }
+
+            this.map.remove(this.markerCity)
+            this.markerCity = []
+
+            this.map.setZoomAndCenter(zoomsData[2], [116.476046, 39.865105])
+            this.buildThird()
+        })
+
+        this.map.add(marker)
+    }
+
+    // 搜索框点击事件
+    searchClickFn() {
+        this.setState({ searchStatus: "show", visible: true })
+    }
+
+    // popup隐藏事件
+    hidePopup() {
+        this.setState({ visible: false }, () => {
+            setTimeout(() => {
+                this.setState({ searchStatus: "hide" })
+            }, 200)
+        })
+    }
+
+    // 搜索框Render
+    searchRender(style?: CSSProperties) {
+        return (
+            <div className="search-main" style={{ ...style }} onClick={() => this.searchClickFn()}>
+                <div className="search-main-content">
+                    <img alt="" src={require("src/assets/images/search/search.png")} className="search-icon" />
+                    <span className="search-text">输入你想去的地方</span>
+                    <img alt="" src={require("src/assets/images/search/scan.png")} className="scan-icon" />
+                    <img alt="" src={require("src/assets/images/search/voice.png")} className="voice-icon" />
+                </div>
+            </div>
+        )
+    }
+
+    // 三级区域建筑
+    buildThird() {
+        const markerContent =
+            "" +
+            '<div class="custom-content-marker">' +
+            `   <img src=${require("src/assets/images/shg.png")}>` +
+            "</div>"
+
+        const marker = new this.mapLoader.Marker({
+            position: [116.476046, 39.865105],
+            content: markerContent,
+            offset: new this.mapLoader.Pixel(-50, -50),
+            zooms: [zoomsData[2], zoomsData[2]],
+        })
+
+        this.map.add(marker)
+    }
+
+    hidePopup1() {
+        this.setState({ visible1: false })
+    }
+
     render() {
-        return <div className="container" id="container"></div>
+        return (
+            <div className="container" id="container">
+                {this.searchRender()}
+
+                <div className="locate-main">
+                    <img alt="" src={require("src/assets/images/locate.png")} />
+                    <span>我的位置</span>
+                </div>
+
+                <div
+                    className="locate-main"
+                    style={{ bottom: "141px" }}
+                    onClick={() => this.setState({ visible1: true })}
+                >
+                    <img alt="" src={require("src/assets/images/national.png")} />
+                    <span>城市选择</span>
+                </div>
+
+                <Popup
+                    visible={this.state.visible}
+                    onMaskClick={() => this.hidePopup()}
+                    bodyStyle={{ height: "508px" }}
+                    maskStyle={{ background: "transparent" }}
+                >
+                    <div className="popup-content" style={{ opacity: this.state.searchStatus === "show" ? 1 : 0 }}>
+                        {this.searchRender({
+                            position: "absolute",
+                            top: 0,
+                        })}
+                        <img alt="" src={require("src/assets/images/search/operating.png")} className="operating" />
+                    </div>
+                </Popup>
+
+                <Popup
+                    visible={this.state.visible1}
+                    onMaskClick={() => this.hidePopup1()}
+                    bodyStyle={{ height: "100vh" }}
+                >
+                    <div className="select-city-main">
+                        <div className="title">
+                            <span>选择城市</span>
+                            <span onClick={() => this.hidePopup1()}>X</span>
+                        </div>
+                        <div className="content">
+                            <div className="my-address-main">
+                                <div className="my-address-title">我的位置</div>
+                                <div className="my-address-content">
+                                    <div className="my-address-content-item">北京市</div>
+                                </div>
+                            </div>
+                            {cityItems.map((item, idx) => {
+                                return (
+                                    <div className="my-address-main" key={`city-${idx}`}>
+                                        <div className="my-address-title">{item.title}</div>
+                                        <div className="my-address-content">
+                                            {item.view.map((n, i) => {
+                                                return (
+                                                    <div className="my-address-content-item" key={`city-view-${i}`}>
+                                                        {n.title}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </Popup>
+            </div>
+        )
     }
 }
