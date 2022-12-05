@@ -128,14 +128,23 @@
                     border-radius: 8px;
                     font-size: 12px;
                     font-weight: 400;
-                    text-align: center;
-                    line-height: 33px;
+                    // text-align: center;
+                    // line-height: 33px;
                     margin-bottom: 24px;
                     margin-right: 4%;
                     position: relative;
                     border: 1px solid #f0f0f0;
                     color: #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     // overflow: hidden;
+
+                    .position-fill {
+                        width: 16px;
+                        height: 16px;
+                        margin-right: 3px;
+                    }
 
                     .isselect {
                         width: 16px;
@@ -337,6 +346,28 @@
     }
 }
 
+.formats-main {
+    width: 52px;
+    height: 288px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-left: 16px;
+    margin-top: 20px;
+    padding: 16px 6px 8px 6px;
+
+    &-item {
+        width: 100%;
+        height: 25px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+        line-height: 25px;
+        color: #000;
+    }
+}
+
 .custom-content-marker-q {
     width: 35px;
     height: 30px;
@@ -378,16 +409,25 @@
 .flag-animation {
     width: 80px;
     height: 80px;
-    animation: myfirst .8s ease;
-    -webkit-animation: myfirst .8s ease;
-    background-image: url('src/assets/images/flag/1.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    animation-fill-mode: forwards;
-    -o-animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
+    // animation: myfirst .8s ease;
+    // -webkit-animation: myfirst .8s ease;
+
+    // background-image: url('src/assets/images/flag/1.png');
+    // background-repeat: no-repeat;
+    // background-size: 100% 100%;
+    // animation-fill-mode: forwards;
+    // -o-animation-fill-mode: forwards;
+    // -webkit-animation-fill-mode: forwards;
     // background-color: rgba($color: #000000, $alpha: 0.5);
     position: relative;
+
+    background-image: url('src/assets/images/flag1.png');
+    background-repeat: no-repeat;
+    // background-size: 918px 900px;
+    animation: myfirst .8s steps(9) forwards;
+    -webkit-animation: myfirst .8s steps(9) forwards;
+    background-position: 0 0;
+    background-size: 80px 80px;
 
     .flag-image {
         width: 100%;
@@ -416,6 +456,42 @@
         white-space: nowrap;
         text-align: center;
     }
+}
+
+@keyframes myfirst1 {
+    0% { background-position: 0 0; }
+    12% { background-position: -306px 0; }
+    24% { background-position: -612px 0; }
+    48% { background-position: -918px 0; }
+    60% { background-position: -1224px 0; }
+    72% { background-position: -1530px 0; }
+    84% { background-position: -1836px 0; }
+    96% { background-position: -2142px 0; }
+    100% { background-position: -2448px 0; }
+}
+
+@-webkit-keyframes myfirst1 {
+    0% { background-position: 0 0; }
+    12% { background-position: -306px 0; }
+    24% { background-position: -612px 0; }
+    48% { background-position: -918px 0; }
+    60% { background-position: -1224px 0; }
+    72% { background-position: -1530px 0; }
+    84% { background-position: -1836px 0; }
+    96% { background-position: -2142px 0; }
+    100% { background-position: -2448px 0; }
+}
+
+@-moz-keyframes myfirst1 {
+    0% { background-position: 0 0; }
+    12% { background-position: -306px 0; }
+    24% { background-position: -612px 0; }
+    48% { background-position: -918px 0; }
+    60% { background-position: -1224px 0; }
+    72% { background-position: -1530px 0; }
+    84% { background-position: -1836px 0; }
+    96% { background-position: -2142px 0; }
+    100% { background-position: -2448px 0; }
 }
 
 @keyframes myfirst {

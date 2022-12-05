@@ -3,6 +3,7 @@ import AMap from "@amap/amap-jsapi-loader"
 import { Component, CSSProperties } from "react"
 import Popup from "antd-mobile/es/components/popup"
 import Mask from "antd-mobile/es/components/mask"
+import Toast from "antd-mobile/es/components/toast"
 
 const zoomsData = [4, 8, 18]
 
@@ -21,12 +22,12 @@ const adcodes = [
         zooms: [zoomsData[0], zoomsData[0]],
         city: {
             zoom: 5.3,
-            provincial: "哈尔滨",
+            provincial: "哈尔滨市",
             number: {
                 shg: 1,
                 lxs: 6,
             },
-            哈尔滨: {
+            哈尔滨市: {
                 center: [126.53505, 45.802981],
                 shg: [
                     {
@@ -96,12 +97,12 @@ const adcodes = [
         zooms: [zoomsData[0], zoomsData[0]],
         city: {
             zoom: 5.7,
-            provincial: "长春",
+            provincial: "长春市",
             number: {
                 shg: 2,
                 lxs: 17,
             },
-            长春: {
+            长春市: {
                 center: [125.323643, 43.816996],
                 shg: [
                     {
@@ -193,7 +194,7 @@ const adcodes = [
                 //     },
                 // ]
             },
-            吉林: {
+            吉林市: {
                 center: [126.549719, 43.838132],
                 shg: [
                     {
@@ -270,7 +271,7 @@ const adcodes = [
         zooms: [zoomsData[0], zoomsData[0]],
         city: {
             zoom: 6.3,
-            provincial: "沈阳",
+            provincial: "沈阳市",
             number: {
                 shg: 4,
                 lxs: 44,
@@ -280,7 +281,7 @@ const adcodes = [
                 sc: 1,
                 yd: 12,
             },
-            沈阳: {
+            沈阳市: {
                 center: [123.464675, 41.677576],
                 shg: [
                     {
@@ -396,7 +397,7 @@ const adcodes = [
                     },
                 ],
             },
-            大连: {
+            大连市: {
                 center: [121.614786, 38.913962],
                 shg: [
                     {
@@ -797,7 +798,7 @@ const adcodes = [
                     },
                 ],
             },
-            丹东: {
+            丹东市: {
                 center: [124.354419, 40.000646],
                 shg: [
                     {
@@ -827,7 +828,7 @@ const adcodes = [
                     },
                 ],
             },
-            盘锦: {
+            盘锦市: {
                 center: [122.170729, 40.71956],
                 lxs: [
                     {
@@ -839,7 +840,7 @@ const adcodes = [
                     },
                 ],
             },
-            海城: {
+            海城市: {
                 center: [122.685176, 40.882548],
                 lxs: [
                     {
@@ -851,7 +852,7 @@ const adcodes = [
                     },
                 ],
             },
-            抚顺: {
+            抚顺市: {
                 center: [123.957053, 41.881311],
                 lxs: [
                     {
@@ -863,7 +864,7 @@ const adcodes = [
                     },
                 ],
             },
-            本溪: {
+            本溪市: {
                 center: [123.684984, 41.486834],
                 lxs: [
                     {
@@ -883,7 +884,7 @@ const adcodes = [
                 //     },
                 // ]
             },
-            瓦房店: {
+            瓦房店市: {
                 center: [121.979463, 39.62701],
                 lxs: [
                     {
@@ -895,7 +896,7 @@ const adcodes = [
                     },
                 ],
             },
-            鞍山: {
+            鞍山市: {
                 center: [122.994183, 41.108239],
                 lxs: [
                     {
@@ -907,7 +908,7 @@ const adcodes = [
                     },
                 ],
             },
-            大石桥: {
+            大石桥市: {
                 center: [122.509006, 40.644482],
                 lxs: [
                     {
@@ -919,7 +920,7 @@ const adcodes = [
                     },
                 ],
             },
-            营口: {
+            营口市: {
                 center: [122.219148, 40.625027],
                 lxs: [
                     {
@@ -1093,12 +1094,12 @@ const adcodes = [
         zooms: [zoomsData[0], zoomsData[0]],
         city: {
             zoom: 6.3,
-            provincial: "石家庄",
+            provincial: "石家庄市",
             number: {
                 shg: 5,
                 lxs: 20,
             },
-            石家庄: {
+            石家庄市: {
                 center: [114.514976, 38.042007],
                 shg: [
                     {
@@ -1140,7 +1141,7 @@ const adcodes = [
                     },
                 ],
             },
-            沧州: {
+            沧州市: {
                 center: [116.838715, 38.304676],
                 shg: [
                     {
@@ -1161,7 +1162,7 @@ const adcodes = [
                     },
                 ],
             },
-            廊坊: {
+            廊坊市: {
                 center: [116.683546, 39.538304],
                 shg: [
                     {
@@ -1232,7 +1233,7 @@ const adcodes = [
                 //     },
                 // ],
             },
-            唐山: {
+            唐山市: {
                 center: [118.180149, 39.63068],
                 shg: [
                     {
@@ -1274,7 +1275,7 @@ const adcodes = [
                     },
                 ],
             },
-            保定: {
+            保定市: {
                 center: [115.464523, 38.874476],
                 shg: [
                     {
@@ -1328,22 +1329,22 @@ const cityItems = [
     {
         title: "辽宁省",
         view: [
-            { title: "沈阳", key: "shenyang" },
-            { title: "大连", key: "dalian" },
-            { title: "丹东", key: "dandong" },
-            { title: "盘锦", key: "panjin" },
-            { title: "海城", key: "haicheng" },
-            { title: "抚顺", key: "fushun" },
-            { title: "本溪", key: "benxi" },
-            { title: "瓦房店", key: "wafangdian" },
-            { title: "鞍山", key: "anshan" },
-            { title: "大石桥", key: "dashiqiao" },
-            { title: "营口", key: "yingkou" },
+            { title: "沈阳市", key: "shenyang" },
+            { title: "大连市", key: "dalian" },
+            { title: "丹东市", key: "dandong" },
+            { title: "盘锦市", key: "panjin" },
+            { title: "海城市", key: "haicheng" },
+            { title: "抚顺市", key: "fushun" },
+            { title: "本溪市", key: "benxi" },
+            { title: "瓦房店市", key: "wafangdian" },
+            { title: "鞍山市", key: "anshan" },
+            { title: "大石桥市", key: "dashiqiao" },
+            { title: "营口市", key: "yingkou" },
         ],
     },
     {
         title: "黑龙江省",
-        view: [{ title: "哈尔滨", key: "haerbin" }],
+        view: [{ title: "哈尔滨市", key: "haerbin" }],
     },
     {
         title: "北京",
@@ -1352,20 +1353,31 @@ const cityItems = [
     {
         title: "吉林省",
         view: [
-            { title: "长春", key: "changchun" },
-            { title: "吉林", key: "jilin" },
+            { title: "长春市", key: "changchun" },
+            { title: "吉林市", key: "jilin" },
         ],
     },
     {
         title: "河北省",
         view: [
-            { title: "石家庄", key: "shijiazhuang" },
-            { title: "沧州", key: "cangzhou" },
-            { title: "廊坊", key: "langfang" },
-            { title: "唐山", key: "tangshan" },
-            { title: "保定", key: "baoding" },
+            { title: "石家庄市", key: "shijiazhuang" },
+            { title: "沧州市", key: "cangzhou" },
+            { title: "廊坊市", key: "langfang" },
+            { title: "唐山市", key: "tangshan" },
+            { title: "保定市", key: "baoding" },
         ],
     },
+]
+
+const formats = [
+    { title: "全部", key: "all" },
+    { title: "餐饮", key: "shg" },
+    { title: "旅游", key: "lxs" },
+    { title: "康养", key: "ky" },
+    { title: "药店", key: "yd" },
+    { title: "生鲜", key: "sx" },
+    { title: "商超", key: "sc" },
+    { title: "便利店", key: "bld" },
 ]
 
 interface IAreaFill {
@@ -1387,13 +1399,16 @@ export default class Home extends Component<any> {
     private selectCity: any
     private markerCity: any = []
     private thirdMarkerCity: any = []
+    private positionText = "定位失败"
 
     state = {
         visible: false,
         visible1: false,
         visible2: true,
+        visible3: false,
         searchStatus: "show",
         city: "全国地图",
+        selectFormat: "all",
     }
 
     componentDidMount() {
@@ -1419,6 +1434,7 @@ export default class Home extends Component<any> {
         })
 
         this.map = new this.mapLoader.Map("container", {
+            mapStyle: "amap://styles/a19ca5840dc79a390ca7a5601233d296",
             viewMode: "3D",
             zoom: 4,
             center: [116.47609, 39.865086],
@@ -1434,7 +1450,6 @@ export default class Home extends Component<any> {
             touchZoom: false,
         })
 
-        // this.dingwei()
         this.insertFlag()
         this.mapFn()
 
@@ -1527,7 +1542,7 @@ export default class Home extends Component<any> {
     dingwei() {
         const geolocation = new this.mapLoader.Geolocation({
             enableHighAccuracy: true, //是否使用高精度定位，默认:true
-            timeout: 10000, //超过10秒后停止定位，默认：无穷大
+            timeout: 20000, //超过10秒后停止定位，默认：无穷大
             maximumAge: 0, //定位结果缓存0毫秒，默认：0
             convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
             showButton: true, //显示定位按钮，默认：true
@@ -1539,8 +1554,42 @@ export default class Home extends Component<any> {
             zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
         })
 
-        // this.map.addControl(geolocation);
-        // geolocation.getCurrentPosition()
+        geolocation.getCurrentPosition((status: any, result: any) => {
+            if (status === "complete") {
+                const geocoder = new this.mapLoader.Geocoder({
+                    city: "010", //城市设为北京，默认：“全国”
+                    radius: 1000, //范围，默认：500
+                })
+                geocoder.getAddress(result.position, (status: any, result: any) => {
+                    if (status === "complete" && result.regeocode) {
+                        const address = result.regeocode.formattedAddress
+                        const info = result.regeocode.addressComponent
+                        let searchText = ""
+
+                        if (info.city === "") {
+                            info.province = info.province.substr(0, info.province.length - 1)
+                            searchText = info.province
+                        } else {
+                            searchText = info.city
+                        }
+
+                        this.setState({ city: searchText, visible1: false }, () => {
+                            const data = adcodes.filter(x => address.includes(x.name))
+
+                            if (data.length) {
+                                this.clearAllLayout()
+                                this.selectCity = data[0]
+                                this.map.setZoomAndCenter(zoomsData[2], data[0].city[searchText].center)
+                                this.buildThird(searchText)
+                            }
+                        })
+                    }
+                })
+            } else {
+                this.positionText = "定位失败"
+                Toast.show({ content: "定位失败" })
+            }
+        })
     }
 
     // 地图事件
@@ -1569,7 +1618,7 @@ export default class Home extends Component<any> {
 
         this.map.on("zoomend", () => {
             const { selectCity } = this
-            const { city, code } = selectCity
+            const { city } = selectCity
             const behalf = city[city.provincial]
 
             // 在二级放大区域
@@ -1580,7 +1629,7 @@ export default class Home extends Component<any> {
                 if (selectCity) {
                     // 给二级区域填充颜色
                     this.areaOfFill({
-                        adcode: code,
+                        adcode: this.selectCity.code,
                         depth: 1,
                         style: {
                             fill: "rgba(110, 181, 226, 0.3)",
@@ -1591,48 +1640,38 @@ export default class Home extends Component<any> {
                     this.setState({ city: selectCity.city.provincial }, () => {
                         // 给二级区域打marker
                         if (behalf.shg) {
-                            this.addMarkerToSecond(behalf.shg, "shg", "#e24c0b")
+                            this.addMarkerToSecond(behalf.shg, "shg", "#E50303")
                         }
                         if (behalf.lxs) {
-                            this.addMarkerToSecond(behalf.lxs, "lxs", "#4ead2d")
+                            this.addMarkerToSecond(behalf.lxs, "lxs", "#E50303")
                         }
                         if (behalf.ky) {
-                            this.addMarkerToSecond(behalf.ky, "ky", "#e02fae")
+                            this.addMarkerToSecond(behalf.ky, "ky", "#E50303")
                         }
                         if (behalf.sx) {
-                            this.addMarkerToSecond(behalf.sx, "sx", "#266bf1")
+                            this.addMarkerToSecond(behalf.sx, "sx", "#E50303")
                         }
                         if (behalf.bld) {
-                            this.addMarkerToSecond(behalf.bld, "bld", "#fd9800")
+                            this.addMarkerToSecond(behalf.bld, "bld", "#E50303")
                         }
                         if (behalf.sc) {
-                            this.addMarkerToSecond(behalf.sc, "sc", "#901bc2")
+                            this.addMarkerToSecond(behalf.sc, "sc", "#E50303")
                         }
                         if (behalf.yd) {
-                            this.addMarkerToSecond(behalf.yd, "yd", "#2998ff")
+                            this.addMarkerToSecond(behalf.yd, "yd", "#E50303")
                         }
                     })
                 }
             }
+
+            if (this.map.getZoom() > zoomsData[0]) {
+                this.setState({ visible3: true })
+            } else {
+                this.setState({ visible3: false })
+            }
         })
 
         this.map.on("zoomend", () => {
-            // if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[1] && this.zoom === zoomsData[0]) {
-            //     // this.map.setZoomAndCenter(zoomsData[1], [116.47609, 39.865086])
-            //     this.zoom = zoomsData[1]
-            // } else if (this.map.getZoom() > zoomsData[1] && this.map.getZoom() < zoomsData[2] && this.zoom === zoomsData[1]) {
-            //     // this.map.setZoomAndCenter(zoomsData[2], [116.47609, 39.865086])
-            //     this.zoom = zoomsData[2]
-            // } else if (this.zoom === zoomsData[2] && this.map.getZoom() < zoomsData[2] && this.map.getZoom() > zoomsData[1]) {
-            //     // this.map.setZoomAndCenter(zoomsData[1], [116.47609, 39.865086])
-            //     this.zoom = zoomsData[1]
-            // } else if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[1] && this.zoom === zoomsData[1]) {
-            //     // this.map.setZoomAndCenter(zoomsData[0], [116.47609, 39.865086])
-            //     this.zoom = zoomsData[0]
-            // }
-            // if (this.map.getZoom() < zoomsData[2]) {
-            //     this.map.setZoom(zoomsData[0])
-            // }
             if (this.map.getZoom() >= zoomsData[2]) {
                 this.map.setPitch(50)
                 this.map.setRotation(10)
@@ -1846,12 +1885,80 @@ export default class Home extends Component<any> {
         })
     }
 
+    // 业态点击事件
+    formatFn(key: string) {
+        if (this.state.selectFormat === key && this.state.selectFormat === "all") return
+
+        if (this.markerCity && this.markerCity.length) {
+            this.map.remove(this.markerCity)
+            this.markerCity = []
+        }
+
+        if (key === "all") {
+            this.setState({ selectFormat: key }, () => {
+                if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[2]) {
+                    this.formatFn1()
+                }
+            })
+        } else {
+            if (!Array.isArray(this.state.selectFormat)) {
+                this.setState({ selectFormat: [key] }, () => {
+                    if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[2]) {
+                        this.formatFn1()
+                    }
+                })
+            } else {
+                const arr = this.state.selectFormat
+                if (arr.includes(key)) {
+                    const index = arr.findIndex(x => x === key)
+                    arr.splice(index, 1)
+                } else {
+                    arr.push(key)
+                }
+                this.setState({ selectFormat: arr }, () => {
+                    if (this.map.getZoom() > zoomsData[0] && this.map.getZoom() < zoomsData[2]) {
+                        this.formatFn1()
+                    }
+                })
+            }
+        }
+    }
+
+    formatFn1() {
+        const { selectCity } = this
+        const { city } = selectCity
+        const behalf = city[city.provincial]
+        const { selectFormat } = this.state
+
+        if (behalf.shg && ((Array.isArray(selectFormat) && selectFormat.includes("shg")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.shg, "shg", "#E50303")
+        }
+        if (behalf.lxs && ((Array.isArray(selectFormat) && selectFormat.includes("lxs")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.lxs, "lxs", "#E50303")
+        }
+        if (behalf.ky && ((Array.isArray(selectFormat) && selectFormat.includes("ky")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.ky, "ky", "#E50303")
+        }
+        if (behalf.sx && ((Array.isArray(selectFormat) && selectFormat.includes("sx")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.sx, "sx", "#E50303")
+        }
+        if (behalf.bld && ((Array.isArray(selectFormat) && selectFormat.includes("bld")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.bld, "bld", "#E50303")
+        }
+        if (behalf.sc && ((Array.isArray(selectFormat) && selectFormat.includes("sc")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.sc, "sc", "#E50303")
+        }
+        if (behalf.yd && ((Array.isArray(selectFormat) && selectFormat.includes("yd")) || selectFormat === "all")) {
+            this.addMarkerToSecond(behalf.yd, "yd", "#E50303")
+        }
+    }
+
     render() {
         return (
             <div className="container" id="container">
                 {this.searchRender()}
 
-                <div className="locate-main">
+                <div className="locate-main" onClick={() => this.dingwei()}>
                     <img alt="" src={require("src/assets/images/locate.png")} />
                     <span>我的位置</span>
                 </div>
@@ -1891,12 +1998,15 @@ export default class Home extends Component<any> {
                             <span onClick={() => this.hidePopup1()}>X</span>
                         </div>
                         <div className="content">
-                            <div className="my-address-main">
+                            {/* <div className="my-address-main">
                                 <div className="my-address-title">我的位置</div>
                                 <div className="my-address-content">
-                                    <div className="my-address-content-item">北京市</div>
+                                    <div className="my-address-content-item">
+                                        <img alt="" src={require('src/assets/images/position-fill.png')} className="position-fill" />
+                                        <span>{this.positionText}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </div> */}
                             {cityItems.map((item, idx) => {
                                 return (
                                     <div className="my-address-main" key={`city-${idx}`}>
@@ -1938,6 +2048,22 @@ export default class Home extends Component<any> {
                         </div>
                     </div>
                 </Popup>
+
+                {/* <Popup
+                    visible={this.state.visible3}
+                    position='left'
+                    mask={false}
+                    bodyStyle={{ minWidth: '68px' }}
+                >
+                    <div className="formats-main">
+                        {formats.map(item => {
+                            return <div key={`formats-${item.key}`} className="formats-main-item" style={{
+                                color: this.state.selectFormat === item.key || (Array.isArray(this.state.selectFormat) && this.state.selectFormat.includes(item.key)) ? '#fff' : '#000', 
+                                background: this.state.selectFormat === item.key || (Array.isArray(this.state.selectFormat) && this.state.selectFormat.includes(item.key))? '#0076E3' : '#fff'
+                            }} onClick={() => this.formatFn(item.key)}>{item.title}</div>
+                        })}
+                    </div>
+                </Popup> */}
 
                 <Mask visible={this.state.visible2} opacity={0} />
             </div>
