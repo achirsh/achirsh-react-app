@@ -496,14 +496,38 @@ export default class Home extends Component<any> {
         if (this.selectProvince) {
             // 给二级区域填充颜色
             if (isFill) {
-                this.areaOfFill({
-                    adcode: params.code,
-                    depth: 1,
-                    style: {
-                        fill: "rgba(173, 220, 255, 0.6)",
-                        city: "#59A2F8",
-                    },
-                })
+                if (this.selectProvince.municipality) {
+                    this.areaOfFill({
+                        adcode: params.code,
+                        depth: 1,
+                        style: {
+                            fill: "rgba(173, 220, 255, 0.6)",
+                            city: "#59A2F8",
+                        },
+                    })
+                } else {
+                    this.areaOfFill({
+                        adcode: params.code,
+                        depth: 1,
+                        style: {
+                            fill: "rgba(225, 225, 225, 0.6)",
+                            city: "rgba(209, 209, 209, 0.6)",
+                        },
+                    })
+
+                    this.selectProvince.city.citys.map((cc: any) => {
+                        this.areaOfFill({
+                            adcode: cc.code,
+                            depth: 1,
+                            style: {
+                                fill: "rgba(173, 220, 255, 0.6)",
+                                city: "#59A2F8",
+                            },
+                        })
+                    })
+                }
+
+                console.log(this.selectProvince)
             }
 
             city.citys.forEach((item: any) => {

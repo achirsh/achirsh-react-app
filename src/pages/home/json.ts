@@ -13,6 +13,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "大连市",
+                    code: "210200",
                     select: "shg",
                     center: [121.614786, 38.913962],
                     total: 54,
@@ -472,6 +473,7 @@ export const adcodes = [
                 },
                 {
                     name: "沈阳市",
+                    code: "210100",
                     select: "shg",
                     center: [123.464675, 41.677576],
                     total: 15,
@@ -607,6 +609,7 @@ export const adcodes = [
                 },
                 {
                     name: "丹东市",
+                    code: "210600",
                     select: "shg",
                     center: [124.354419, 40.000646],
                     total: 3,
@@ -644,6 +647,7 @@ export const adcodes = [
                 },
                 {
                     name: "盘锦市",
+                    code: "211100",
                     select: "lxs",
                     center: [122.170729, 40.71956],
                     total: 1,
@@ -661,6 +665,7 @@ export const adcodes = [
                 },
                 {
                     name: "海城市",
+                    code: "210381",
                     select: "lxs",
                     center: [122.685176, 40.882548],
                     total: 1,
@@ -678,6 +683,7 @@ export const adcodes = [
                 },
                 {
                     name: "抚顺市",
+                    code: "210400",
                     select: "lxs",
                     center: [123.957053, 41.881311],
                     total: 1,
@@ -695,6 +701,7 @@ export const adcodes = [
                 },
                 {
                     name: "本溪市",
+                    code: "210500",
                     select: "lxs",
                     center: [123.684984, 41.486834],
                     total: 1,
@@ -720,6 +727,7 @@ export const adcodes = [
                 },
                 {
                     name: "瓦房店市",
+                    code: "210281",
                     select: "lxs",
                     center: [121.979463, 39.62701],
                     total: 1,
@@ -737,6 +745,7 @@ export const adcodes = [
                 },
                 {
                     name: "鞍山市",
+                    code: "210300",
                     select: "lxs",
                     center: [122.994183, 41.108239],
                     total: 1,
@@ -754,6 +763,7 @@ export const adcodes = [
                 },
                 {
                     name: "大石桥市",
+                    code: "210882",
                     select: "lxs",
                     center: [122.509006, 40.644482],
                     total: 1,
@@ -771,6 +781,7 @@ export const adcodes = [
                 },
                 {
                     name: "营口市",
+                    code: "210800",
                     select: "lxs",
                     center: [122.219148, 40.625027],
                     total: 2,
@@ -802,10 +813,11 @@ export const adcodes = [
         title: "北京",
         code: "110000",
         center: [116.41647, 39.90347],
-        centerQ: [116.685292, 40.388712],
+        centerQ: [117.089898, 40.395249],
         centerT: [116.360852, 39.616454],
         pixel: { x: -35, y: -80 },
         animation: "delay",
+        municipality: true,
         city: {
             zoom: 8,
             citys: [
@@ -967,6 +979,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "哈尔滨市",
+                    code: "230100",
                     select: "shg",
                     center: [126.53505, 45.802981],
                     total: 7,
@@ -1049,6 +1062,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "长春市",
+                    code: "220100",
                     select: "shg",
                     center: [125.323643, 43.816996],
                     total: 11,
@@ -1156,6 +1170,7 @@ export const adcodes = [
                 },
                 {
                     name: "吉林市",
+                    code: "220200",
                     select: "shg",
                     center: [126.549719, 43.838132],
                     total: 8,
@@ -1246,6 +1261,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "石家庄市",
+                    code: "130100",
                     select: "shg",
                     center: [114.514976, 38.042007],
                     total: 5,
@@ -1297,6 +1313,7 @@ export const adcodes = [
                 },
                 {
                     name: "沧州市",
+                    code: "130900",
                     select: "shg",
                     center: [116.838715, 38.304676],
                     total: 2,
@@ -1324,6 +1341,7 @@ export const adcodes = [
                 },
                 {
                     name: "廊坊市",
+                    code: "131000",
                     select: "shg",
                     center: [116.683546, 39.538304],
                     total: 8,
@@ -1407,6 +1425,7 @@ export const adcodes = [
                 },
                 {
                     name: "唐山市",
+                    code: "130200",
                     select: "shg",
                     center: [118.180149, 39.63068],
                     total: 5,
@@ -1458,6 +1477,7 @@ export const adcodes = [
                 },
                 {
                     name: "保定市",
+                    code: "130600",
                     select: "shg",
                     center: [115.464523, 38.874476],
                     total: 5,
@@ -1524,6 +1544,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "泉州市",
+                    code: "350500",
                     select: "lxs",
                     center: [118.675724, 24.874452],
                     total: 2,
@@ -1553,6 +1574,7 @@ export const adcodes = [
                 },
                 {
                     name: "福州市",
+                    code: "350100",
                     select: "lxs",
                     center: [119.296411, 26.074286],
                     total: 2,
@@ -1582,6 +1604,7 @@ export const adcodes = [
                 },
                 {
                     name: "厦门市",
+                    code: "350200",
                     select: "lxs",
                     center: [118.08891, 24.479627],
                     total: 1,
@@ -1611,6 +1634,7 @@ export const adcodes = [
         centerT: [121.887028, 30.922951],
         pixel: { x: -20, y: -80 },
         animation: "immediately",
+        municipality: true,
         city: {
             citys: [
                 {
@@ -1699,6 +1723,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "武汉市",
+                    code: "420100",
                     select: "shg",
                     center: [114.304569, 30.593354],
                     total: 11,
@@ -1835,6 +1860,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "广州市",
+                    code: "440100",
                     select: "lxs",
                     center: [113.264499, 23.130061],
                     total: 4,
@@ -1884,6 +1910,7 @@ export const adcodes = [
                 },
                 {
                     name: "佛山市",
+                    code: "440600",
                     select: "lxs",
                     center: [113.121586, 23.021351],
                     total: 1,
@@ -1918,6 +1945,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "长沙市",
+                    code: "430100",
                     select: "lxs",
                     center: [112.938882, 28.228304],
                     total: 1,
@@ -1952,6 +1980,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "昆明市",
+                    code: "530100",
                     select: "lxs",
                     center: [102.833669, 24.88149],
                     total: 2,
@@ -1992,12 +2021,13 @@ export const adcodes = [
         centerT: [107.880172, 29.076681],
         pixel: { x: -20, y: -80 },
         animation: "immediately",
+        municipality: true,
         city: {
             citys: [
                 {
                     name: "重庆市",
                     select: "shg",
-                    center: "",
+                    center: [106.550483, 29.563707],
                     total: 6,
                     have: ["shg", "lxs"],
                     lxs: [
@@ -2082,6 +2112,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "合肥市",
+                    code: "340100",
                     select: "shg",
                     center: [117.227267, 31.820567],
                     total: 5,
@@ -2143,8 +2174,9 @@ export const adcodes = [
                 },
                 {
                     name: "芜湖市",
+                    code: "340200",
                     select: "shg",
-                    center: "",
+                    center: [118.433065, 31.352614],
                     have: ["shg", "lxs", "sx"],
                     lxs: [
                         {
@@ -2211,6 +2243,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "成都市",
+                    code: "510100",
                     select: "lxs",
                     center: [104.066301, 30.572961],
                     total: 3,
@@ -2265,6 +2298,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "日照市",
+                    code: "371100",
                     select: "lxs",
                     center: [119.52685, 35.416912],
                     total: 1,
@@ -2284,6 +2318,7 @@ export const adcodes = [
                 },
                 {
                     name: "烟台市",
+                    code: "370600",
                     select: "shg",
                     center: [121.447755, 37.464551],
                     total: 6,
@@ -2355,6 +2390,7 @@ export const adcodes = [
                 },
                 {
                     name: "德州市",
+                    code: "371400",
                     select: "lxs",
                     center: [116.359244, 37.436492],
                     total: 4,
@@ -2406,6 +2442,7 @@ export const adcodes = [
                 },
                 {
                     name: "淄博市",
+                    code: "370300",
                     select: "lxs",
                     center: [118.054994, 36.813787],
                     total: 2,
@@ -2435,6 +2472,7 @@ export const adcodes = [
                 },
                 {
                     name: "潍坊市",
+                    code: "370700",
                     select: "lxs",
                     center: [119.161721, 36.707668],
                     total: 1,
@@ -2466,6 +2504,7 @@ export const adcodes = [
                 },
                 {
                     name: "青岛市",
+                    code: "370200",
                     select: "shg",
                     center: [120.382665, 36.066938],
                     total: 7,
@@ -2569,6 +2608,7 @@ export const adcodes = [
                 },
                 {
                     name: "临沂市",
+                    code: "371300",
                     select: "lxs",
                     center: [118.356464, 35.103771],
                     total: 1,
@@ -2588,6 +2628,7 @@ export const adcodes = [
                 },
                 {
                     name: "济南市",
+                    code: "370100",
                     select: "shg",
                     center: [117.120128, 36.652069],
                     total: 10,
@@ -2711,6 +2752,7 @@ export const adcodes = [
                 },
                 {
                     name: "威海市",
+                    code: "371000",
                     select: "lxs",
                     center: [122.120519, 37.513315],
                     total: 3,
@@ -2767,6 +2809,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "西安市",
+                    code: "610100",
                     select: "shg",
                     center: [108.939645, 34.343207],
                     total: 6,
@@ -2858,6 +2901,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "呼和浩特市",
+                    code: "150100",
                     select: "lxs",
                     center: [111.748814, 40.842127],
                     total: 2,
@@ -2902,6 +2946,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "杭州市",
+                    code: "330100",
                     select: "shg",
                     center: [120.210792, 30.246026],
                     total: 14,
@@ -3068,6 +3113,7 @@ export const adcodes = [
                 },
                 {
                     name: "绍兴市",
+                    code: "330600",
                     select: "lxs",
                     center: [120.582886, 30.051549],
                     total: 1,
@@ -3087,6 +3133,7 @@ export const adcodes = [
                 },
                 {
                     name: "宁波市",
+                    code: "330200",
                     select: "shg",
                     center: [121.62454, 29.860258],
                     total: 4,
@@ -3175,6 +3222,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "南京市",
+                    code: "320100",
                     select: "shg",
                     center: [118.796624, 32.059344],
                     total: 5,
@@ -3237,6 +3285,7 @@ export const adcodes = [
                 },
                 {
                     name: "苏州市",
+                    code: "320500",
                     select: "shg",
                     center: [120.585294, 31.299758],
                     total: 1,
@@ -3256,6 +3305,7 @@ export const adcodes = [
                 },
                 {
                     name: "无锡市",
+                    code: "320200",
                     select: "lxs",
                     center: [120.311889, 31.491064],
                     total: 1,
@@ -3286,6 +3336,7 @@ export const adcodes = [
         centerT: [117.709626, 38.931786],
         pixel: { x: -20, y: -80 },
         animation: "immediately",
+        municipality: true,
         city: {
             citys: [
                 {
@@ -3408,6 +3459,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "洛阳市",
+                    code: "410300",
                     select: "lxs",
                     center: [112.453895, 34.619702],
                     total: 3,
@@ -3447,6 +3499,7 @@ export const adcodes = [
                 },
                 {
                     name: "郑州市",
+                    code: "410100",
                     select: "shg",
                     center: [113.625351, 34.746303],
                     total: 14,
@@ -3616,6 +3669,7 @@ export const adcodes = [
             citys: [
                 {
                     name: "大同市",
+                    code: "140200",
                     select: "lxs",
                     center: [113.366749, 40.09711],
                     total: 4,
@@ -3668,6 +3722,7 @@ export const adcodes = [
                 },
                 {
                     name: "太原市",
+                    code: "140100",
                     select: "shg",
                     center: [112.549656, 37.870451],
                     total: 7,
