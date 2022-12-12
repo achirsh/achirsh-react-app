@@ -6,7 +6,7 @@ import Mask from "antd-mobile/es/components/mask"
 import Toast from "antd-mobile/es/components/toast"
 import { adcodes, cityItems, formats } from "./json"
 
-const zoomsData = [4, 8, 18, 20]
+const zoomsData = [3.2, 8, 18, 20]
 interface IAreaFill {
     adcode: string
     depth: number
@@ -25,8 +25,12 @@ export default class Home extends Component<any> {
     private firstMarkerCity: any = []
     private secondMarkerCity: any = []
     private thirdMarkerCity: any = []
+    private peopleMarker: any = []
     private city = "全国地图"
     private searchStatus = "show"
+
+    private mapMixZoom = 3
+    private mapCenter = [104.710713, 35.865113]
 
     state = {
         visible: false,
@@ -37,11 +41,12 @@ export default class Home extends Component<any> {
 
         visible5: false,
         visible6: false,
-
+        visible7: false,
         showSearch: true,
 
         selectFormat: "all",
         formatCitys: [],
+        showCity: "全国地图",
     }
 
     componentDidMount() {
@@ -70,8 +75,8 @@ export default class Home extends Component<any> {
             // mapStyle: 'amap://styles/a19ca5840dc79a390ca7a5601233d296',
             mapStyle: "amap://styles/2481b4a764ad464f4fc2e516478ae481",
             viewMode: "3D",
-            zoom: 4.5,
-            center: [117.573178, 39.860211],
+            // zoom: zoomsData[0],
+            // center: [104.710713,35.865113],
             terrain: true,
             zoomEnable: true,
             rotateEnable: false,
@@ -83,15 +88,26 @@ export default class Home extends Component<any> {
             touchZoom: true,
         })
 
+        const bounds = new this.mapLoader.Bounds([135.214058, 48.440836], [73.435189, 39.373343])
+
         this.map.on("complete", () => {
-            this.map.setZooms([4.5, 5])
+            const initMapData = this.map.getFitZoomAndCenterByBounds(bounds)
 
-            this.mapFn()
-            this.commonFn()
+            this.mapMixZoom = initMapData[0] || 3
+            this.mapCenter = [initMapData[1].lng, initMapData[1].lat]
+            this.map.setCenter(this.mapCenter)
+            this.map.setZooms([this.mapMixZoom, 5])
+            this.map.setZoom(this.mapMixZoom)
+            // this.map.setZooms([zoomsData[0], 5])
 
-            adcodes.map(item => {
-                this.addProvinceName(item)
-            })
+            setTimeout(() => {
+                this.mapFn()
+                this.commonFn()
+
+                adcodes.map(item => {
+                    this.addProvinceName(item)
+                })
+            }, 1200)
         })
     }
 
@@ -155,7 +171,7 @@ export default class Home extends Component<any> {
         const flagMarker = new this.mapLoader.Marker({
             position: item.centerQ,
             content: flagMarkerContent,
-            zooms: [4.5, 5],
+            zooms: [3, 5],
             bubble: true,
             anchor: "bottom-center",
         })
@@ -221,12 +237,19 @@ export default class Home extends Component<any> {
                         if (data.length) {
                             this.map.setZooms([data[0].city.zoom, 20])
 
-                            this.clearAllLayout()
+                            // this.clearAllLayout()
                             this.selectProvince = data[0]
 
                             const info1 = data[0].city.citys.filter((x: any) => x.name === searchText)
 
                             if (info1.length) {
+                                this.setState({ showCity: data[0].title + " " + info1[0].name })
+
+                                if (this.peopleMarker.length) {
+                                    this.map.remove(this.peopleMarker)
+                                    this.peopleMarker = []
+                                }
+
                                 const markerContent =
                                     "" +
                                     '<div class="people-marker">' +
@@ -240,6 +263,8 @@ export default class Home extends Component<any> {
                                     zooms: [18, 20],
                                     anchor: "bottom-center",
                                 })
+
+                                this.peopleMarker.push(marker)
 
                                 this.map.add(marker)
 
@@ -279,6 +304,7 @@ export default class Home extends Component<any> {
                         // 点击一级区域缩放到二级区域
                         if (center.length) {
                             this.city = center[0].title
+                            this.setState({ showCity: center[0].title })
                             this.selectProvince = center[0]
                             this.secondCityFillAndAddMarker(center[0], center[0].center, center[0].city.zoom, true)
                         }
@@ -333,6 +359,14 @@ export default class Home extends Component<any> {
                 this.setState({ showSearch: false })
             } else {
                 this.setState({ showSearch: true })
+            }
+
+            if (this.map.getZoom() > 5) {
+                if (!this.state.visible7) {
+                    this.setState({ visible7: true })
+                }
+            } else {
+                this.setState({ visible7: false })
             }
         })
     }
@@ -401,11 +435,13 @@ export default class Home extends Component<any> {
 
         this.setState({ visible1: false }, () => {
             if (params.title === "全国地图") {
-                this.map.setZooms([4.5, 5])
+                this.setState({ showCity: "全国地图" })
+
+                this.map.setZooms([this.mapMixZoom, 5])
                 this.setState({ selectFormat: "all" })
                 // 选择全国地图
                 this.clearAllLayout()
-                this.map.setZoomAndCenter(4.5, [116.47609, 39.865086])
+                this.map.setZoomAndCenter(this.mapMixZoom, this.mapCenter)
                 this.map.setPitch(0)
                 this.map.setRotation(0)
 
@@ -422,10 +458,12 @@ export default class Home extends Component<any> {
                     this.map.setZooms([city.zoom, 20])
 
                     if (params.key === "s") {
+                        this.setState({ showCity: params.title })
                         // 选择省
                         // this.map.setZooms([city.zoom, 18])
                         this.secondCityFillAndAddMarker(data[0], data[0].center, data[0].city.zoom, true)
                     } else {
+                        this.setState({ showCity: data[0].title + " " + params.title })
                         // 选择市
                         // this.map.setZooms([18, 20])
                         // this.clearAllLayout()
@@ -517,7 +555,6 @@ export default class Home extends Component<any> {
 
         // 二级marker点击事件
         marker.on("click", () => {
-            console.log(item)
             // this.city = item1.name
             // const arr: string | any[] = []
 
@@ -528,7 +565,8 @@ export default class Home extends Component<any> {
             // })
 
             // this.setState({ formatCitys: arr, visible4: true })
-            console.log(item)
+            this.setState({ showCity: this.selectProvince.title + " " + item1.name })
+            this.city = item1.name
             this.map.setZoomAndCenter(18, item.center)
         })
 
@@ -713,7 +751,13 @@ export default class Home extends Component<any> {
                     <span>城市选择</span>
                 </div>
 
-                <Popup visible={this.state.visible5} position="left" mask={false} bodyStyle={{ minWidth: "68px" }}>
+                <Popup
+                    visible={this.state.visible5}
+                    position="left"
+                    style={{ "--z-index": "1001" }}
+                    mask={false}
+                    bodyStyle={{ height: "308px" }}
+                >
                     <div className="formats-main">
                         {formats.map(item => {
                             return (
@@ -744,10 +788,23 @@ export default class Home extends Component<any> {
                 </Popup>
 
                 <Popup
+                    visible={this.state.visible7}
+                    position="right"
+                    style={{ "--z-index": "1001" }}
+                    mask={false}
+                    bodyStyle={{
+                        height: "53px",
+                    }}
+                >
+                    <div className="show-city">{this.state.showCity}</div>
+                </Popup>
+
+                <Popup
                     visible={this.state.visible}
                     onMaskClick={() => this.hidePopup()}
                     bodyStyle={{ height: "508px" }}
                     maskStyle={{ background: "transparent" }}
+                    style={{ "--z-index": "1003" }}
                 >
                     <div className="popup-content" style={{ opacity: this.searchStatus === "show" ? 1 : 0 }}>
                         {this.searchRender({
@@ -758,7 +815,7 @@ export default class Home extends Component<any> {
                     </div>
                 </Popup>
 
-                <Popup visible={this.state.visible1} bodyStyle={{ height: "100%" }}>
+                <Popup visible={this.state.visible1} style={{ "--z-index": "1005" }} bodyStyle={{ height: "100%" }}>
                     <div className="select-city-main">
                         <div className="title">
                             <span>选择城市</span>
@@ -827,6 +884,7 @@ export default class Home extends Component<any> {
                     onMaskClick={() => this.setState({ visible4: false, formatCitys: [], selectFormat: "all" })}
                     bodyStyle={{ height: "70vh" }}
                     maskStyle={{ background: "transparent" }}
+                    style={{ "--z-index": "1007" }}
                 >
                     <div className="popup-content-1">
                         <div className="format-content">
@@ -879,7 +937,7 @@ export default class Home extends Component<any> {
                     </div>
                 </Popup>
 
-                <Popup visible={this.state.visible6} bodyStyle={{ height: "100%" }}>
+                <Popup visible={this.state.visible6} bodyStyle={{ height: "100%" }} style={{ "--z-index": "1009" }}>
                     <div className="store-main">
                         <img
                             alt=""
