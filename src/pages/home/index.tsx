@@ -6,7 +6,8 @@ import Mask from "antd-mobile/es/components/mask"
 import Toast from "antd-mobile/es/components/toast"
 import { adcodes, cityItems, formats } from "./json"
 import lottie from "lottie-web"
-import flagJson from "src/assets/Flag.json"
+import flagJson from "src/assets/flag.json"
+
 interface IAreaFill {
     adcode: string
     depth: number
@@ -17,6 +18,7 @@ interface IAreaFill {
         city?: string
     }
 }
+
 export default class Home extends Component<any> {
     private map: any
     private mapLoader: any
@@ -37,7 +39,6 @@ export default class Home extends Component<any> {
         visible1: false,
         visible2: true,
         visible3: false,
-        visible4: false,
 
         visible5: false,
         visible6: false,
@@ -72,11 +73,8 @@ export default class Home extends Component<any> {
         })
 
         this.map = new this.mapLoader.Map("container", {
-            // mapStyle: 'amap://styles/a19ca5840dc79a390ca7a5601233d296',
             mapStyle: "amap://styles/2481b4a764ad464f4fc2e516478ae481",
             viewMode: "3D",
-            // zoom: zoomsData[0],
-            // center: [104.710713,35.865113],
             terrain: true,
             zoomEnable: true,
             rotateEnable: false,
@@ -98,7 +96,6 @@ export default class Home extends Component<any> {
             this.map.setCenter(this.mapCenter)
             this.map.setZooms([this.mapMixZoom, 5])
             this.map.setZoom(this.mapMixZoom)
-            // this.map.setZooms([zoomsData[0], 5])
 
             setTimeout(() => {
                 this.mapFn()
@@ -119,24 +116,37 @@ export default class Home extends Component<any> {
             setTimeout(() => {
                 this.insertFlag(item, true)
 
-                // const lottieElement: any = document.getElementById(item.code)
+                const lottieElement: any = document.getElementById(item.code)
 
-                // const animation = lottie.loadAnimation({
-                //     container: lottieElement,
-                //     renderer: 'html',
-                //     loop: false,
-                //     autoplay: false,
-                //     animationData: flagJson,
-                //     assetsPath: PUBLIC_PATH,
-                // });
+                const animation = lottie.loadAnimation({
+                    container: lottieElement,
+                    renderer: "canvas",
+                    loop: false,
+                    autoplay: false,
+                    animationData: flagJson,
+                    assetsPath: PUBLIC_PATH,
+                })
 
-                // animation.play()
+                animation.play()
             }, 800 * idx)
         })
 
         setTimeout(() => {
             immediatelyAnimation.forEach((item: any) => {
                 this.insertFlag(item, false)
+
+                const lottieElement: any = document.getElementById(item.code)
+
+                const animation = lottie.loadAnimation({
+                    container: lottieElement,
+                    renderer: "canvas",
+                    loop: false,
+                    autoplay: false,
+                    animationData: flagJson,
+                    assetsPath: PUBLIC_PATH,
+                })
+
+                animation.play()
             })
         }, 800 * 5)
 
@@ -283,13 +293,6 @@ export default class Home extends Component<any> {
 
                                 this.secondCityFillAndAddMarker(data[0], result.position, 18, false)
                             }
-
-                            // this.map.setZoomAndCenter(zoomsData[2], result.position)
-                            // info1[0].have.forEach((n: any) => {
-                            //     info1[0][n].forEach((n1: any) => {
-                            //         this.thirdCityAddMarker(n1)
-                            //     })
-                            // })
                         }
                     }
                 })
@@ -525,25 +528,14 @@ export default class Home extends Component<any> {
                     if (params.key === "s") {
                         this.setState({ showCity: params.title })
                         // 选择省
-                        // this.map.setZooms([city.zoom, 18])
                         this.secondCityFillAndAddMarker(data[0], data[0].center, data[0].city.zoom, true)
                     } else {
                         this.setState({ showCity: data[0].title + " " + params.title })
                         // 选择市
-                        // this.map.setZooms([18, 20])
-                        // this.clearAllLayout()
                         const nowCity = city.citys.filter((x: any) => x.name === params.title)
 
                         if (nowCity.length) {
                             this.secondCityFillAndAddMarker(data[0], nowCity[0].center, 18, false)
-
-                            // this.map.setZoomAndCenter(zoomsData[2], nowCity[0].center)
-
-                            // nowCity[0].have.forEach((n: any) => {
-                            //     nowCity[0][n].forEach((n1: any) => {
-                            //         this.thirdCityAddMarker(n1)
-                            //     })
-                            // })
                         }
                     }
                 }
@@ -595,7 +587,6 @@ export default class Home extends Component<any> {
             }
 
             city.citys.forEach((item: any) => {
-                // this.addMarkerToSecond(item[item.have[0]][0].center, item)
                 if (Array.isArray(this.state.selectFormat)) {
                     this.state.selectFormat.forEach((n: any) => {
                         if (item[n]) {
@@ -643,16 +634,6 @@ export default class Home extends Component<any> {
 
         // 二级marker点击事件
         marker.on("click", () => {
-            // this.city = item1.name
-            // const arr: string | any[] = []
-
-            // item.have.forEach((n: any) => {
-            //     item[n].forEach((n1: any) => {
-            //         arr.push(n1)
-            //     })
-            // })
-
-            // this.setState({ formatCitys: arr, visible4: true })
             this.setState({ showCity: this.selectProvince.title + " " + item1.name })
             this.city = item1.name
             this.map.setZoomAndCenter(18, item.center)
@@ -720,48 +701,17 @@ export default class Home extends Component<any> {
         this.map.add(marker)
     }
 
-    // 业态点击事件
+    // 业态点击函数
     formatFn(key: string) {
-        if (this.state.selectFormat === key) return
-
-        this.setState({ selectFormat: key }, () => {
-            if (key !== "all") {
-                const data = this.selectProvince.city.citys[0][key]
-                this.setState({ formatCitys: data && data.length ? data : [] })
-            } else {
-                const nowCity = this.selectProvince.city.citys[0]
-                const arr: string | any[] = []
-
-                nowCity.have.forEach((n: any) => {
-                    nowCity[n].forEach((n1: any) => {
-                        arr.push(n1)
-                    })
-                })
-
-                this.setState({ formatCitys: arr })
-            }
-        })
-    }
-
-    goThird(item: any) {
-        this.map.setZooms([18, 20])
-
-        this.setState({ visible4: false }, () => {
-            this.clearAllLayout()
-            this.map.setZoomAndCenter(18, item.center)
-            this.thirdCityAddMarker(item)
-        })
-    }
-
-    formatFn1(key: string) {
         const { city } = this.selectProvince
         if (this.state.selectFormat === key && this.state.selectFormat === "all") return
 
+        // 删除二级marker
         if (this.secondMarkerCity.length) {
             this.map.remove(this.secondMarkerCity)
             this.secondMarkerCity = []
         }
-
+        // 删除三级marker
         if (this.thirdMarkerCity.length) {
             this.map.remove(this.thirdMarkerCity)
             this.thirdMarkerCity = []
@@ -771,7 +721,6 @@ export default class Home extends Component<any> {
             // 业态点击全部，绘制二级、三级区域的点
             this.setState({ selectFormat: key }, () => {
                 city.citys.forEach((item: any) => {
-                    // this.addMarkerToSecond(item[item.have[0]][0].center, item)
                     item.have.forEach((n: any) => {
                         item[n].forEach((n1: any) => {
                             this.addMarkerToSecond(n1.center, n1, item)
@@ -784,7 +733,6 @@ export default class Home extends Component<any> {
             if (!Array.isArray(this.state.selectFormat)) {
                 this.setState({ selectFormat: [key] }, () => {
                     city.citys.forEach((item: any) => {
-                        // this.addMarkerToSecond(item[item.have[0]][0].center, item)
                         this.state.selectFormat.forEach((n: any) => {
                             if (item[n]) {
                                 item[n].forEach((n1: any) => {
@@ -805,7 +753,6 @@ export default class Home extends Component<any> {
                 }
                 this.setState({ selectFormat: arr }, () => {
                     city.citys.forEach((item: any) => {
-                        // this.addMarkerToSecond(item[item.have[0]][0].center, item)
                         this.state.selectFormat.forEach((n: any) => {
                             if (item[n]) {
                                 item[n].forEach((n1: any) => {
@@ -821,6 +768,8 @@ export default class Home extends Component<any> {
     }
 
     render() {
+        const { selectFormat } = this.state
+
         return (
             <div className="container" id="container">
                 {this.state.showSearch ? this.searchRender() : null}
@@ -839,6 +788,7 @@ export default class Home extends Component<any> {
                     <span>城市选择</span>
                 </div>
 
+                {/* 业态选择 */}
                 <Popup
                     visible={this.state.visible5}
                     position="left"
@@ -854,19 +804,17 @@ export default class Home extends Component<any> {
                                     className="formats-main-item"
                                     style={{
                                         color:
-                                            this.state.selectFormat === item.key ||
-                                            (Array.isArray(this.state.selectFormat) &&
-                                                this.state.selectFormat.includes(item.key))
+                                            selectFormat === item.key ||
+                                            (Array.isArray(selectFormat) && selectFormat.includes(item.key))
                                                 ? "#fff"
                                                 : "#000",
                                         background:
-                                            this.state.selectFormat === item.key ||
-                                            (Array.isArray(this.state.selectFormat) &&
-                                                this.state.selectFormat.includes(item.key))
+                                            selectFormat === item.key ||
+                                            (Array.isArray(selectFormat) && selectFormat.includes(item.key))
                                                 ? "#0076E3"
                                                 : "#fff",
                                     }}
-                                    onClick={() => this.formatFn1(item.key)}
+                                    onClick={() => this.formatFn(item.key)}
                                 >
                                     {item.title}
                                 </div>
@@ -875,18 +823,18 @@ export default class Home extends Component<any> {
                     </div>
                 </Popup>
 
+                {/* 右上角城市显示 */}
                 <Popup
                     visible={this.state.visible7}
                     position="right"
                     style={{ "--z-index": "1001" }}
                     mask={false}
-                    bodyStyle={{
-                        height: "53px",
-                    }}
+                    bodyStyle={{ height: "53px" }}
                 >
                     <div className="show-city">{this.state.showCity}</div>
                 </Popup>
 
+                {/* 运营弹窗 */}
                 <Popup
                     visible={this.state.visible}
                     onMaskClick={() => this.hidePopup()}
@@ -895,10 +843,7 @@ export default class Home extends Component<any> {
                     style={{ "--z-index": "1003" }}
                 >
                     <div className="popup-content" style={{ opacity: this.searchStatus === "show" ? 1 : 0 }}>
-                        {this.searchRender({
-                            position: "absolute",
-                            top: 0,
-                        })}
+                        {this.searchRender({ position: "absolute", top: 0 })}
                         <img alt="" src={require("src/assets/images/search/operating.png")} className="operating" />
                     </div>
                 </Popup>
@@ -915,15 +860,6 @@ export default class Home extends Component<any> {
                             />
                         </div>
                         <div className="content">
-                            {/* <div className="my-address-main">
-                                <div className="my-address-title">我的位置</div>
-                                <div className="my-address-content">
-                                    <div className="my-address-content-item">
-                                        <img alt="" src={require('src/assets/images/position-fill.png')} className="position-fill" />
-                                        <span>{this.positionText}</span>
-                                    </div>
-                                </div>
-                            </div> */}
                             {cityItems.map((item, idx) => {
                                 return (
                                     <div className="my-address-main" key={`city-${idx}`}>
@@ -936,19 +872,7 @@ export default class Home extends Component<any> {
                                                             n.title === this.city && "my-address-content-item-active"
                                                         }`}
                                                         key={`city-view-${i}`}
-                                                        onClick={() => {
-                                                            this.selectCityFn(n, item.title)
-                                                        }}
-                                                        style={{
-                                                            color:
-                                                                n.title === this.city
-                                                                    ? "rgba(26, 131, 228, 1)"
-                                                                    : "#000",
-                                                            backgroundColor:
-                                                                n.title === this.city
-                                                                    ? "rgba(26, 131, 228, .1)"
-                                                                    : "#f0f0f0",
-                                                        }}
+                                                        onClick={() => this.selectCityFn(n, item.title)}
                                                     >
                                                         {n.title}
                                                         {n.title === this.city ? (
@@ -967,64 +891,7 @@ export default class Home extends Component<any> {
                     </div>
                 </Popup>
 
-                <Popup
-                    visible={this.state.visible4}
-                    onMaskClick={() => this.setState({ visible4: false, formatCitys: [], selectFormat: "all" })}
-                    bodyStyle={{ height: "70vh" }}
-                    maskStyle={{ background: "transparent" }}
-                    style={{ "--z-index": "1007" }}
-                >
-                    <div className="popup-content-1">
-                        <div className="format-content">
-                            {formats.map((item, idx) => {
-                                return (
-                                    <div
-                                        key={`format-${idx}`}
-                                        className="format-item"
-                                        style={{
-                                            backgroundColor:
-                                                this.state.selectFormat === item.key ? "#0076E3" : "#F0F0F0",
-                                            color: this.state.selectFormat === item.key ? "#fff" : "#000",
-                                        }}
-                                        onClick={() => this.formatFn(item.key)}
-                                    >
-                                        {item.title}
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-                        <div className="format-main">
-                            {this.state.formatCitys && this.state.formatCitys.length ? (
-                                this.state.formatCitys.map((item: any, idx: number) => {
-                                    return (
-                                        <div
-                                            className="format-main-item"
-                                            key={`formatCity-${idx}`}
-                                            onClick={() => {
-                                                this.goThird(item)
-                                            }}
-                                        >
-                                            <div className="format-main-item-name">{item.name}</div>
-                                            <div className="format-main-item-address">{item.address}</div>
-                                            <div className="go-third-city">
-                                                <span className="go-third-city-text">去这里</span>
-                                                <img
-                                                    alt=""
-                                                    src={require("src/assets/images/navigation.png")}
-                                                    className="navigation"
-                                                />
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            ) : (
-                                <></>
-                            )}
-                        </div>
-                    </div>
-                </Popup>
-
+                {/* 点击二级建筑弹窗 */}
                 <Popup visible={this.state.visible6} bodyStyle={{ height: "100%" }} style={{ "--z-index": "1009" }}>
                     <div className="store-main">
                         <img

@@ -146,6 +146,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    background-color: #f0f0f0;
                     // overflow: hidden;
 
                     .position-fill {
@@ -170,6 +171,8 @@
 
                 .my-address-content-item-active {
                     border: 1px solid rgba(26, 131, 228, 1);
+                    color: rgba(26, 131, 228, 1);
+                    background-color: rgba(26, 131, 228, .1);
                 }                
 
                 .my-address-content-item:nth-child(4n) {
@@ -563,12 +566,12 @@
 
     // background-size: 918px 900px;
 
-    background-image: url('src/assets/images/flag1.png');
-    background-repeat: no-repeat;
-    animation: myfirst .8s steps(9) forwards;
-    -webkit-animation: myfirst .8s steps(9) forwards;
-    background-position: 0 0;
-    background-size: 80px 80px;
+    // background-image: url('src/assets/images/flag1.png');
+    // background-repeat: no-repeat;
+    // animation: myfirst .8s steps(9) forwards;
+    // -webkit-animation: myfirst .8s steps(9) forwards;
+    // background-position: 0 0;
+    // background-size: 80px 80px;
 
     .flag-image {
         width: 100%;
