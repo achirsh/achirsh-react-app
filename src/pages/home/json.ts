@@ -1252,7 +1252,7 @@ export const adcodes = [
         title: "河北省",
         code: "130000",
         center: [116.933895, 40.864895],
-        centerQ: [114.990001, 38.056656],
+        centerQ: [115.98186, 38.23742],
         centerT: [115.276847, 36.965716],
         pixel: { x: -30, y: -70 },
         animation: "delay",

@@ -5,8 +5,8 @@ import Popup from "antd-mobile/es/components/popup"
 import Mask from "antd-mobile/es/components/mask"
 import Toast from "antd-mobile/es/components/toast"
 import { adcodes, cityItems, formats } from "./json"
-
-const zoomsData = [3.2, 8, 18, 20]
+import lottie from "lottie-web"
+import flagJson from "src/assets/Flag.json"
 interface IAreaFill {
     adcode: string
     depth: number
@@ -118,6 +118,19 @@ export default class Home extends Component<any> {
         delayAnimation.forEach((item: any, idx: number) => {
             setTimeout(() => {
                 this.insertFlag(item, true)
+
+                // const lottieElement: any = document.getElementById(item.code)
+
+                // const animation = lottie.loadAnimation({
+                //     container: lottieElement,
+                //     renderer: 'html',
+                //     loop: false,
+                //     autoplay: false,
+                //     animationData: flagJson,
+                //     assetsPath: PUBLIC_PATH,
+                // });
+
+                // animation.play()
             }, 800 * idx)
         })
 
@@ -314,31 +327,82 @@ export default class Home extends Component<any> {
         })
 
         this.map.on("zoomend", () => {
-            if (
-                this.selectProvince &&
-                this.map.getZoom() >= this.selectProvince.city.zoom &&
-                this.map.getZoom() < 17.99
-            ) {
-                if (!this.disProvinces.length) {
-                    this.areaOfFill({
-                        adcode: this.selectProvince.code,
-                        depth: 1,
-                        style: {
-                            fill: "rgba(173, 220, 255, 0.6)",
-                            city: "#59A2F8",
-                        },
+            const zoom = this.map.getZoom()
+            const center = this.map.getCenter()
+            const { selectProvince } = this
+
+            if (selectProvince) {
+                if (zoom >= selectProvince.city.zoom && zoom < 17.99) {
+                    this.setState({ showCity: selectProvince.name })
+                    if (!this.disProvinces.length) {
+                        // this.areaOfFill({
+                        //     adcode: this.selectProvince.code,
+                        //     depth: 1,
+                        //     style: {
+                        //         fill: "rgba(173, 220, 255, 0.6)",
+                        //         city: "#59A2F8",
+                        //     },
+                        // })
+
+                        if (selectProvince.municipality) {
+                            this.areaOfFill({
+                                adcode: selectProvince.code,
+                                depth: 1,
+                                style: {
+                                    fill: "rgba(173, 220, 255, 0.6)",
+                                    city: "#59A2F8",
+                                },
+                            })
+                        } else {
+                            this.areaOfFill({
+                                adcode: selectProvince.code,
+                                depth: 1,
+                                style: {
+                                    fill: "rgba(225, 225, 225, 0.6)",
+                                    city: "rgba(209, 209, 209, 0.6)",
+                                    province: "#59A2F8",
+                                },
+                            })
+
+                            selectProvince.city.citys.map((cc: any) => {
+                                this.areaOfFill({
+                                    adcode: cc.code,
+                                    depth: 1,
+                                    style: {
+                                        fill: "rgba(173, 220, 255, 0.6)",
+                                        city: "#59A2F8",
+                                    },
+                                })
+                            })
+                        }
+                    }
+                } else if (zoom >= 18) {
+                    if (this.disProvinces && this.disProvinces.length) {
+                        this.disProvinces.map((item: any) => {
+                            item.setMap(null)
+                        })
+                        this.disProvinces = []
+                    }
+
+                    geocoder.getAddress([center.lng, center.lat], (status: any, result: any) => {
+                        if (status === "complete" && result.regeocode) {
+                            const info = result.regeocode.addressComponent
+                            let searchText = []
+
+                            if (info.city === "") {
+                                searchText = [info.province.substr(0, info.province.length - 1), info.province]
+                            } else {
+                                searchText = [info.province, info.city]
+                            }
+
+                            this.city = searchText[1]
+                            this.setState({ showCity: searchText[0] + " " + searchText[1] })
+                        }
                     })
-                }
-            } else if (this.map.getZoom() >= 18) {
-                if (this.disProvinces && this.disProvinces.length) {
-                    this.disProvinces.map((item: any) => {
-                        item.setMap(null)
-                    })
-                    this.disProvinces = []
                 }
             }
 
-            if (this.map.getZoom() > 5 && this.map.getZoom() < 18) {
+            if (zoom > 5 && zoom < 18) {
                 if (!this.state.visible5) {
                     this.setState({ visible5: true })
                 }
@@ -346,22 +410,23 @@ export default class Home extends Component<any> {
                 this.setState({ visible5: false })
             }
 
-            if (this.map.getZoom() >= 18) {
+            if (zoom >= 18) {
                 this.map.setPitch(50)
                 this.map.setRotation(10)
             }
-            if (this.map.getPitch() !== 0 && this.map.getZoom() < 18) {
+
+            if (this.map.getPitch() !== 0 && zoom < 18) {
                 this.map.setPitch(0)
                 this.map.setRotation(0)
             }
 
-            if (this.map.getZoom() >= 18) {
+            if (zoom >= 18) {
                 this.setState({ showSearch: false })
             } else {
                 this.setState({ showSearch: true })
             }
 
-            if (this.map.getZoom() > 5) {
+            if (zoom > 5) {
                 if (!this.state.visible7) {
                     this.setState({ visible7: true })
                 }
@@ -512,6 +577,7 @@ export default class Home extends Component<any> {
                         style: {
                             fill: "rgba(225, 225, 225, 0.6)",
                             city: "rgba(209, 209, 209, 0.6)",
+                            province: "#59A2F8",
                         },
                     })
 
@@ -526,8 +592,6 @@ export default class Home extends Component<any> {
                         })
                     })
                 }
-
-                console.log(this.selectProvince)
             }
 
             city.citys.forEach((item: any) => {
@@ -684,7 +748,7 @@ export default class Home extends Component<any> {
 
         this.setState({ visible4: false }, () => {
             this.clearAllLayout()
-            this.map.setZoomAndCenter(zoomsData[2], item.center)
+            this.map.setZoomAndCenter(18, item.center)
             this.thirdCityAddMarker(item)
         })
     }

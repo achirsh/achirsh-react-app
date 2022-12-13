@@ -1,0 +1,952 @@
+{
+    "408:1332": {
+        "name": "flag",
+        "keyframes": {
+            "rotation": [
+                {
+                    "time": 0,
+                    "value": -13.48,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 2.69,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 2.69,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 2.69,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 8.02,
+                    "easing": "linear"
+                }
+            ],
+            "x": [
+                {
+                    "time": 0,
+                    "value": 101.49,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 80,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 80,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 76,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 75,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 51.58,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 80,
+                    "easing": "linear",
+                    "keyframeId": "408:1332_y_0.7722426028349834",
+                    "animationId": "1670771014709_0.5774675082849183",
+                    "nodeId": "408:1332",
+                    "propertyName": "y"
+                },
+                {
+                    "time": 300,
+                    "value": 92,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 108,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 122,
+                    "easing": "linear"
+                }
+            ],
+            "width": [
+                {
+                    "time": 0,
+                    "value": 70.01,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 52.37,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 52.37,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 40.89,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 37.99,
+                    "easing": "linear"
+                }
+            ],
+            "height": [
+                {
+                    "time": 0,
+                    "value": 81.07,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 60.64,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 60.64,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 47.76,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 44.36,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "409:1381": {
+        "name": "flag",
+        "keyframes": {
+            "y": [
+                {
+                    "time": 0,
+                    "value": 81.19,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 81.19,
+                    "easing": "linear"
+                }
+            ],
+            "x": [
+                {
+                    "time": 0,
+                    "value": 82.2,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 82.2,
+                    "easing": "linear"
+                }
+            ],
+            "height": [
+                {
+                    "time": 0,
+                    "value": 60.64,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 60.64,
+                    "easing": "linear"
+                }
+            ],
+            "width": [
+                {
+                    "time": 0,
+                    "value": 52.37,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 52.37,
+                    "easing": "linear"
+                }
+            ],
+            "rotation": [
+                {
+                    "time": 0,
+                    "value": 2.69,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 2.69,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "410:1425": {
+        "name": "Vector 692",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 140,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ],
+            "vectorPaths": [
+                {
+                    "time": 200,
+                    "value": [
+                        {
+                            "windingRule": "NONE",
+                            "data": "M 2.438836097717285 10.287673950195312 C 0.17354226112365723 8.022175312042236 -2.059325695037842 3.4792096614837646 3.3773794174194336 0"
+                        }
+                    ],
+                    "easing": "linear",
+                    "vectorPathsSourceType": "self"
+                }
+            ]
+        }
+    },
+    "410:1426": {
+        "name": "Vector 693",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 140,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "410:1427": {
+        "name": "Vector 694",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 140,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 200,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1320": {
+        "name": "Vector 639",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 200,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1321": {
+        "name": "Vector 642",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 200,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1322": {
+        "name": "Vector 640",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 200,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1323": {
+        "name": "Vector 641",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 200,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1345": {
+        "name": "Vector 643",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1347": {
+        "name": "Vector 697",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1346": {
+        "name": "Vector 696",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1343": {
+        "name": "Vector 644",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1344": {
+        "name": "Vector 695",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 300,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1361": {
+        "name": "Vector 699",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1362": {
+        "name": "Vector 700",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1363": {
+        "name": "Vector 701",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1360": {
+        "name": "Vector 698",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1364": {
+        "name": "Vector 702",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 400,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 500,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1374": {
+        "name": "Frame 1073",
+        "keyframes": {
+            "opacity": [
+                {
+                    "time": 0,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 550,
+                    "value": 0,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 1,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 99.23,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 99.23,
+                    "easing": "linear"
+                }
+            ],
+            "x": [
+                {
+                    "time": 0,
+                    "value": 61.6,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 61.6,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1378": {
+        "name": "Vector 651",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 16.46,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 16.46,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 10,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 1.4,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 1.4,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": -4,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1375": {
+        "name": "Vector 645",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 14.94,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 14.94,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 8,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 34.88,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 34.88,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 24,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1380": {
+        "name": "Vector 646",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 0.38,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 0.38,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": -6,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 29.95,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 29.95,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 18,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1377": {
+        "name": "Vector 647",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 33.2,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 33.2,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 17,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 24.23,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 24.23,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1379": {
+        "name": "Vector 649",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 75.66,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 75.66,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 88,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 11.11,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 11.11,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1376": {
+        "name": "Vector 648",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 93.92,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 93.92,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 110,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 21.77,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 21.77,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    },
+    "411:1381": {
+        "name": "Vector 650",
+        "keyframes": {
+            "x": [
+                {
+                    "time": 0,
+                    "value": 110.16,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 110.16,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 140,
+                    "easing": "linear"
+                }
+            ],
+            "y": [
+                {
+                    "time": 0,
+                    "value": 17.01,
+                    "easing": "linear"
+                },
+                {
+                    "time": 700,
+                    "value": 17.01,
+                    "easing": "linear"
+                },
+                {
+                    "time": 800,
+                    "value": 0,
+                    "easing": "linear"
+                }
+            ]
+        }
+    }
+}

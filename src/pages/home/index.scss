@@ -561,9 +561,10 @@
     // background-color: rgba($color: #000000, $alpha: 0.5);
     position: relative;
 
+    // background-size: 918px 900px;
+
     background-image: url('src/assets/images/flag1.png');
     background-repeat: no-repeat;
-    // background-size: 918px 900px;
     animation: myfirst .8s steps(9) forwards;
     -webkit-animation: myfirst .8s steps(9) forwards;
     background-position: 0 0;
