@@ -179,14 +179,6 @@ export default function confg(config: Configuration): Configuration {
                 new WebpackManifestPlugin({
                     fileName: "asset-manifest.json",
                 }),
-                new CopyWebpackPlugin({
-                    patterns: [
-                        {
-                            from: resolvePath(__dirname, "../public/assets/pixi"),
-                            to: resolvePath(__dirname, "../build/assets/pixi"),
-                        },
-                    ],
-                }),
                 // new BundleAnalyzerPlugin.BundleAnalyzerPlugin()
             ],
             performance: false,
