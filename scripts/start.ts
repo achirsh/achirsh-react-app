@@ -43,13 +43,13 @@ const serverConfig: any = {
     https: false,
     host: "0.0.0.0",
     historyApiFallback: { disableDotRule: true, index: publicPath },
-    port: 3003,
+    port: 3004,
 }
 
 const devServer = new WebpackDevServer(serverConfig, compiler)
 
 devServer.startCallback(() => {
-    console.info("Listening on :3003")
+    console.info("Listening on :3004")
 })
 
 // const proxySetting: any = getProxy(REACT_APP_ENV)
