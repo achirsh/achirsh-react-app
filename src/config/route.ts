@@ -1,7 +1,7 @@
 // 初始化路由
 export const routes = [
     {
-        url: "home",
+        url: "/",
         page: "home",
     },
 ]
